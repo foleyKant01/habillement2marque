@@ -9,7 +9,8 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     UserComponent,
-    HomeComponent
+    HomeComponent,
+
   ],
   imports: [
     CommonModule,
