@@ -1,40 +1,38 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0);
 }
-
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+  background-color: transparent; /* Navbar transparente par défaut */
+  transition: background-color 0.3s ease; /* Transition fluide */
 }
 
-.navbar-logo img {
-  max-height: 40px;
+.bg-white {
+  background-color: #ffffff; /* Couleur blanche */
 }
-
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 20px;
-  font-weight: bold;
+/* Style pour l'input transparent */
+.transparent-input {
+  background-color: transparent; /* Fond transparent */
+  border: solid 0px; /* Supprimer la bordure */
+  color: rgb(0, 0, 0); /* Couleur du texte */
+  transition: background-color 0.3s ease; /* Transition fluide */
 }
-
-.navbar-links a:hover {
-  text-decoration: underline;
+.btn-outline-success {
+  --bs-btn-color: #000000;
+  --bs-btn-border-color: none;
+  --bs-btn-hover-color: #1eb2a6;
+  --bs-btn-hover-bg: #189187;
+  --bs-btn-hover-border-color:#1eb2a6;
+  --bs-btn-focus-shadow-rgb: 25, 135, 84;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #1eb2a6;
+  --bs-btn-active-border-color: #1eb2a6;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #1eb2a6;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #1eb2a6;
+  --bs-gradient: none;
 }
-
-.content {
-  padding-top: 80px; /* Pour éviter que le contenu soit caché derrière la navbar */
-  text-align: center;
-  height: 2000px; /* Exemple de contenu défilable */
-  background-color: #f9f9f9;
+.active-link {
+  border-bottom: 2px solid green; /* Bordure inférieure verte */
+  padding-bottom: 5px; /* Espacement pour la bordure inférieure */
 }
