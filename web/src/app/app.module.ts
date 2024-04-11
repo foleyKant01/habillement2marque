@@ -11,8 +11,6 @@ import { FooterComponent } from './include/footer/footer.component';
   declarations: [
     AppComponent,
     NotfoundComponent,
-    HeaderComponent,
-    FooterComponent
   ],
   imports: [
     BrowserModule,

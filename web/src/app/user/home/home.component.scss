@@ -1,4 +1,4 @@
-body {
+.body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -47,7 +47,7 @@ body {
 }
 
 .order-btn {
-  background-color: #007bff;
+  background-color: #1eb2a6;
   color: #ffffff;
   border: none;
   display: flex;
@@ -60,5 +60,16 @@ body {
 }
 
 .order-btn:hover {
-  background-color: #0056b3;
+  background-color: #189187;
+}
+
+.accueil{
+  height: 740px;
+  // border: 1px solid red;
+  background-image: url("/assets/img_products/home5.jpg" );
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+a{
+  text-decoration: none;
 }
