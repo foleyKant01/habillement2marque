@@ -1,0 +1,23 @@
+<br><br><br><br>
+<div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
+  <img src="" alt="Logo Trouvez Tous">
+</div>
+<div id="wrappe">
+  <form [formGroup]="loginuser" (submit)="Loginadmin()">
+    <h2>Login</h2>
+    <hr><br>
+    <div class="div-input">
+      <label for="exampleInputEmail1" class="form-label"> Username:</label>
+      <input type="email" class="form-control" formControlName="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div><br>
+    <div class="div-input">
+      <label for="exampleInputPassword1" class="form-label">Password:</label>
+      <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1">
+    </div><br><br>
+    <div style="display: flex; justify-content: space-between;" class=" mx-0">
+      <button type="submit" class="btn btn-primary">Login</button>
+      <a class="forgot" routerLink="/auth/forgotpassword/">Forgot password</a>
+    </div>
+  </form>
+</div><br>
+<div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div>

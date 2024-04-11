@@ -13,9 +13,8 @@ const routes: Routes = [
     { path:'contact', component: ContactComponent },
     { path:'suivez-nous', component: SuivezNousComponent },
     {path: 'nos-articles', loadChildren: () => import('./nos-articles/nos-articles.module').then((m) => m.NosArticlesModule)},
-
   ]
-}
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,0 +1,29 @@
+<div style="height: 905px;">
+  <br>
+  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
+    <img src="" alt="Logo Trouvez Tous">
+  </div>
+  <div id="wrappe">
+    <form [formGroup]="createproducts" (submit)="Createproducts()" [ngClass]="{'blur-background': loading}">
+      <h2>Create categories</h2>
+      <hr><br>
+      <div class="div-input">
+          <label for="exampleInputEmail1" class="form-label">Name:</label>
+          <input type="text" class="form-control" formControlName="name" aria-describedby="emailHelp">
+      </div><br>
+      <div class="div-input">
+          <label for="exampleInputEmail1" class="form-label">Description:</label>
+          <textarea class="form-control" formControlName="description" id="" cols="25" rows="3"></textarea>
+      </div><br>
+
+      <div class="mt-2 p-2" style="display: flex; justify-content: end;" *ngIf="!loading">
+          <button type="submit" class="btn btn-primary">Create</button>
+      </div><br>
+  </form>
+  <app-spinner style="margin-top: -400px;" class="overlay" *ngIf="loading"></app-spinner>
+  <div *ngIf="success" style=" position: absolute; display: flex; margin-top: 90%; height: 35px; padding-top: 5px; padding-bottom: 0px;" class="alert alert-succes" role="alert">
+    Categorie creer avec succès !
+  </div>
+  </div>
+</div>
+<div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div>

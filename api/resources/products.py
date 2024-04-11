@@ -1,26 +1,26 @@
 from flask_restful import Resource
 import json
-from helpers.business import *
+from helpers.products import *
 from flask import request
 
 
-class BusinessApi(Resource):
+class ProductsApi(Resource):
     def post(self, route):
         if route == "create":
-            return CreateBusiness()
+            return CreateProducts()
     
     def get(self, route):
         if route == "readall":
-            return ReadAllBusiness()
+            return ReadAllProducts()
 
         if route == "readsingle":
-            return ReadSingleBusiness()
+            return ReadSingleProducts()
     
     def delete(self, route):
          if route == "delete":
-            return DeleteBusiness()
+            return DeleteProducts()
          
     def patch(self, route):
         if route == "update":
-            return UpdateBusiness()
+            return UpdateProducts()
         

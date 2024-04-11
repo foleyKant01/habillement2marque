@@ -1,0 +1,71 @@
+#wrappe{
+  padding-top: 5%;
+  display: flex;
+  width: auto !important;
+  margin-bottom: 0px;
+  position: relative;
+  float: none;
+  margin-left: 0px!important;
+  justify-content: space-around;
+}
+
+form{
+
+  padding: 10px 30px 10px 30px;
+  min-width: 330px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+  box-shadow: 4px 2px 12px #b1b1b1,
+    -8px -8px 10px #ffffff;
+}
+
+button{
+  background-color: black;
+  border: 0px;
+  padding: 5px 8px 5px 8px;
+  border-radius: 3px;
+  color: white;
+}
+button:hover{
+  background-color: #ffc107;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mt-2 > a{
+  color: #656565;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+.Copyrights{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  color: #9b9b9b;
+}
+
+label{
+  min-width: 50px!important;
+  color: #656565;
+}
+.div-input{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 75px;
+}
+
+label{
+  min-width: 90px!important;
+  color: #656565;
+  padding-top: 6px;
+}
+
+input{
+  height: 35px;
+}

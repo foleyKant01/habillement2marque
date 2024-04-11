@@ -1,28 +1,28 @@
 from flask_restful import Resource
 import json
-from helpers.teller import *
+from helpers.admin import *
 from flask import request
 
 
-class TellerApi(Resource):
+class AdminApi(Resource):
     def post(self, route):
         if route == "create":
-            return CreateTeller()
+            return CreateAdmin()
         if route == "login":
-            return LoginTeller()
+            return LoginAdmin()
     
     # def get(self, route):
     #     if route == "readall":
-    #         return ReadAllTeller()
+    #         return ReadAllAdmin()
     #     if route == "readsingle":
-    #         return ReadSingleTeller()
+    #         return ReadSingleAdmin()
             
     
     # def delete(self, route):
     #      if route == "delete":
-    #         return DeleteTeller()
+    #         return DeleteAdmin()
          
     # def patch(self, route):
     #     if route == "update":
-    #         return UpdateTeller()
+    #         return UpdateAdmin()
         
