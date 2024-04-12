@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { BackService } from 'src/app/back.service';
 
@@ -14,11 +14,12 @@ export class CreateProductsComponent implements OnInit {
   delayDuration= 2000
   success = false;
 
+
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
 
-  constructor(private router: Router, private http: BackService){}
+  constructor(private router: Router, private fb: FormBuilder, private http: BackService){}
 
   createproducts: FormGroup = new FormGroup(
     {

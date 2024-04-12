@@ -4,7 +4,7 @@
     <img src="" alt="Logo Trouvez Tous">
   </div>
   <div id="wrappe">
-    <form [formGroup]="createproducts" (submit)="Createproducts()" [ngClass]="{'blur-background': loading || success}">
+    <form [formGroup]="updateProductsForm" (submit)="updateProducts()" [ngClass]="{'blur-background': loading || success}">
       <h2>Create product</h2>
       <hr><br>
       <div class="div-input">

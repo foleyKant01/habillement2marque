@@ -1,0 +1,22 @@
+<div class="container" style="height: 905px;">
+  <br>
+  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
+    <img src="" alt="Logo Trouvez Tous">
+  </div>
+  <div id="wrapper">
+    <h2>All Products</h2>
+    <hr><br>
+    <!-- Afficher la liste des produits -->
+    <div class="p-2" style="border: 1px solid red; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+      <div *ngIf="data.length > 0">
+        <ul>
+          <li style="display: flex; justify-content: space-between;" *ngFor="let product of data">
+            <h3 style="text-align: left;">{{ product.name }}</h3>
+            <p style="text-align: left;">Price: {{ product.price }}</p>
+            <p style="text-align: left;">Uid: {{ product.pr_uid }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
