@@ -12,10 +12,10 @@ import { ViewSingleProductsComponent } from './view-single-products/view-single-
 const routes: Routes = [
   { path:'', component: AdminComponent,
   children: [
-    { path:'', redirectTo:'home', pathMatch:'full' },
+    { path:'', redirectTo:'ad-home', pathMatch:'full' },
     { path:'ad-home', component: AdHomeComponent },
     { path:'create-products', component: CreateProductsComponent },
-    { path:'edit-products', component: EditProductsComponent },
+    { path:'edit-products/:pr_uid', component: EditProductsComponent },
     { path:'spinner', component: SpinnerComponent },
     { path:'view-all-products', component: ViewAllProductsComponent },
     { path:'view-single-products', component: ViewSingleProductsComponent },

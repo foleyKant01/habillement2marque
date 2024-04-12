@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackService } from 'src/app/back.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class ViewAllProductsComponent implements OnInit {
   products: any[] = []; // Tableau pour stocker les produits
   data: any;
 
-  constructor(private http: BackService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private http: BackService) { }
 
   ngOnInit(): void {
     this.viewallProducts(); // Charger les produits au chargement du composant
@@ -19,10 +20,10 @@ export class ViewAllProductsComponent implements OnInit {
   viewallProducts(): void {
     this.http.ReadAllProducts().subscribe({
       next: (response: any) => {
-        this.products = response; // Stocker les produits dans le tableau
+        this.products = response || []; // Stocker les produits dans le tableau
         if(response?.products)  {
           this.data = response?.products
-          console.log(this.data)
+          // console.log(this.data)
 
         }
       },
@@ -31,4 +32,9 @@ export class ViewAllProductsComponent implements OnInit {
       }
     });
   }
+
+  editProduct(pr_uid: number): void {
+    this.router.navigate(['/admin/edit-products', pr_uid]);
+  }
+
 }
