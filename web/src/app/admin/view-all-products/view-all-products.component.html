@@ -7,13 +7,17 @@
     <h2>All Products</h2>
     <hr><br>
     <!-- Afficher la liste des produits -->
-    <div class="p-2" style="border: 1px solid red; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-      <div *ngIf="data.length > 0">
-        <ul>
-          <li style="display: flex; justify-content: space-between;" *ngFor="let product of data">
-            <h3 style="text-align: left;">{{ product.name }}</h3>
-            <p style="text-align: left;">Price: {{ product.price }}</p>
-            <p style="text-align: left;">Uid: {{ product.pr_uid }}</p>
+    <div class="p-2" style=" border: 1px solid; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+      <div class="p-0" *ngIf="data.length > 0">
+        <ul class="p-0">
+          <li class="p-0 m-0" style="display: flex;" *ngFor="let product of data">
+            <ul class="container-fluid p-0 m-0"  style="border-bottom: solid 1px rgb(209, 209, 209); display: flex; list-style: none; justify-content: space-between;">
+              <li style="text-align: left; width: 33%;padding-top: 7px;">Name: {{ product.name }}</li>
+              <li style="text-align: left; width: 23%;padding-top: 7px;">Price: {{ product.price }}</li>
+              <li style="text-align: left; width: 29%; padding-top: 7px;">Uid: {{ product.pr_uid }}</li>
+              <button type="button" class="btn btn-warning" style="width: 7%;" (click)="editProduct(product.pr_uid)">Edit</button>
+              <button type="button" class="btn btn-danger" style="width: 7%;" routerLink="">Delete</button>
+            </ul>
           </li>
         </ul>
       </div>

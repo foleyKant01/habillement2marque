@@ -43,9 +43,15 @@ this.http.ReadSingleProducts(this.productUid).subscribe((product: any) => {
       this.loading = true;
 
       const updatedCategory = {
-        ca_uid: this.productUid,
+        pr_uid: this.productUid,
         name: this.updateProductsForm.value.name,
-        description: this.updateProductsForm.value.description
+        description: this.updateProductsForm.value.description,
+        price: this.updateProductsForm.value.description,
+        image: this.updateProductsForm.value.description,
+        taille1: this.updateProductsForm.value.description,
+        taille2: this.updateProductsForm.value.description,
+        taille3: this.updateProductsForm.value.description,
+        taille4: this.updateProductsForm.value.description,
       };
 
       // Appeler la fonction de mise à jour de la catégorie dans le service API
