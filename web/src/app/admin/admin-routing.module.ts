@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { HomeComponent } from '../user/home/home.component';
 import { CreateProductsComponent } from './create-products/create-products.component';
 import { AdHomeComponent } from './ad-home/ad-home.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 const routes: Routes = [
   { path:'', component: AdminComponent,
@@ -11,6 +12,7 @@ const routes: Routes = [
     { path:'', redirectTo:'home', pathMatch:'full' },
     { path:'ad-home', component: AdHomeComponent },
     { path:'create-products', component: CreateProductsComponent },
+    { path:'spinner', component: SpinnerComponent },
   ]
   }
 ];

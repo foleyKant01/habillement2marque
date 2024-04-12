@@ -11,7 +11,7 @@ import { BackService } from 'src/app/back.service';
 export class CreateProductsComponent implements OnInit {
 
   loading= false;
-  delayDuration= 2000;
+  delayDuration= 2000
   success = false;
 
   ngOnInit(): void {
@@ -24,6 +24,12 @@ export class CreateProductsComponent implements OnInit {
     {
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
+      price: new FormControl(null, Validators.required),
+      image: new FormControl(null, Validators.required),
+      taille1: new FormControl(null, Validators.required),
+      taille2: new FormControl(null, Validators.required),
+      taille3: new FormControl(null, Validators.required),
+      taille4: new FormControl(null, Validators.required),
     }
   )
 

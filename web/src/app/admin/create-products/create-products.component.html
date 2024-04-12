@@ -4,26 +4,49 @@
     <img src="" alt="Logo Trouvez Tous">
   </div>
   <div id="wrappe">
-    <form [formGroup]="createproducts" (submit)="Createproducts()" [ngClass]="{'blur-background': loading}">
-      <h2>Create categories</h2>
+    <form [formGroup]="createproducts" (submit)="Createproducts()" [ngClass]="{'blur-background': loading || success}">
+      <h2>Create product</h2>
       <hr><br>
       <div class="div-input">
-          <label for="exampleInputEmail1" class="form-label">Name:</label>
-          <input type="text" class="form-control" formControlName="name" aria-describedby="emailHelp">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name">
       </div><br>
       <div class="div-input">
-          <label for="exampleInputEmail1" class="form-label">Description:</label>
-          <textarea class="form-control" formControlName="description" id="" cols="25" rows="3"></textarea>
+        <label for="description" class="form-label">Description:</label>
+        <textarea class="form-control" id="description" formControlName="description" id="" cols="25" rows="3"></textarea>
       </div><br>
-
+      <div class="div-input">
+        <label for="price" class="form-label">Price:</label>
+        <input type="text" class="form-control" id="price" formControlName="price" aria-describedby="price">
+      </div><br>
+      <div class="div-input">
+        <label for="image" class="form-label">Image:</label>
+        <input type="file" class="form-control" id="image" formControlName="image" aria-describedby="image">
+      </div><br>
+      <div class="div-input">
+        <label for="taille1" class="form-label">Taille 1:</label>
+        <input type="number" class="form-control" id="taille1" formControlName="taille1" aria-describedby="taille1">
+      </div><br>
+      <div class="div-input">
+        <label for="taille2" class="form-label">Taille 2:</label>
+        <input type="number" class="form-control" id="taille2" formControlName="taille2" aria-describedby="taille2">
+      </div><br>
+      <div class="div-input">
+        <label for="taille3" class="form-label">Taille 3:</label>
+        <input type="number" class="form-control" id="taille3" formControlName="taille3" aria-describedby="taille3">
+      </div><br>
+      <div class="div-input">
+        <label for="taille4" class="form-label">Taille 4:</label>
+        <input type="number" class="form-control" id="taille4" formControlName="taille4" aria-describedby="taille4">
+      </div><br>
       <div class="mt-2 p-2" style="display: flex; justify-content: end;" *ngIf="!loading">
-          <button type="submit" class="btn btn-primary">Create</button>
-      </div><br>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
   </form>
   <app-spinner style="margin-top: -400px;" class="overlay" *ngIf="loading"></app-spinner>
-  <div *ngIf="success" style=" position: absolute; display: flex; margin-top: 90%; height: 35px; padding-top: 5px; padding-bottom: 0px;" class="alert alert-succes" role="alert">
-    Categorie creer avec succès !
+  <div *ngIf="success" style="position: fixed; top: 50%; height: 50px; " class="alert alert-success" role="alert">
+    Catégorie créée avec succès !
   </div>
   </div>
-</div>
+</div><br>
 <div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div>
