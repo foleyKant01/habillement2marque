@@ -117,7 +117,7 @@ def ReadAllProducts():
             products_info.append(products_infos)
 
         response['status'] = 'success'
-        response ['categories'] = products_info
+        response ['products'] = products_info
 
     except Exception as e:
         response['status'] = 'error'
