@@ -25,14 +25,14 @@ export class EditProductsComponent implements OnInit {
 // Récupérer l'ID de la catégorie depuis l'URL
 this.productUid = this.router.snapshot.params['pr_uid'];
 
-// Charger les informations de la catégorie à modifier
-this.http.ReadSingleProducts(this.productUid).subscribe((product: any) => {
-  // Pré-remplir le formulaire avec les informations de la catégorie
-  this.updateProductsForm.patchValue({
-    name: product.name,
-    description: product.description
-  });
-});
+// // Charger les informations de la catégorie à modifier
+// this.http.ReadSingleProducts(this.productUid).subscribe((product: any) => {
+//   // Pré-remplir le formulaire avec les informations de la catégorie
+//   this.updateProductsForm.patchValue({
+//     name: product.name,
+//     description: product.description
+//   });
+// });
 }
 //Gar de transport
 //Des compagnies de transport pour des destination interne et externe du pays
@@ -46,12 +46,12 @@ this.http.ReadSingleProducts(this.productUid).subscribe((product: any) => {
         pr_uid: this.productUid,
         name: this.updateProductsForm.value.name,
         description: this.updateProductsForm.value.description,
-        price: this.updateProductsForm.value.description,
-        image: this.updateProductsForm.value.description,
-        taille1: this.updateProductsForm.value.description,
-        taille2: this.updateProductsForm.value.description,
-        taille3: this.updateProductsForm.value.description,
-        taille4: this.updateProductsForm.value.description,
+        price: this.updateProductsForm.value.price,
+        image: this.updateProductsForm.value.image,
+        taille1: this.updateProductsForm.value.taille1,
+        taille2: this.updateProductsForm.value.taille2,
+        taille3: this.updateProductsForm.value.taille3,
+        taille4: this.updateProductsForm.value.taille4,
       };
 
       // Appeler la fonction de mise à jour de la catégorie dans le service API
@@ -61,7 +61,7 @@ this.http.ReadSingleProducts(this.productUid).subscribe((product: any) => {
           setTimeout(() => {
             this.loading = false;
             this.success = true;
-            window.location.reload();
+            // window.location.reload();
           }, this.delayDuration);
           // Rediriger ou afficher un message de succès
         },

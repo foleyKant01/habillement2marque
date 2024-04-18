@@ -18,7 +18,7 @@ const routes: Routes = [
     { path:'edit-products/:pr_uid', component: EditProductsComponent },
     { path:'spinner', component: SpinnerComponent },
     { path:'view-all-products', component: ViewAllProductsComponent },
-    { path:'view-single-products', component: ViewSingleProductsComponent },
+    { path:'view-single-products/:pr_uid', component: ViewSingleProductsComponent },
   ]
   }
 ];

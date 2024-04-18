@@ -33,8 +33,8 @@ export class ViewAllProductsComponent implements OnInit {
     });
   }
 
-  editProduct(pr_uid: number): void {
-    this.router.navigate(['/admin/edit-products', pr_uid]);
+  viewsingleProducts(pr_uid: number): void {
+    this.router.navigate(['/admin/view-single-products', pr_uid]);
   }
 
 }

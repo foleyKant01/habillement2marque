@@ -12,7 +12,7 @@ def CreateProducts():
 
     try:
         name = request.json.get('name')
-        desciption = request.json.get('description')
+        description = request.json.get('description')
         price = request.json.get('price')
         image = request.json.get('image')
         taille1 = request.json.get('taille1')
@@ -23,7 +23,7 @@ def CreateProducts():
 
         new_products = Products()
         new_products.name = name
-        new_products.desciption = desciption
+        new_products.description = description
         new_products.price = price
         new_products.image = image
         new_products.taille1 = taille1
@@ -132,10 +132,8 @@ def ReadSingleProducts():
     response = {}
 
     try:
-        pr_uid = request.json.get('pr_uid')
-
-
-        single_products = Products.query.filter_by(pr_uid=pr_uid).first()
+        uid = request.json.get('pr_uid')
+        single_products = Products.query.filter_by(pr_uid=uid).first()
 
         products_infos = {
             'pr_uid': single_products.pr_uid,
@@ -148,7 +146,6 @@ def ReadSingleProducts():
             'taille3': single_products.taille3,              
             'taille4': single_products.description,              
         }
-
         response['status'] = 'success'
         response['user'] = products_infos
 
