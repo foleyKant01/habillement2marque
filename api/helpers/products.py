@@ -81,7 +81,6 @@ def DeleteProducts():
 
     try:
         pr_uid = request.json.get('pr_uid')
-
         delete_products = Products.query.filter_by(pr_uid=pr_uid).first()
 
         if delete_products:

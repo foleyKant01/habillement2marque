@@ -4,37 +4,28 @@
     <img src="" alt="Logo Trouvez Tous">
   </div>
   <div id="wrappe">
-    <form [formGroup]="updateProductsForm" (submit)="updateProducts()" [ngClass]="{'blur-background': loading || success}">
+    <form (submit)="updateProducts()" [ngClass]="{'blur-background': loading || success}">
       <h2>Update product</h2>
       <hr><br>
       <div class="div-input">
         <label for="name" class="form-label">Name:</label>
-        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name">
+        <input type="text" id="name" name="name" class="form-control"  [(ngModel)]="product.name" aria-describedby="name">
       </div><br>
       <div class="div-input">
         <label for="description" class="form-label">Description:</label>
-        <textarea class="form-control" id="description" formControlName="description" cols="25" rows="3"></textarea>
+        <textarea class="form-control" name="description" [(ngModel)]="product.description"  id="description"  cols="25" rows="3"></textarea>
       </div><br>
       <div class="div-input">
         <label for="price" class="form-label">Price:</label>
-        <input type="text" class="form-control" id="price" formControlName="price" aria-describedby="price">
+        <input type="text" class="form-control" name="price" [(ngModel)]="product.price"  id="price"  aria-describedby="price">
       </div><br>
       <div class="div-input">
         <label for="image" class="form-label">Image:</label>
-        <input type="file" class="form-control" id="image" formControlName="image" aria-describedby="image">
+        <input type="file" class="form-control" name="image" [(ngModel)]="product.image"  id="image"  aria-describedby="image">
       </div><br>
-      <!-- <div class="div-input">
-        <label for="image" class="form-label">Pointure:</label>
-        <select formControlName="options" name="options" class="compose-multiple-select form-select select2-accessible" multiple="" data-select2-id="1"tabindex="-1" aria-hidden="true">
-          <option value="weight40">40</option>
-          <option value="weight41">41</option>
-          <option value="weight42">42</option>
-          <option value="weight43">43</option>
-        </select>
-      </div> -->
       <div class="div-input">
         <label for="taille1" class="form-label">Taille 1:</label>
-        <select name="taille1" id="taille1" class="form-control" formControlName="taille1" aria-describedby="taille1">
+        <select name="taille1" name="taille1" [(ngModel)]="product.taille1"  id="taille1" class="form-control"  aria-describedby="taille1">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
@@ -43,7 +34,7 @@
       </div><br>
       <div class="div-input">
         <label for="taille2" class="form-label">Taille 2:</label>
-        <select name="taille2" class="form-control" id="taille2" formControlName="taille2" aria-describedby="taille2">
+        <select name="taille2" class="form-control" name="taille2" [(ngModel)]="product.taille2"  id="taille2"  aria-describedby="taille2">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
@@ -52,7 +43,7 @@
       </div><br>
       <div class="div-input">
         <label for="taille3" class="form-label">Taille 3:</label>
-        <select name="taille3" id="taille3" class="form-control" formControlName="taille3" aria-describedby="taille3">
+        <select name="taille3" name="taille3" [(ngModel)]="product.taille3"  id="taille3" class="form-control"  aria-describedby="taille3">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
@@ -61,7 +52,7 @@
       </div><br>
       <div class="div-input">
         <label for="taille4" class="form-label">Taille 4:</label>
-        <select name="taille4" id="taille4" class="form-control" formControlName="taille4" aria-describedby="taille4">
+        <select name="taille4" name="taille4" [(ngModel)]="product.taille4"  id="taille4" class="form-control" aria-describedby="taille4">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
