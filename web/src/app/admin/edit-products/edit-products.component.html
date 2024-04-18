@@ -5,7 +5,7 @@
   </div>
   <div id="wrappe">
     <form [formGroup]="updateProductsForm" (submit)="updateProducts()" [ngClass]="{'blur-background': loading || success}">
-      <h2>Create product</h2>
+      <h2>Update product</h2>
       <hr><br>
       <div class="div-input">
         <label for="name" class="form-label">Name:</label>
@@ -13,7 +13,7 @@
       </div><br>
       <div class="div-input">
         <label for="description" class="form-label">Description:</label>
-        <textarea class="form-control" id="description" formControlName="description" id="" cols="25" rows="3"></textarea>
+        <textarea class="form-control" id="description" formControlName="description" cols="25" rows="3"></textarea>
       </div><br>
       <div class="div-input">
         <label for="price" class="form-label">Price:</label>
@@ -34,7 +34,7 @@
       </div> -->
       <div class="div-input">
         <label for="taille1" class="form-label">Taille 1:</label>
-        <select name="taille1" id="taille1" class="form-control" id="taille1" formControlName="taille1" aria-describedby="taille1">
+        <select name="taille1" id="taille1" class="form-control" formControlName="taille1" aria-describedby="taille1">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
@@ -52,7 +52,7 @@
       </div><br>
       <div class="div-input">
         <label for="taille3" class="form-label">Taille 3:</label>
-        <select name="taille3" id="taille3" class="form-control" id="taille3" formControlName="taille3" aria-describedby="taille3">
+        <select name="taille3" id="taille3" class="form-control" formControlName="taille3" aria-describedby="taille3">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
@@ -61,15 +61,16 @@
       </div><br>
       <div class="div-input">
         <label for="taille4" class="form-label">Taille 4:</label>
-        <select name="taille4" id="taille4" class="form-control" id="taille4" formControlName="taille4" aria-describedby="taille4">
+        <select name="taille4" id="taille4" class="form-control" formControlName="taille4" aria-describedby="taille4">
           <option value="weight40">40</option>
           <option value="weight41">41</option>
           <option value="weight42">42</option>
           <option value="weight43">43</option>
         </select>
       </div><br>
-      <div class="mt-2 p-2" style="display: flex; justify-content: end;" *ngIf="!loading">
-        <button type="submit" class="btn btn-primary">Create</button>
+      <div class="mt-2 p-2" style="display: flex; justify-content: end;">
+        <div *ngIf="!loading"></div>
+        <button type="submit" class="btn btn-primary">Update</button>
     </div>
   </form>
   <app-spinner style="margin-top: -400px;" class="overlay" *ngIf="loading"></app-spinner>

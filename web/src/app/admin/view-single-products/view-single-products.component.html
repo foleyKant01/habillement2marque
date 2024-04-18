@@ -1,1 +1,48 @@
-<p>view-single-products works!</p>
+<div class="container" style="height: 905px;">
+  <br>
+  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
+    <img src="" alt="Logo Trouvez Tous">
+  </div>
+  <div id="wrapper">
+    <div></div>
+    <br>
+    <div class="p-2" style=" border: 1px solid; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+      <div class="table-wrapper mt-5">
+        <div class="col-12 table-responsive">
+          <table class="table table-striped" *ngIf="product">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Name </th>
+                <th scope="col">Description </th>
+                <th scope="col">Price </th>
+                <th scope="col">Picture </th>
+                <th scope="col">Taille 1 </th>
+                <th scope="col">Taille 2 </th>
+                <th scope="col">Taille 3 </th>
+                <th scope="col">Taille 4 </th>
+                <th scope="col">Reférence </th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.image }}</td>
+                <td>{{ product.taille1 }}</td>
+                <td>{{ product.taille2 }}</td>
+                <td>{{ product.taille3 }}</td>
+                <td>{{ product.taille4 }}</td>
+                <td>{{ product.pr_uid }}</td>
+                <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="editProduct(product.pr_uid)"><i style="color: #e9af00;"  class="fa-solid fa-pencil"></i></button></td>
+                <td><button type="button" class="btn" style="width: 50%;" routerLink=""><i class="fa-solid fa-trash-can text-danger"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

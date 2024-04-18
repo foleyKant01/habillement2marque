@@ -21,7 +21,7 @@ class Admin(db.Model):
 class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(128), nullable=False)
-    desciption = db.Column(db.String(128), nullable=False)
+    description = db.Column(db.String(128), nullable=False)
     price = db.Column(db.String(128), nullable=False)
     image = db.Column(db.String(128), nullable=False)
     taille1 = db.Column(db.String(128), nullable=False)
