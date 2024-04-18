@@ -9,71 +9,77 @@ import { BackService } from 'src/app/back.service';
   styleUrls: ['./edit-products.component.scss']
 })
 export class EditProductsComponent implements OnInit {
-  updateProductsForm: FormGroup;
   loading = false;
   productUid: any;
   delayDuration= 2000
   success = false;
+  product: any; // Stocke les détails du produit
 
-  constructor(private router: ActivatedRoute, private http: BackService, private formBuilder: FormBuilder){
-    this.updateProductsForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-  }
+
+  constructor(private route: ActivatedRoute, private http: BackService, private formBuilder: FormBuilder){}
+
   ngOnInit(): void {
-// Récupérer l'ID de la catégorie depuis l'URL
-this.productUid = this.router.snapshot.params['pr_uid'];
+    this.route.params.subscribe(params => {
+      this.productUid = params['pr_uid']; // (+) converts string 'id' to a number
+    });
 
-// // Charger les informations de la catégorie à modifier
-// this.http.ReadSingleProducts(this.productUid).subscribe((product: any) => {
-//   // Pré-remplir le formulaire avec les informations de la catégorie
-//   this.updateProductsForm.patchValue({
-//     name: product.name,
-//     description: product.description
-//   });
-// });
-}
-//Gar de transport
-//Des compagnies de transport pour des destination interne et externe du pays
+    this.readSingleProducts();
+    this.updateProducts();
+  }
 
+  readSingleProducts(): void {
+    let body = {
+      pr_uid: this.productUid
+    }
+    this.http.ReadSingleProducts(body).subscribe({
+      next: (response: any) => {
+        this.product = response?.user; // Stocker les produits dans le tableau
+        // console.log(this.product)
+
+      },
+      error: (error) => {
+        console.error('Failed to load products:', error);
+      }
+    });
+      // }
+    }
 
   updateProducts() {
-    if (this.updateProductsForm.valid) {
-      this.loading = true;
+    // if (this.updateProductsForm.valid) {
+    //   this.loading = true;
 
-      const updatedCategory = {
-        pr_uid: this.productUid,
-        name: this.updateProductsForm.value.name,
-        description: this.updateProductsForm.value.description,
-        price: this.updateProductsForm.value.price,
-        image: this.updateProductsForm.value.image,
-        taille1: this.updateProductsForm.value.taille1,
-        taille2: this.updateProductsForm.value.taille2,
-        taille3: this.updateProductsForm.value.taille3,
-        taille4: this.updateProductsForm.value.taille4,
-      };
+    //   const updatedCategory = {
+    //     pr_uid: this.productUid,
+    //     name: this.updateProductsForm.value.name,
+    //     description: this.updateProductsForm.value.description,
+    //     price: this.updateProductsForm.value.price,
+    //     image: this.updateProductsForm.value.image,
+    //     taille1: this.updateProductsForm.value.taille1,
+    //     taille2: this.updateProductsForm.value.taille2,
+    //     taille3: this.updateProductsForm.value.taille3,
+    //     taille4: this.updateProductsForm.value.taille4,
+    //   };
 
       // Appeler la fonction de mise à jour de la catégorie dans le service API
-      this.http.UpdateProducts(updatedCategory).subscribe({
-        next: (response: any) => {
-          console.log(response);
-          setTimeout(() => {
-            this.loading = false;
-            this.success = true;
-            // window.location.reload();
-          }, this.delayDuration);
-          // Rediriger ou afficher un message de succès
-        },
-        error: (error) => {
-          console.error(error);
-          setTimeout(() => {
-            this.loading = false;
-          }, this.delayDuration);
-          // Afficher un message d'erreur
-        }
-      });
+      // this.http.UpdateProducts(body).subscribe({
+      //   next: (response: any) => {
+      //     console.log(response);
+      //     setTimeout(() => {
+      //       this.loading = false;
+      //       this.success = true;
+      //       // window.location.reload();
+      //     }, this.delayDuration);
+      //     // Rediriger ou afficher un message de succès
+      //   },
+      //   error: (error) => {
+      //     console.error(error);
+      //     setTimeout(() => {
+      //       this.loading = false;
+      //     }, this.delayDuration);
+      //     // Afficher un message d'erreur
+      //   }
+      // });
     }
   }
-}
+
 
