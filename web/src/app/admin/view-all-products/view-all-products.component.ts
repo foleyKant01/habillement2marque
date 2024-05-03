@@ -37,4 +37,19 @@ export class ViewAllProductsComponent implements OnInit {
     this.router.navigate(['/admin/view-single-products', pr_uid]);
   }
 
+
+  deleteProduct(pr_uid: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+      this.http.DeleteProducts(pr_uid).subscribe({
+        next: (response: any) => {
+          console.log('Product deleted successfully:', response);
+          // Actualiser la liste des produits après la suppression
+          this.viewallProducts();
+        },
+        error: (error) => {
+          console.error('Failed to delete product:', error);
+        }
+      });
+    }
+  }
 }

@@ -118,7 +118,7 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.post("http://127.0.0.1:5000/api/products/delete", body, httpOptions)
+    return this.http.delete("http://127.0.0.1:5000/api/products/delete", body)
   }
 
 
