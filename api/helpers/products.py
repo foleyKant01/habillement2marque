@@ -143,7 +143,7 @@ def ReadSingleProducts():
             'taille1': single_products.taille1,              
             'taille2': single_products.taille2,              
             'taille3': single_products.taille3,              
-            'taille4': single_products.description,              
+            'taille4': single_products.taille4,              
         }
         response['status'] = 'success'
         response['user'] = products_infos

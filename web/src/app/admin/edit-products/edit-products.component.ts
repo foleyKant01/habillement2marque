@@ -9,6 +9,7 @@ import { BackService } from 'src/app/back.service';
   styleUrls: ['./edit-products.component.scss']
 })
 export class EditProductsComponent implements OnInit {
+  updateProductsForm: FormGroup;
   loading = false;
   productUid: any;
   delayDuration= 2000
@@ -16,7 +17,18 @@ export class EditProductsComponent implements OnInit {
   product: any; // Stocke les détails du produit
 
 
-  constructor(private route: ActivatedRoute, private http: BackService, private formBuilder: FormBuilder){}
+  constructor(private route: ActivatedRoute, private http: BackService, private formBuilder: FormBuilder){
+    this.updateProductsForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      image: ['', Validators.required],
+      taille1: ['', Validators.required],
+      taille2: ['', Validators.required],
+      taille3: ['', Validators.required],
+      taille4: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -45,41 +57,41 @@ export class EditProductsComponent implements OnInit {
     }
 
   updateProducts() {
-    // if (this.updateProductsForm.valid) {
-    //   this.loading = true;
+    if (this.updateProductsForm.valid) {
+      this.loading = true;
 
-    //   const updatedCategory = {
-    //     pr_uid: this.productUid,
-    //     name: this.updateProductsForm.value.name,
-    //     description: this.updateProductsForm.value.description,
-    //     price: this.updateProductsForm.value.price,
-    //     image: this.updateProductsForm.value.image,
-    //     taille1: this.updateProductsForm.value.taille1,
-    //     taille2: this.updateProductsForm.value.taille2,
-    //     taille3: this.updateProductsForm.value.taille3,
-    //     taille4: this.updateProductsForm.value.taille4,
-    //   };
+      const updateProducts = {
+        pr_uid: this.productUid,
+        name: this.updateProductsForm.value.name,
+        description: this.updateProductsForm.value.description,
+        price: this.updateProductsForm.value.price,
+        image: this.updateProductsForm.value.image,
+        taille1: this.updateProductsForm.value.taille1,
+        taille2: this.updateProductsForm.value.taille2,
+        taille3: this.updateProductsForm.value.taille3,
+        taille4: this.updateProductsForm.value.taille4,
+      };
 
       // Appeler la fonction de mise à jour de la catégorie dans le service API
-      // this.http.UpdateProducts(body).subscribe({
-      //   next: (response: any) => {
-      //     console.log(response);
-      //     setTimeout(() => {
-      //       this.loading = false;
-      //       this.success = true;
-      //       // window.location.reload();
-      //     }, this.delayDuration);
-      //     // Rediriger ou afficher un message de succès
-      //   },
-      //   error: (error) => {
-      //     console.error(error);
-      //     setTimeout(() => {
-      //       this.loading = false;
-      //     }, this.delayDuration);
-      //     // Afficher un message d'erreur
-      //   }
-      // });
+      this.http.UpdateProducts(updateProducts).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          setTimeout(() => {
+            this.loading = false;
+            this.success = true;
+            window.location.reload();
+          }, this.delayDuration);
+          // Rediriger ou afficher un message de succès
+        },
+        error: (error) => {
+          console.error(error);
+          setTimeout(() => {
+            this.loading = false;
+          }, this.delayDuration);
+          // Afficher un message d'erreur
+        }
+      });
     }
   }
 
-
+}

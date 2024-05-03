@@ -13,6 +13,7 @@ import { AdHomeComponent } from './ad-home/ad-home.component';
 import { EditProductsComponent } from './edit-products/edit-products.component';
 import { ViewAllProductsComponent } from './view-all-products/view-all-products.component';
 import { ViewSingleProductsComponent } from './view-single-products/view-single-products.component';
+import { DeleteProductsComponent } from './delete-products/delete-products.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ViewSingleProductsComponent } from './view-single-products/view-single-
     EditProductsComponent,
     ViewAllProductsComponent,
     ViewSingleProductsComponent,
+    DeleteProductsComponent,
   ],
   imports: [
     FormsModule,
