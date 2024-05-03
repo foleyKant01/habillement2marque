@@ -1,0 +1,64 @@
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Alignement à gauche */
+  gap: 20px;
+}
+
+.order-btn {
+  background-color: #1eb2a6;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #189187;
+}
+
+.accueil{
+  height: 740px;
+  // border: 1px solid red;
+  background-image: url("/assets/img_products/home5.jpg" );
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+a{
+  text-decoration: none;
+}
+
+/* contact.component.css */
+
+.contact-section {
+  padding: 50px 0;
+}
+
+.contact-info {
+  list-style: none;
+  padding-left: 0;
+}
+
+.contact-info li {
+  margin-bottom: 10px;
+}

@@ -8,6 +8,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { EditProductsComponent } from './edit-products/edit-products.component';
 import { ViewAllProductsComponent } from './view-all-products/view-all-products.component';
 import { ViewSingleProductsComponent } from './view-single-products/view-single-products.component';
+import { DeleteProductsComponent } from './delete-products/delete-products.component';
 
 const routes: Routes = [
   { path:'', component: AdminComponent,
@@ -15,7 +16,10 @@ const routes: Routes = [
     { path:'', redirectTo:'ad-home', pathMatch:'full' },
     { path:'ad-home', component: AdHomeComponent },
     { path:'create-products', component: CreateProductsComponent },
+    { path:'edit-products', component: EditProductsComponent },
     { path:'edit-products/:pr_uid', component: EditProductsComponent },
+    { path:'delete-products', component: DeleteProductsComponent },
+    { path:'delete-products/:pr_uid', component: DeleteProductsComponent },
     { path:'spinner', component: SpinnerComponent },
     { path:'view-all-products', component: ViewAllProductsComponent },
     { path:'view-single-products/:pr_uid', component: ViewSingleProductsComponent },
