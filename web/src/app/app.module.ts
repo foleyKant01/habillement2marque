@@ -7,6 +7,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { HeaderComponent } from './include/header/header.component';
 import { FooterComponent } from './include/footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
