@@ -21,7 +21,8 @@ import { SuivezNousComponent } from './suivez-nous/suivez-nous.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+
   ]
 })
 export class UserModule { }
