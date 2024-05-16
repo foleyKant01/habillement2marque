@@ -57,7 +57,7 @@ label{
 .div-input{
   display: flex;
   justify-content: space-between;
-  padding-right: 75px;
+  padding-right: 0px;
 }
 
 label{
@@ -77,8 +77,20 @@ input{
 .overlay {
   position: fixed;
   top: 65%;
-  left: 57.7%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999; /* Positionner le patienteur au-dessus du contenu de la page */
   /* Autres styles pour le positionnement et l'apparence du patienteur */
+}
+.alert.alert-success {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Assure que le message est au premier plan */
+  padding: 10px;
+  // background-color: rgba(0, 255, 0, 0.8); /* Couleur de fond du message de succès */
+  // color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }

@@ -1,0 +1,211 @@
+<div class="accueil">
+  <app-header></app-header><br><br>
+</div><br>
+<div class="container-fluid m-0 p-0">
+  <div class="container text-center p-0">
+    <div class="product row p-0" *ngIf="product">
+      <div class="col">
+        <img [src]="product?.image_file" [alt]="product.name">
+      </div>
+      <div class="col">
+        <h1 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;"></small> {{ product.name }}
+        </h1><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">Price: </small> {{ product.price }}FCFA</h2><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">Référence: </small> {{ product.pr_uid }}</h2><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">Description: </small> {{ product.description }}</h2><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">Tailles disponible: </small> {{ product.taille1 }}, {{ product.taille2 }}, {{ product.taille3 }}, {{ product.taille4 }}</h2><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">No de pièce disponible: </small> {{ product.inventory_level }}</h2><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">Type: </small> {{ product.type }}</h2><br>
+        <h2 class="m-0"><small style="font-size: 14px; color: #666666; margin-bottom: 15px;">Color: </small> {{ product.color }}</h2>
+      </div>
+      <div style="padding-left: 10px;" class="col">
+        <div class="elementor-element elementor-element-039473e e-con-full elementor-hidden-mobile e-flex e-con e-child"
+          data-id="039473e" data-element_type="container">
+          <div class="elementor-element elementor-element-5812d4a elementor-widget elementor-widget-heading"
+            data-id="5812d4a" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+              <h2 class="elementor-heading-title elementor-size-default">LIVRAISON &amp; RETOUR</h2>
+            </div>
+          </div>
+          <div
+            class="elementor-element elementor-element-3a1da94 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+            data-id="3a1da94" data-element_type="widget" data-widget_type="divider.default">
+            <div class="elementor-widget-container">
+              <div class="elementor-divider">
+                <span class="elementor-divider-separator">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="elementor-element elementor-element-e31a375 elementor-widget elementor-widget-heading"
+            data-id="e31a375" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+              <h2 class="elementor-heading-title elementor-size-default">Options de paiement</h2>
+            </div>
+          </div>
+          <div class="elementor-element elementor-element-11cb8c4 elementor-widget elementor-widget-text-editor"
+            data-id="11cb8c4" data-element_type="widget" data-widget_type="text-editor.default">
+            <div class="elementor-widget-container">
+              <p>– Paiement en espèce<br>– Paiement par Mobile money</p>
+            </div>
+          </div>
+          <div class="elementor-element elementor-element-e480b0d elementor-widget elementor-widget-image"
+            data-id="e480b0d" data-element_type="widget" data-widget_type="image.default">
+            <div class="elementor-widget-container">
+              <style>
+                /*! elementor - v3.21.0 - 08-05-2024 */
+                .elementor-widget-image {
+                  text-align: center
+                }
+
+                .elementor-widget-image a {
+                  display: inline-block
+                }
+
+                .elementor-widget-image a img[src$=".svg"] {
+                  width: 48px
+                }
+
+                .elementor-widget-image img {
+                  vertical-align: middle;
+                  display: inline-block
+                }
+              </style> <img loading="lazy" width="482" height="79"
+                src="https://www.ivoirshop.ci/wp-content/uploads/2023/11/paiement.webp"
+                class="attachment-large size-large wp-image-30816" alt=""
+                srcset="https://www.ivoirshop.ci/wp-content/uploads/2023/11/paiement.webp 482w, https://www.ivoirshop.ci/wp-content/uploads/2023/11/paiement-300x49.webp 300w, https://www.ivoirshop.ci/wp-content/uploads/2023/11/paiement-320x52.webp 320w, https://www.ivoirshop.ci/wp-content/uploads/2023/11/paiement-370x61.webp 370w"
+                sizes="(max-width: 482px) 100vw, 482px">
+            </div>
+          </div>
+          <div class="elementor-element elementor-element-fdc1de3 e-flex e-con-boxed e-con e-child" data-id="fdc1de3"
+            data-element_type="container">
+            <div class="e-con-inner">
+              <div class="elementor-element elementor-element-bffac91 e-con-full e-flex e-con e-child" data-id="bffac91"
+                data-element_type="container">
+                <div class="elementor-element elementor-element-aaacdb6 elementor-widget elementor-widget-image"
+                  data-id="aaacdb6" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                  </div>
+                </div>
+                <div class="elementor-element elementor-element-ed540ab e-con-full e-flex e-con e-child" data-id="ed540ab"
+                  data-element_type="container">
+                  <div class="elementor-element elementor-element-4e8cdd5 elementor-widget elementor-widget-heading"
+                    data-id="4e8cdd5" data-element_type="widget" data-widget_type="heading.default">
+                    <div class="elementor-widget-container">
+                      <h2 class="elementor-heading-title elementor-size-default"> Livraison en Côte d'ivoire</h2>
+                    </div>
+                  </div>
+                  <div class="elementor-element elementor-element-2664ef2 elementor-widget elementor-widget-text-editor"
+                    data-id="2664ef2" data-element_type="widget" data-widget_type="text-editor.default">
+                    <div class="elementor-widget-container">
+                      <p>à partir de 1 500 FCFA</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="elementor-element elementor-element-2ec582a e-flex e-con-boxed e-con e-child" data-id="2ec582a" data-element_type="container">
+              <div class="e-con-inner">
+                <div class="elementor-element elementor-element-c8af9aa e-con-full e-flex e-con e-child" data-id="c8af9aa"
+                  data-element_type="container">
+                  <div class="elementor-element elementor-element-4f01db5 elementor-widget elementor-widget-image"
+                    data-id="4f01db5" data-element_type="widget" data-widget_type="image.default">
+                    <div class="elementor-widget-container">
+                    </div>
+                  </div>
+                  <div class="elementor-element elementor-element-5a0f633 e-flex e-con-boxed e-con e-child"
+                    data-id="5a0f633" data-element_type="container">
+                    <div class="e-con-inner">
+                      <div class="elementor-element elementor-element-d77048d elementor-widget elementor-widget-heading"
+                        data-id="d77048d" data-element_type="widget" data-widget_type="heading.default">
+                        <div class="elementor-widget-container">
+                          <h2 class="elementor-heading-title elementor-size-default">Livraison Express</h2>
+                        </div>
+                      </div>
+                      <div
+                        class="elementor-element elementor-element-a484645 elementor-widget elementor-widget-text-editor"
+                        data-id="a484645" data-element_type="widget" data-widget_type="text-editor.default">
+                        <div class="elementor-widget-container">
+                          <p>Uniquement à Abidjan</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="elementor-element elementor-element-f0d03d9 elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
+                data-id="f0d03d9" data-element_type="widget" data-widget_type="divider.default">
+                <div class="elementor-widget-container">
+                  <div class="elementor-divider">
+                    <span class="elementor-divider-separator">
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="elementor-element elementor-element-918100d e-flex e-con-boxed e-con e-child" data-id="918100d"
+                data-element_type="container">
+                <div class="e-con-inner">
+                  <div class="elementor-element elementor-element-9f3c7fa e-con-full e-flex e-con e-child"
+                    data-id="9f3c7fa" data-element_type="container">
+                    <div class="elementor-element elementor-element-89e7ed0 elementor-widget elementor-widget-image"
+                      data-id="89e7ed0" data-element_type="widget" data-widget_type="image.default">
+                      <div class="elementor-widget-container">
+                      </div>
+                    </div>
+                    <div class="elementor-element elementor-element-1e25241 e-flex e-con-boxed e-con e-child"
+                      data-id="1e25241" data-element_type="container">
+                      <div class="e-con-inner">
+                        <div class="elementor-element elementor-element-e7d7f0e elementor-widget elementor-widget-heading"
+                          data-id="e7d7f0e" data-element_type="widget" data-widget_type="heading.default">
+                          <div class="elementor-widget-container">
+                            <h2 class="elementor-heading-title elementor-size-default">Retour &amp; remboursement</h2>
+                          </div>
+                        </div>
+                        <div
+                          class="elementor-element elementor-element-3059559 elementor-widget elementor-widget-text-editor"
+                          data-id="3059559" data-element_type="widget" data-widget_type="text-editor.default">
+                          <div class="elementor-widget-container">
+                            <p>Retours gratuits sous 10 Jours</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="elementor-element elementor-element-7787d74 e-flex e-con-boxed e-con e-child" data-id="7787d74" data-element_type="container">
+                  <div class="e-con-inner">
+                    <div class="elementor-element elementor-element-73b3dae e-con-full e-flex e-con e-child" data-id="73b3dae" data-element_type="container">
+                      <div class="elementor-element elementor-element-182eee3 elementor-widget elementor-widget-image" data-id="182eee3" data-element_type="widget" data-widget_type="image.default">
+                        <div class="elementor-widget-container">
+                        </div>
+                      </div>
+                      <div class="elementor-element elementor-element-17833cf e-flex e-con-boxed e-con e-child" data-id="17833cf" data-element_type="container">
+                        <div class="e-con-inner">
+                          <div class="elementor-element elementor-element-14f1aa3 elementor-widget elementor-widget-heading"data-id="14f1aa3" data-element_type="widget" data-widget_type="heading.default">
+                            <div class="elementor-widget-container">
+                              <h2 class="elementor-heading-title elementor-size-default">Service client</h2>
+                            </div>
+                          </div>
+                          <div class="elementor-element elementor-element-24117c4 elementor-widget elementor-widget-text-editor" data-id="24117c4" data-element_type="widget" data-widget_type="text-editor.default">
+                            <div class="elementor-widget-container">
+                              <p>Disponible 7j/7 au&nbsp; 0566031945</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><br>
+  <div class="text-center">
+    <span>Produits similaire</span>
+  </div>
+</div>
+

@@ -11,7 +11,7 @@ export class BackService {
   private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
 
 
-  constructor(private api: HttpClient) {}
+  constructor(private http: HttpClient, private api: HttpClient) {}
 
 
   // Api Admin
@@ -22,7 +22,7 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.api.post("http://127.0.0.1:5000/api/admin/create", body, httpOptions)
+    return this.http.post("http://127.0.0.1:5000/api/admin/create", body, httpOptions)
   }
 
 
@@ -32,7 +32,7 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.api.post('http://127.0.0.1:5000/api/admin/login', body, httpOptions);
+    return this.http.post('http://127.0.0.1:5000/api/admin/login', body, httpOptions);
     // return this.api.post('mysql+pymysql://root:@localhost/tt_officiel', body, httpOptions)
   }
 
@@ -80,27 +80,34 @@ export class BackService {
   // Api Products
 
    ReadAllProducts(): Observable<any>{
-    return this.api.get<any[]>("http://127.0.0.1:5000/api/products/readall")
+    return this.http.get<any[]>("http://127.0.0.1:5000/api/products/readall")
   }
 
+  // ReadSingleProducts(pr_uid: string): Observable<any> {
+  //   const url = `http://127.0.0.1:5000/api/products/readsingle/${pr_uid}`;
+  //   return this.http.get(url); // Utilisation correcte de la méthode get sans les arguments supplémentaires
+  // }
 
-  ReadSingleProducts(u_uid:any){
+
+
+  ReadSingleProducts(body : any){
     const httpOptions = {
       headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      })
+      Authorization: ''
+      }),
     };
-    return this.api.get("http://127.0.0.1:5000/api/products/readsingle/${ca_uid}", httpOptions);
+    return this.http.post("http://127.0.0.1:5000/api/products/readsingle",body, httpOptions);
   }
 
 
-  CreateProducts(body:any){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    }
-    return this.api.post("http://127.0.0.1:5000/api/products/create", body, httpOptions)
+  CreateProducts(formData: FormData){
+    // const httpOptions = {
+    //   // headers: new HttpHeaders({
+    //   //   'Content-Type': 'application/json',
+    //   // })
+    // }
+    return this.http.post("http://127.0.0.1:5000/api/products/create", formData)
   }
 
 
@@ -111,7 +118,7 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.api.post("http://127.0.0.1:5000/api/products/delete", body, httpOptions)
+    return this.http.delete("http://127.0.0.1:5000/api/products/delete", body)
   }
 
 
@@ -121,6 +128,6 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.api.patch("http://127.0.0.1:5000/api/products/update", body, httpOptions)
+    return this.http.patch("http://127.0.0.1:5000/api/products/update", body, httpOptions)
   }
 }

@@ -8,6 +8,7 @@ from model.tt import *
 from resources.admin import AdminApi
 from resources.products import ProductsApi
 from flask_migrate import Migrate
+from flask import Flask
 from flask_cors import CORS
 
 
@@ -23,6 +24,7 @@ app.secret_key = os.urandom(24)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = LIEN_BASE_DE_DONNEES
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 db.init_app(app)
@@ -38,7 +40,7 @@ def home():
     return render_template('index.html')
 
 api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
-api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_categiries', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_products', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 if __name__ == '__main__':
     app.run(debug=True,  host="0.0.0.0")  
