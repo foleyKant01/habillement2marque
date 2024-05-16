@@ -7,10 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '../include/header/header.component';
 import { FooterComponent } from '../include/footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
-import { NosArticlesComponent } from './nos-articles/nos-articles.component';
 import { SuivezNousComponent } from './suivez-nous/suivez-nous.component';
-import { ChaussuresComponent } from './nos_articles/chaussures/chaussures.component';
-import { MontresComponent } from './nos_articles/montres/montres.component';
+import { ReadSingleProductComponent } from './read-single-product/read-single-product.component';
 
 
 @NgModule({
@@ -21,13 +19,12 @@ import { MontresComponent } from './nos_articles/montres/montres.component';
     HomeComponent,
     ContactComponent,
     SuivezNousComponent,
-    ChaussuresComponent,
-    MontresComponent
-
+    ReadSingleProductComponent,
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+
   ]
 })
 export class UserModule { }

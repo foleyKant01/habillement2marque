@@ -1,0 +1,116 @@
+<div style="height: 905px;">
+  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
+    <img src="" alt="Logo Trouvez Tous">
+  </div>
+  <div class="container" style="height: auto;">
+    <div id="wrapper">
+      <div></div>
+      <br>
+      <div class="p-2" style=" border: 1px solid; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+        <div class="table-wrapper mt-5">
+          <div class="col-12 table-responsive">
+            <table class="table table-striped" *ngIf="product">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Name </th>
+                  <th scope="col">Description </th>
+                  <th scope="col">Price </th>
+                  <th scope="col">Picture </th>
+                  <th scope="col">Taille 1 </th>
+                  <th scope="col">Taille 2 </th>
+                  <th scope="col">Taille 3 </th>
+                  <th scope="col">Taille 4 </th>
+                  <th scope="col">Reférence </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.description }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.image }}</td>
+                  <td>{{ product.taille1 }}</td>
+                  <td>{{ product.taille2 }}</td>
+                  <td>{{ product.taille3 }}</td>
+                  <td>{{ product.taille4 }}</td>
+                  <td>{{ product.pr_uid }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="wrappe">
+    <form (submit)="updateProducts()" [formGroup]="updateProductsForm" [ngClass]="{'blur-background': loading || success}">
+      <h2>Update product</h2>
+      <hr><br>
+      <div class="div-input">
+        <label for="name" class="form-label">Name:</label>
+        <input formControlName="name" type="text" id="name" name="name" class="form-control" aria-describedby="name">
+      </div><br>
+      <div class="div-input">
+        <label for="description" class="form-label">Description:</label>
+        <textarea formControlName="description" class="form-control" name="description" id="description" cols="25" rows="3"></textarea>
+      </div><br>
+      <div class="div-input">
+        <label for="price" class="form-label">Price:</label>
+        <input formControlName="price" type="text" class="form-control" name="price"  id="price" aria-describedby="price">
+      </div><br>
+      <div class="div-input">
+        <label for="image" class="form-label">Image:</label>
+        <input formControlName="image" type="file" class="form-control" name="image" id="image"  aria-describedby="image">
+      </div><br>
+      <div class="div-input">
+        <label for="taille1" class="form-label">Taille 1:</label>
+        <select name="taille1" name="taille1" id="taille1" class="form-control" formControlName="taille1" aria-describedby="taille1">
+          <option value="null"></option>
+          <option value="weight40">40</option>
+          <option value="weight41">41</option>
+          <option value="weight42">42</option>
+          <option value="weight43">43</option>
+        </select>
+      </div><br>
+      <div class="div-input">
+        <label for="taille2" class="form-label">Taille 2:</label>
+        <select name="taille2" class="form-control" name="taille2" formControlName="taille2" id="taille2" aria-describedby="taille2">
+          <option value="null"></option>
+          <option value="weight40">40</option>
+          <option value="weight41">41</option>
+          <option value="weight42">42</option>
+          <option value="weight43">43</option>
+        </select>
+      </div><br>
+      <div class="div-input">
+        <label for="taille3" class="form-label">Taille 3:</label>
+        <select name="taille3" name="taille3" id="taille3" class="form-control" formControlName="taille3" aria-describedby="taille3">
+          <option value="null"></option>
+          <option value="weight40">40</option>
+          <option value="weight41">41</option>
+          <option value="weight42">42</option>
+          <option value="weight43">43</option>
+        </select>
+      </div><br>
+      <div class="div-input">
+        <label for="taille4" class="form-label">Taille 4:</label>
+        <select name="taille4" name="taille4" id="taille4" class="form-control" formControlName="taille4" aria-describedby="taille4">
+          <option value="null"></option>
+          <option value="weight40">40</option>
+          <option value="weight41">41</option>
+          <option value="weight42">42</option>
+          <option value="weight43">43</option>
+        </select>
+      </div><br>
+      <div class="mt-2 p-2" style="display: flex; justify-content: end;">
+        <div *ngIf="!loading"></div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </form>
+  <app-spinner style="margin-top: -400px;" class="overlay" *ngIf="loading"></app-spinner>
+  <div *ngIf="success" style="position: fixed; top: 50%; height: 50px; " class="alert alert-success" role="alert">
+    Catégorie créée avec succès !
+  </div>
+  </div>
+</div><br>
+<div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div>

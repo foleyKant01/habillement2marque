@@ -10,7 +10,7 @@
 .spinner {
   margin-top: 15%;
   margin-bottom: 5px;
-  margin-left: 135px;
+  // margin-left: 135px;
   width: 90px;
   text-align: center;
 }
@@ -35,4 +35,10 @@
 @keyframes bounce {
   0%, 80%, 100% { transform: scale(0); }
   40% { transform: scale(1.0); }
+}
+.ok {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
+  padding: 300px 0px 0px 0px;
 }

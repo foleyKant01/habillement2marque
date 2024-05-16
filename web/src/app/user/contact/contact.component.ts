@@ -7,4 +7,21 @@ import { Component } from '@angular/core';
 })
 export class ContactComponent {
 
+  contact = {
+    fullName: '',
+    email: '',
+    message: ''
+  };
+
+  submitForm() {
+    console.log('Formulaire soumis :', this.contact);
+    // Ajoutez ici la logique pour envoyer le formulaire de contact (par exemple, en utilisant un service HTTP)
+    // Réinitialisez le formulaire après l'envoi si nécessaire
+    this.contact = {
+      fullName: '',
+      email: '',
+      message: ''
+    };
+  }
+
 }

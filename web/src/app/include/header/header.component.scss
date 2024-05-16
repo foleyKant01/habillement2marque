@@ -7,7 +7,11 @@
 }
 
 .bg-white {
-  background-color: #ffffff; /* Couleur blanche */
+  background-color: rgb(230 230 230) !important;
+}
+.bg-white {
+  --bs-bg-opacity: 1;
+  background-color: rgb(230 230 230) !important;
 }
 /* Style pour l'input transparent */
 .transparent-input {

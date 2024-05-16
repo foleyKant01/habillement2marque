@@ -8,10 +8,16 @@ class ProductsApi(Resource):
     def post(self, route):
         if route == "create":
             return CreateProducts()
-    
+        
+        if route == "readsingle":
+            return ReadSingleProducts()
+            
     def get(self, route):
         if route == "readall":
             return ReadAllProducts()
+        
+        if route == "test":
+            return test()
 
         if route == "readsingle":
             return ReadSingleProducts()

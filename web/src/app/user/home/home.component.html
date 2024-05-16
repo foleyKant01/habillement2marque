@@ -2,189 +2,22 @@
   <app-header></app-header><br><br>
 </div>
 <div class="body pt-3">
-  <div class="container"><br>
-  <h1>Nos Articles</h1><br><br>
-  <div class="products">
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
+  <div class="container">
+    <h1>Nos Articles</h1><br><br>
+    <div class="products" *ngIf="data && data?.length > 0">
+      <div class="product" *ngFor="let product of data">
+        <h2 class="m-0">{{ product.name }}</h2>
+        <a style="cursor: pointer;">
+          <img [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid)" alt="fdff">
+        </a>
+        <p>{{ product.pr_uid }}</p>
+        <div class="d-flex justify-content-between">
+            <a class="order-btn"
+          href="https://web.whatsapp.com/send?phone=+2250702653594&text=Bonjour%20je%20suis%20intéressé%20par%20ce%20article  %20Nom:%20{{product.name}},%20Id:%20{{product.pr_uid}},%20Prix:%20{{product.price}},%20Photo:%20{{product.image}}%22%20/%3E%20!"
+          target="_blank">Commander</a>
+          <span class="mt-2">{{ product.price }}FCFA</span>
+        </div>
       </div>
     </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 1</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-    <div class="product">
-      <h2>Nom de l'article 2</h2>
-      <img src="../assets/img_products/image1.jpeg" alt="fdff">
-      <p>Id article :</p>
-      <div class="d-flex justify-content-between">
-        <a class="order-btn" href="https://web.whatsapp.com/send?phone=+2250709767193&text=Bonjour je suis intéressé par un vos articles%20!" target="_blank">Commander</a>
-        <span class="mt-2">Prix</span>
-      </div>
-    </div>
-  </div>
   </div>
 </div>

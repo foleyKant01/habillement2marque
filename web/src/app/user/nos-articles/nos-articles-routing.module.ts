@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NosArticlesComponent } from './nos-articles.component';
-import { ChaussuresComponent } from '../nos_articles/chaussures/chaussures.component';
-import { MontresComponent } from '../nos_articles/montres/montres.component';
+import { ChaussuresComponent } from './chaussures/chaussures.component';
+import { MontresComponent } from './montres/montres.component';
 
 const routes: Routes = [
   { path:'', component: NosArticlesComponent,
