@@ -16,6 +16,7 @@ export class CreateProductsComponent implements OnInit {
   file: any;
 
 
+
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
