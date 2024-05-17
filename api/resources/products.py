@@ -11,6 +11,9 @@ class ProductsApi(Resource):
         
         if route == "readsingle":
             return ReadSingleProducts()
+        
+        if route == "readsimilar":
+            return AllSimilarProducts()
             
     def get(self, route):
         if route == "readall":
@@ -21,6 +24,11 @@ class ProductsApi(Resource):
 
         if route == "readsingle":
             return ReadSingleProducts()
+        
+        if route == "readsimilar":
+            return AllSimilarProducts()
+        
+        
     
     def delete(self, route):
          if route == "delete":

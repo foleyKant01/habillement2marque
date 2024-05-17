@@ -3,12 +3,12 @@
 </div>
 <div class="body pt-3">
   <div class="container">
-    <h1>Nos Articles</h1><br><br>
+    <h1 style="border: 1px solid ;">Nos Articles</h1><br><br>
     <div class="products" *ngIf="data && data?.length > 0">
       <div class="product" *ngFor="let product of data">
         <h2 class="m-0">{{ product.name }}</h2>
         <a style="cursor: pointer;">
-          <img [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid)" alt="fdff">
+          <img [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid, product.type)" alt="fdff">
         </a>
         <p>{{ product.pr_uid }}</p>
         <div class="d-flex justify-content-between">

@@ -91,14 +91,18 @@ export class BackService {
 
 
   ReadSingleProducts(body : any){
-    const httpOptions = {
-      headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: ''
-      }),
-    };
-    return this.http.post("http://127.0.0.1:5000/api/products/readsingle",body, httpOptions);
+    return this.http.post("http://127.0.0.1:5000/api/products/readsingle",body);
   }
+
+
+  AllSimilarProducts(body : any){
+    return this.http.post("http://127.0.0.1:5000/api/products/readsimilar",body);
+  }
+
+
+  // ReadSimilarProducts(): Observable<any>{
+  //   return this.http.get<any[]>("http://127.0.0.1:5000/api/products/readsimilar")
+  // }
 
 
   CreateProducts(formData: FormData){

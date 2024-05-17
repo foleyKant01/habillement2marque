@@ -180,19 +180,19 @@ def ReadAllProducts():
                 'price': products.price,  
                 'image_file': str(IMGHOSTNAME)+str(products.image_file),              
                 'pr_uid': products.pr_uid,          
+                'type': products.type,          
             }
             products_info.append(products_infos)
 
         response['status'] = 'success'
         response ['products'] = products_info
+        # response ['products'] = all_products
 
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
 
     return response
-
-
 
 
 def ReadSingleProducts():
@@ -225,9 +225,51 @@ def ReadSingleProducts():
 
     return response 
 
-# IMGHOSTNAME
+
+# def ReadSimilarProducts():
+#     response = {}
+
+#     product = ReadSingleProducts()
+#     if product['status']:
+#         product_type = product['user']['type']
+        
+#     if product_type:
+#         similar_products = AllSimilarProducts(product_type)
+#         products_similar = similar_products['products']
+#     response['status'] = 'succes'
+#     response['products'] = products_similar
+#     return response
 
 
 
+def AllSimilarProducts():
+    response = {}
+    pr_uid = str
+    
+    try:
+        product_type = request.json.get('type')
+        uid = request.json.get('pr_uid')
+        all_products = Products.query.filter(Products.type == product_type, Products.pr_uid != uid).all()
 
+        products_info = []
+
+        for products  in all_products:
+            products_infos = {
+                'name': products.name,              
+                'price': products.price,  
+                'image_file': str(IMGHOSTNAME)+str(products.image_file),              
+                'pr_uid': products.pr_uid,          
+                'type': products.type,          
+            }
+            products_info.append(products_infos)
+
+
+        response['status'] = 'success'
+        response['products'] = products_info
+
+    except Exception as e:
+        response['status'] = 'error'
+        response['error_description'] = str(e)
+
+    return response
 
