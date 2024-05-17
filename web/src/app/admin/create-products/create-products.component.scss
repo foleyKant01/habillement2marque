@@ -11,10 +11,10 @@
 
 form{
 
-  padding: 10px 30px 10px 30px;
-  min-width: 330px;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding: 10px 20px 10px 20px;
+  min-width: 600px;
+  // margin-left: 5px;
+  // margin-right: 5px;
   border-radius: 10px;
   box-shadow: 4px 2px 12px #b1b1b1,
     -8px -8px 10px #ffffff;
@@ -50,10 +50,10 @@ a{
   color: #9b9b9b;
 }
 
-label{
-  min-width: 50px!important;
-  color: #656565;
-}
+// label{
+//   min-width: 70px!important;
+//   color: #656565;
+// }
 .div-input{
   display: flex;
   justify-content: space-between;
@@ -61,7 +61,7 @@ label{
 }
 
 label{
-  min-width: 90px!important;
+  min-width: 140px!important;
   color: #656565;
   padding-top: 6px;
 }

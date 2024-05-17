@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { BackService } from 'src/app/back.service';
 
@@ -14,11 +14,14 @@ export class CreateProductsComponent implements OnInit {
   delayDuration= 2000
   success = false;
   file: any;
+  selectedType: any;
 
 
 
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+    this.createproducts.get('type')?.valueChanges.subscribe(value => {
+      this.selectedType = value;
+    });
   }
 
   constructor(private router: Router, private fb: FormBuilder, private http: BackService){}
@@ -32,13 +35,13 @@ export class CreateProductsComponent implements OnInit {
       image_file: new FormControl(null, Validators.required),
       inventory_level: new FormControl(null, Validators.required),
       price_received: new FormControl(null, Validators.required),
-      weight: new FormControl(null, Validators.required),
-      color: new FormControl(null, Validators.required),
-      taille1: new FormControl(null, Validators.required),
-      taille2: new FormControl(null, Validators.required),
-      taille3: new FormControl(null, Validators.required),
-      taille4: new FormControl(null, Validators.required),
-      // taille5: new FormControl(null, Validators.required),
+      color: new FormControl(null),
+      tailleVe: new FormControl(null),
+      tailleJe: new FormControl(null),
+      taille1: new FormControl(null),
+      taille2: new FormControl(null),
+      taille3: new FormControl(null),
+      taille4: new FormControl(null),
     }
   )
 
@@ -62,8 +65,10 @@ export class CreateProductsComponent implements OnInit {
       formData.append('image_file', this.file as File);
       formData.append('inventory_level', this.createproducts.get('inventory_level')?.value);
       formData.append('price_received', this.createproducts.get('price_received')?.value);
-      formData.append('weight', this.createproducts.get('weight')?.value);
       formData.append('color', this.createproducts.get('color')?.value);
+      formData.append('taille', this.createproducts.get('taille')?.value);
+      formData.append('tailleVe', this.createproducts.get('tailleVe')?.value);
+      formData.append('tailleJe', this.createproducts.get('tailleJe')?.value);
       formData.append('taille1', this.createproducts.get('taille1')?.value);
       formData.append('taille2', this.createproducts.get('taille2')?.value);
       formData.append('taille3', this.createproducts.get('taille3')?.value);

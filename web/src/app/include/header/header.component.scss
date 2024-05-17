@@ -1,6 +1,22 @@
 .navbar-light .navbar-nav .nav-link {
   color: rgba(0, 0, 0);
 }
+
+.dropdown-item{
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  --bs-dropdown-zindex: 1000;
+  --bs-dropdown-min-width: 10rem;
+
+  --bs-dropdown-link-hover-color: #5ff0ac;
+  --bs-dropdown-link-hover-bg: #aceccc;
+  --bs-dropdown-link-active-bg: #1ca565;
+  --bs-dropdown-header-color: #5ff0ac;
+
+}
+
 .navbar {
   background-color: transparent; /* Navbar transparente par défaut */
   transition: background-color 0.3s ease; /* Transition fluide */

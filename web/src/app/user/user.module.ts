@@ -9,6 +9,7 @@ import { FooterComponent } from '../include/footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { SuivezNousComponent } from './suivez-nous/suivez-nous.component';
 import { ReadSingleProductComponent } from './read-single-product/read-single-product.component';
+import { ProductByFilterComponent } from './product-by-filter/product-by-filter.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ReadSingleProductComponent } from './read-single-product/read-single-pr
     ContactComponent,
     SuivezNousComponent,
     ReadSingleProductComponent,
+    ProductByFilterComponent,
   ],
   imports: [
     CommonModule,
