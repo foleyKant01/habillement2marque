@@ -11,12 +11,21 @@
     <div style="margin-left: 20px;" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown" (click)="setActiveLink(0)" [ngClass]="{ 'active-link': activeLinkIndex === 0 }">
-          <a style="padding-left: 0px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" >Nos catégories</a>
+          <a style="padding-left: 0px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">Nos catégories</a>
           <div style="margin-left: -1px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Vêtement Homme')">Vêtement Homme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Vêtement Femme')">Vêtement Femme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Sous Vêtement Homme')">Sous Vêtement Homme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Sous Vêtement Femme')">Sous Vêtement Femme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Chaînes')">Chaînes</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Montres')">Montres</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Bagues')">Bagues</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Chaussures Homme')">Chaussures Homme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Chaussures Homme')">Chaussures Femme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Sandales Femme')">Sandales Homme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Sandales Femme')">Sandales Femme</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <!-- <a class="dropdown-item" (click)="redirectToCategory('Something else here')">Something else here</a> -->
           </div>
         </li>
         <li class="nav-item" (click)="setActiveLink(1)" [ngClass]="{ 'active-link': activeLinkIndex === 1 }">

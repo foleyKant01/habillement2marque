@@ -6,16 +6,18 @@
     <h1 style="border: 1px solid ;">Nos Articles</h1><br><br>
     <div class="products" *ngIf="data && data?.length > 0">
       <div class="product" *ngFor="let product of data">
-        <h2 class="m-0">{{ product.name }}</h2>
-        <a style="cursor: pointer;">
-          <img [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid, product.type)" alt="fdff">
-        </a>
+        <h2 class="mb-1">{{ product.name }}</h2>
+        <div style="height: 320px; width: 300px;">
+          <a style="cursor: pointer; ">
+            <img style="height: 100%;" [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid, product.type)" alt="fdff">
+          </a>
+        </div>
         <p>{{ product.pr_uid }}</p>
         <div class="d-flex justify-content-between">
             <a class="order-btn"
           href="https://web.whatsapp.com/send?phone=+2250702653594&text=Bonjour%20je%20suis%20intéressé%20par%20ce%20article  %20Nom:%20{{product.name}},%20Id:%20{{product.pr_uid}},%20Prix:%20{{product.price}},%20Photo:%20{{product.image}}%22%20/%3E%20!"
           target="_blank">Commander</a>
-          <span class="mt-2">{{ product.price }}FCFA</span>
+          <span class="mt-2">{{ product.price }} FCFA</span>
         </div>
       </div>
     </div>

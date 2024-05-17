@@ -8,12 +8,216 @@
       <h2>Create product</h2>
       <hr><br>
       <div class="div-input">
+        <label for="type" class="form-label">Type:</label>
+        <select name="type" id="type" class="form-control" formControlName="type" required aria-describedby="type">
+          <option value="Vêtement Homme">Vêtement Homme</option>
+          <option value="Vêtement Femme">Vêtement Femme</option>
+          <option value="Sous Vêtement Homme">Sous Vêtement Homme</option>
+          <option value="Sous Vêtement Femme">Sous Vêtement Femme</option>
+          <option value="Chaînes">Chaînes</option>
+          <option value="Montres">Montres</option>
+          <option value="Bagues">Bagues</option>
+          <option value="Chaussures Homme">Chaussures Homme</option>
+          <option value="Chaussures Homme">Chaussures Femme</option>
+          <option value="Sandales Femme">Sandales Homme</option>
+          <option value="Sandales Femme">Sandales Femme</option>
+        </select>
+      </div><br>
+
+      <!-- Sections communes à tous les types -->
+      <div class="div-input">
         <label for="name" class="form-label">Name:</label>
-        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name">
+        <input type="text" id="name" class="form-control" formControlName="name" required aria-describedby="name">
       </div><br>
       <div class="div-input">
+        <label for="description" class="form-label">Description:</label>
+        <textarea class="form-control" id="description" formControlName="description" cols="25" rows="3"></textarea>
+      </div><br>
+      <div class="div-input">
+        <label for="price" class="form-label">Price:</label>
+        <input type="text" class="form-control" id="price" formControlName="price" required aria-describedby="price">
+      </div><br>
+
+      <!-- Sections spécifiques -->
+      <div *ngIf="selectedType === 'Vêtement Homme' || selectedType === 'Vêtement Femme' || selectedType === 'Sous Vêtement Homme' || selectedType === 'Sous Vêtement Femme'">
+        <div class="div-input">
+          <label for="color" class="form-label">Color:</label>
+          <select name="color" id="color" class="form-control" id="color" formControlName="color" aria-describedby="color">
+            <option value="Noir">Noir</option>
+            <option value="Blanc">Blanc</option>
+            <option value="Gris">Gris</option>
+            <option value="Marron">Marron</option>
+            <option value="Beige">Beige</option>
+            <option value="Bleu marine">Bleu marine</option>
+            <option value="Rouge">Rouge</option>
+            <option value="Vert">Vert</option>
+            <option value="Jaune">Jaune</option>
+            <option value="Bleu">Bleu</option>
+            <option value="Rose">Rose</option>
+            <option value="Violet">Violet</option>
+            <option value="Orange">Orange</option>
+            <option value="Multi">Multi</option>
+          </select>
+        </div><br>
+        <div class="div-input">
+          <label for="tailleVe" class="form-label">Taille vetements:</label>
+          <select name="tailleVe" id="tailleVe" class="form-control" id="tailleVe" formControlName="tailleVe" aria-describedby="tailleVe">
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">Marron</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+            <option value="XXXL">XXXL</option>
+          </select>
+        </div><br>
+        <div class="div-input">
+          <label for="tailleJe" class="form-label">Taille jeans:</label>
+          <select name="tailleJe" id="tailleJe" class="form-control" id="tailleJe" formControlName="tailleJe" aria-describedby="tailleJe">
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+          </select>
+        </div><br>
+      </div>
+
+      <div *ngIf="selectedType === 'Chaînes' || selectedType === 'Montres' || selectedType === 'Bagues'">
+        <div class="div-input">
+          <label for="color" class="form-label">Color:</label>
+          <select name="color" id="color" class="form-control" id="color" formControlName="color" aria-describedby="color">
+            <option value="Coleur Or">Coleur Or</option>
+            <option value="Coleur Ar">Coleur Ar</option>
+          </select>
+        </div><br>
+      </div>
+
+      <div *ngIf="selectedType === 'Chaussures Homme' || selectedType === 'Sandales Femme'">
+        <div class="div-input">
+          <label for="color" class="form-label">Color:</label>
+          <select name="color" id="color" class="form-control" id="color" formControlName="color" required aria-describedby="color">
+            <option value="Noir">Noir</option>
+            <option value="Blanc">Blanc</option>
+            <option value="Gris">Gris</option>
+            <option value="Marron">Marron</option>
+            <option value="Beige">Beige</option>
+            <option value="Bleu marine">Bleu marine</option>
+            <option value="Rouge">Rouge</option>
+            <option value="Vert">Vert</option>
+            <option value="Jaune">Jaune</option>
+            <option value="Bleu">Bleu</option>
+            <option value="Rose">Rose</option>
+            <option value="Violet">Violet</option>
+            <option value="Orange">Orange</option>
+            <option value="Multi">Multi</option>
+          </select>
+        </div><br>
+        <div class="div-input">
+          <label for="taille1" class="form-label">Taille 1:</label>
+          <select name="taille1" id="taille1" class="form-control" id="taille1" formControlName="taille1" required aria-describedby="taille1">
+            <option value="null"></option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+          </select>
+        </div><br>
+        <div class="div-input">
+          <label for="taille2" class="form-label">Taille 2:</label>
+          <select name="taille2" class="form-control" id="taille2" formControlName="taille2" aria-describedby="taille2">
+            <option value="null"></option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+          </select>
+        </div><br>
+        <div class="div-input">
+          <label for="taille3" class="form-label">Taille 3:</label>
+          <select name="taille3" id="taille3" class="form-control" id="taille3" formControlName="taille3" aria-describedby="taille3">
+            <option value="null"></option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+          </select>
+        </div><br>
+        <div class="div-input">
+          <label for="taille4" class="form-label">Taille 4:</label>
+          <select name="taille4" id="taille4" class="form-control" id="taille4" formControlName="taille4" aria-describedby="taille4">
+            <option value="null"></option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+          </select>
+        </div><br>
+      </div>
+
+      <!-- Champs communs -->
+      <div class="div-input">
+        <label for="image_file" class="form-label">Image:</label>
+        <input type="file" class="form-control" id="image_file" (change)="onFileChange($event)" formControlName="image_file" required aria-describedby="image_file">
+      </div><br>
+      <div class="div-input">
+        <label for="inventory_level" class="form-label">Inventory level:</label>
+        <input type="text" class="form-control" id="inventory_level" formControlName="inventory_level" required aria-describedby="inventory_level">
+      </div><br>
+      <div class="div-input">
+        <label for="price_received" class="form-label">Price received:</label>
+        <input type="text" class="form-control" id="price_received" formControlName="price_received" required aria-describedby="price_received">
+      </div><br>
+      <div class="mt-2 p-2" style="display: flex; justify-content: end;" *ngIf="!loading">
+        <button type="submit"  class="btn btn-primary">Create</button>
+      </div>
+    </form>
+    <app-spinner style="margin-top: -400px;" class="overlay" *ngIf="loading"></app-spinner>
+    <div *ngIf="success" style="position: fixed; top: 50%; height: 50px;" class="alert alert-success" role="alert">
+      Product created successfully!
+    </div>
+  </div><br>
+  <div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div><br>
+</div><br>
+
+
+
+<!-- <div style="height: 905px;">
+  <br>
+  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
+    <img src="" alt="Logo Trouvez Tous">
+  </div>
+  <div id="wrappe">
+    <form [formGroup]="createproducts" (submit)="Createproducts()" [ngClass]="{'blur-background': loading || success}">
+      <h2>Create product</h2>
+      <hr><br>
+      <div class="div-input">
         <label for="type" class="form-label">Type:</label>
-        <input type="text" id="type" class="form-control" formControlName="type" aria-describedby="type">
+        <select name="type" id="type" class="form-control" id="type" formControlName="type" aria-describedby="type">
+          <option value="Vêtement Homme">Vêtement Homme</option><br>
+          <option value="Vêtement Femme">Vêtement Femme</option><br>
+          <option value="Sous Vêtement Homme">Sous Vêtement Homme</option>
+          <option value="Sous Vêtement Femme">Sous Vêtement Femme</option>
+          <option value="Chaînes">Chaînes</option>
+          <option value="Montres">Montres</option>
+          <option value="Bagues">Bagues</option>
+          <option value="Chaussures Homme">Chaussures Homme</option>
+          <option value="Sandales Femme">Sandales Femme</option>
+        </select>
+      </div><br>
+      <div class="div-input">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" class="form-control" formControlName="name" aria-describedby="name">
       </div><br>
       <div class="div-input">
         <label for="description" class="form-label">Description:</label>
@@ -83,15 +287,6 @@
           <option value="43">43</option>
         </select>
       </div><br>
-      <!-- <div class="div-input">
-        <label for="taille5" class="form-label">Taille 5:</label>
-        <select name="taille5" id="taille5" formControlName="taille5" class="compose-multiple-select form-control form-select select2-accessible" multiple="" data-select2-id="1"tabindex="-1" aria-hidden="true">
-          <option value="40">40</option>
-          <option value="41">41</option>
-          <option value="42">42</option>
-          <option value="43">43</option>
-        </select>
-      </div><br> -->
       <div class="mt-2 p-2" style="display: flex; justify-content: end;" *ngIf="!loading">
         <button type="submit" class="btn btn-primary">Create</button>
       </div>
@@ -102,7 +297,16 @@
     </div>
   </div><br>
   <div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div><br>
-</div><br>
+</div><br> -->
 
 
+<!-- <div class="div-input">
+  <label for="taille5" class="form-label">Taille 5:</label>
+  <select name="taille5" id="taille5" formControlName="taille5" class="compose-multiple-select form-control form-select select2-accessible" multiple="" data-select2-id="1"tabindex="-1" aria-hidden="true">
+    <option value="40">40</option>
+    <option value="41">41</option>
+    <option value="42">42</option>
+    <option value="43">43</option>
+  </select>
+</div><br> -->
 
