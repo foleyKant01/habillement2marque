@@ -1,6 +1,9 @@
 <nav style="padding-left: 10px;" [class.bg-white]="isNavbarWhite" class="navbar navbar-expand-lg navbar-light  fixed-top bg-whit bg-whi">
   <div class="container">
-    <a class="navbar-brand" routerLink="/user/home">Habillement2Manque</a>
+    <h2 style="margin-top: -2px;"
+    >
+      <a class="navbar-brand" routerLink="/user/home">Habillement2Manque</a>
+    </h2>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,10 +11,8 @@
     <div style="margin-left: 20px;" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown" (click)="setActiveLink(0)" [ngClass]="{ 'active-link': activeLinkIndex === 0 }">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" >
-            Nos produits
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a style="padding-left: 0px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" >Nos catégories</a>
+          <div style="margin-left: -1px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>

@@ -11,7 +11,7 @@ const routes: Routes = [
   children: [
     { path:'', redirectTo:'home', pathMatch:'full' },
     { path:'home', component: HomeComponent },
-    { path:'read-single-product/:pr_uid', component: ReadSingleProductComponent },
+    { path:'read-single-product/:pr_uid/:type', component: ReadSingleProductComponent },
     { path:'contact', component: ContactComponent },
     { path:'suivez-nous', component: SuivezNousComponent },
     {path: 'nos-articles', loadChildren: () => import('./nos-articles/nos-articles.module').then((m) => m.NosArticlesModule)},
