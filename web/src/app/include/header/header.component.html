@@ -21,18 +21,18 @@
             <a class="dropdown-item" (click)="redirectToCategory('Montres')">Montres</a>
             <a class="dropdown-item" (click)="redirectToCategory('Bagues')">Bagues</a>
             <a class="dropdown-item" (click)="redirectToCategory('Chaussures Homme')">Chaussures Homme</a>
-            <a class="dropdown-item" (click)="redirectToCategory('Chaussures Homme')">Chaussures Femme</a>
-            <a class="dropdown-item" (click)="redirectToCategory('Sandales Femme')">Sandales Homme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Chaussures Femme')">Chaussures Femme</a>
+            <a class="dropdown-item" (click)="redirectToCategory('Sandales Homme')">Sandales Homme</a>
             <a class="dropdown-item" (click)="redirectToCategory('Sandales Femme')">Sandales Femme</a>
             <div class="dropdown-divider"></div>
             <!-- <a class="dropdown-item" (click)="redirectToCategory('Something else here')">Something else here</a> -->
           </div>
         </li>
+        <li class="nav-item" (click)="setActiveLink(2)" [ngClass]="{ 'active-link': activeLinkIndex === 2 }">
+          <a class="nav-link" routerLink="/user/offres">Offres</a>
+        </li>
         <li class="nav-item" (click)="setActiveLink(1)" [ngClass]="{ 'active-link': activeLinkIndex === 1 }">
           <a class="nav-link" routerLink="/user/suivez-nous">Suivez-Nous</a>
-        </li>
-        <li class="nav-item" (click)="setActiveLink(2)" [ngClass]="{ 'active-link': activeLinkIndex === 2 }">
-          <a class="nav-link" routerLink="/user/contact">Contact</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
