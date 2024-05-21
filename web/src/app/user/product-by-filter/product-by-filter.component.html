@@ -1,8 +1,9 @@
 <div class="accueil">
   <app-header></app-header>
-</div><br><br><br>
+</div><br><br>
 <div class="text-center">
-  <span>Articles de {{ product.type }}</span>
+  <!-- <div class="text-center" *ngif="type?.length > 0"> -->
+  <span>Articles {{ productType }}</span>
 </div><br>
 <div class="gr_div_product p-0">
   <div class="products" *ngIf="data && data?.length > 0">

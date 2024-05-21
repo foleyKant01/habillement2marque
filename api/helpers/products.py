@@ -1,6 +1,7 @@
 import csv
+import json
 import os
-from flask import request
+from flask import jsonify, request
 from werkzeug.utils import secure_filename
 import uuid
 from config.db import db
@@ -269,3 +270,32 @@ def AllSimilarProducts():
 
 
 
+def serialize_product(product):
+    return {
+        'name': product.name,              
+        'price': product.price,  
+        'image_file': str(IMGHOSTNAME)+str(product.image_file),              
+        'pr_uid': product.pr_uid,          
+        'type': product.type,          
+    }
+
+def AllSimilarTypeProducts():
+    response = {}
+    product_list = []
+    
+    try:
+        product_type = request.json.get('type')
+        all_products = Products.query.filter_by(type=product_type).all()
+        
+        for product in all_products:
+            product_data = serialize_product(product)
+            product_list.append(product_data)
+        
+        response['products'] = product_list
+        response['status'] = 'success'
+        
+    except Exception as e:
+        response['status'] = 'error'
+        response['message'] = str(e)
+    
+    return jsonify(response)

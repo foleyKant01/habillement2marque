@@ -14,6 +14,10 @@ class ProductsApi(Resource):
         
         if route == "readsimilar":
             return AllSimilarProducts()
+        
+        if route == "readsimilartype":
+            return AllSimilarTypeProducts()
+        
             
     def get(self, route):
         if route == "readall":
@@ -21,12 +25,6 @@ class ProductsApi(Resource):
         
         if route == "test":
             return test()
-
-        if route == "readsingle":
-            return ReadSingleProducts()
-        
-        if route == "readsimilar":
-            return AllSimilarProducts()
         
         
     
