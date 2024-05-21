@@ -12,6 +12,7 @@ export class ProductByFilterComponent implements OnInit{
   products: any;
   product: any; // Stocke les détails du produit
   data: any;
+  types: any;
   productUid: string | undefined;
   productType: string | undefined;
 
@@ -21,25 +22,31 @@ export class ProductByFilterComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.productType = params['type']; // (+) converts string 'id' to a number
-      this.productUid = params['pr_uid']; // (+) converts string 'id' to a number
+      console.log(this.productType);
+
+      // this.productUid = params['pr_uid']; // (+) converts string 'id' to a number
     });
+    this.allSimilarTypeProducts();
+
   }
 
   readsingleProducts(pr_uid: number, type: string): void {
     this.router.navigate(['/user/read-single-product', pr_uid, type]);
   }
 
-  allSimilarProducts(): void {
+
+  allSimilarTypeProducts(): void {
     let body = {
       type: this.productType,
     }
-    this.http.AllSimilarProducts(body).subscribe({
+    this.http.AllSimilarTypeProducts(body).subscribe({
       next: (response: any) => {
         this.products = response || []; // Stocker les produits dans le tableau
         if(response?.products)  {
           this.data = response?.products
           console.log(this.data)
         }
+
       },
       error: (error) => {
         console.error('Failed to load products:', error);

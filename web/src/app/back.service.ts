@@ -83,12 +83,6 @@ export class BackService {
     return this.http.get<any[]>("http://127.0.0.1:5000/api/products/readall")
   }
 
-  // ReadSingleProducts(pr_uid: string): Observable<any> {
-  //   const url = `http://127.0.0.1:5000/api/products/readsingle/${pr_uid}`;
-  //   return this.http.get(url); // Utilisation correcte de la méthode get sans les arguments supplémentaires
-  // }
-
-
 
   ReadSingleProducts(body : any){
     return this.http.post("http://127.0.0.1:5000/api/products/readsingle",body);
@@ -100,9 +94,9 @@ export class BackService {
   }
 
 
-  // ReadSimilarProducts(): Observable<any>{
-  //   return this.http.get<any[]>("http://127.0.0.1:5000/api/products/readsimilar")
-  // }
+  AllSimilarTypeProducts(body : any){
+    return this.http.post("http://127.0.0.1:5000/api/products/readsimilartype",body);
+  }
 
 
   CreateProducts(formData: FormData){

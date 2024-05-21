@@ -15,7 +15,7 @@ const routes: Routes = [
     { path:'read-single-product/:pr_uid/:type', component: ReadSingleProductComponent },
     { path:'contact', component: ContactComponent },
     { path:'suivez-nous', component: SuivezNousComponent },
-    { path:'product_by_filter/:category', component: ProductByFilterComponent },
+    { path:'product_by_filter/:type', component: ProductByFilterComponent },
     {path: 'nos-articles', loadChildren: () => import('./nos-articles/nos-articles.module').then((m) => m.NosArticlesModule)},
   ]
   }

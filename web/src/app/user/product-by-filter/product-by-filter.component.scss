@@ -6,3 +6,87 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+}
+
+// .container {
+//   max-width: 1600px;
+//   margin: 0 auto;
+//   padding: 20px;
+//   text-align: center;
+// }
+
+.product {
+  flex: 0 0 calc(20% - 40px); /* 20% width with 40px margin (equivalent to 5 items per row) */
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.product img {
+  width: 100%; /* La largeur de l'image s'adapte au conteneur */
+  height: auto; /* La hauteur s'ajuste automatiquement pour conserver les proportions */
+  border-radius: 8px 8px 0 0; /* Coins arrondis uniquement en haut */
+}
+
+.product h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product p {
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 15px;
+}
+
+.order-btn {
+  background-color: #1eb2a6;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #189187;
+}
+
+a{
+  text-decoration: none;
+}
+
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+}
+
+.gr_div_product {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Alignement à gauche */
+  gap: 20px;
+  margin-bottom: 20px;
+}

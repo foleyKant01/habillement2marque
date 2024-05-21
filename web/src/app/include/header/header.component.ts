@@ -18,12 +18,10 @@ export class HeaderComponent implements OnInit{
     this.activeLinkIndex = index;
   }
 
-  redirectToCategory(category: string): void {
-    this.selectedCategory = category;
-    // console.log('Selected category:', category);
-    this.router.navigate(['user/product_by_filter',category]);
-
-    // this.filterProductsByCategory(category);
+  redirectToCategory(type: string): void {
+    // this.selectedCategory = type;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['user/product_by_filter',type]));
   }
 
   constructor(private el: ElementRef, private route: ActivatedRoute, private http: BackService, private router: Router) {}
