@@ -6,10 +6,10 @@ import { UserComponent } from './user.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '../include/header/header.component';
 import { FooterComponent } from '../include/footer/footer.component';
-import { ContactComponent } from './contact/contact.component';
 import { SuivezNousComponent } from './suivez-nous/suivez-nous.component';
 import { ReadSingleProductComponent } from './read-single-product/read-single-product.component';
 import { ProductByFilterComponent } from './product-by-filter/product-by-filter.component';
+import { OffresComponent } from './offres/offres.component';
 
 
 @NgModule({
@@ -18,10 +18,11 @@ import { ProductByFilterComponent } from './product-by-filter/product-by-filter.
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ContactComponent,
+    OffresComponent,
     SuivezNousComponent,
     ReadSingleProductComponent,
     ProductByFilterComponent,
+    OffresComponent,
   ],
   imports: [
     CommonModule,
