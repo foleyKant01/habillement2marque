@@ -58,6 +58,7 @@
 
 .accueil{
   height: 62px;
+  width: auto;
   background-color: rgb(238, 238, 238) !important;
   // border: 1px solid red;
   // background-image: url("/assets/img_products/home5.jpg" );
@@ -88,4 +89,42 @@ a{
   justify-content: center; /* Alignement à gauche */
   gap: 20px;
   margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  .product {
+      flex: 0 0 calc(33.333% - 40px);
+  }
+}
+
+@media (min-width: 992px) {
+  .product {
+      flex: 0 0 calc(25% - 40px);
+  }
+}
+
+@media (min-width: 768px) {
+  .imgread {
+    height: 70%!important;
+  }
+}
+
+@media (min-width: 300px) {
+  .imgread {
+    height: 60%!important;
+  }
+}
+@media (min-width: 576px) {
+  .imgread {
+    height: 95%!important;
+  }
+}
+@media (max-width: 300px) {
+  .imgread {
+    height: 60%!important;
+  }
+}
+@media (max-width: 230px) {
+  .imgread {
+    height: 50%!important;
+  }
 }
