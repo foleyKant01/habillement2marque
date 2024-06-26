@@ -31,3 +31,38 @@ button {
 button:hover {
   background-color: #189187;
 }
+
+
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #F5F5DC; /* Beige */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  flex-direction: column;
+}
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #B3D4E0; /* Bleu ciel */
+  margin-bottom: 20px;
+}
+.content {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #C1E1C1; /* Vert menthe */
+}
+.container {
+  background-color: #FADADD; /* Rose pâle */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.date {
+  color: #E6E6FA; /* Lavande */
+}

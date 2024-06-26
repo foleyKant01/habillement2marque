@@ -43,4 +43,4 @@ api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', met
 api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_products', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 if __name__ == '__main__':
-    app.run(debug=True,  host="0.0.0.0")  
+    app.run(debug=False,  host="0.0.0.0")  
