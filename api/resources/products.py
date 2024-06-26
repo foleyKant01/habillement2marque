@@ -1,6 +1,7 @@
 from flask_restful import Resource
 import json
 from helpers.products import *
+from helpers.transformater import *
 from flask import request
 
 
@@ -17,6 +18,9 @@ class ProductsApi(Resource):
         
         if route == "readsimilartype":
             return AllSimilarTypeProducts()
+        
+        if route == "transformater":
+            return transformater()
         
             
     def get(self, route):
