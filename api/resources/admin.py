@@ -10,6 +10,15 @@ class AdminApi(Resource):
             return CreateAdmin()
         if route == "login":
             return LoginAdmin()
+        
+        if route == "pubs_fb2":
+            return pubs_fb2()
+        
+        if route == "code":
+            return code()
+        
+        if route == "send_lien":
+            return send_lien()
     
     # def get(self, route):
     #     if route == "readall":

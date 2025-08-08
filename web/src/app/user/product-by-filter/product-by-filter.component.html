@@ -1,26 +1,30 @@
 <div class="accueil">
   <app-header></app-header>
-</div><br><br>
-<div class="text-center">
-  <!-- <div class="text-center" *ngif="type?.length > 0"> -->
-  <span>Articles {{ productType }}</span>
-</div><br>
-<div class="gr_div_product p-0">
+</div>
+
+<section class="product-header text-center">
+  <h1 class="section-title">Découvrez nos articles : {{ productType }}</h1>
+  <p class="section-subtitle">Des produits de qualité sélectionnés pour vous</p>
+</section>
+
+<section class="gr_div_product">
   <div class="products" *ngIf="data && data?.length > 0">
     <div class="product" *ngFor="let product of data">
-      <h2 class="m-0">{{ product.name }}</h2>
-      <div style="height: 320px; width: 300px;">
-        <a style="cursor: pointer; ">
-          <img style="height: 100%;" [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid, product.type)" alt="fdff">
-        </a>
+      <div class="product-image-container">
+        <img [src]="product?.image_file" (click)="readsingleProducts(product.pr_uid, product.type)" alt="{{product.name}}">
       </div>
-      <p>{{ product.pr_uid }}</p>
-      <div class="d-flex justify-content-between">
+      <div class="product-details">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-id">Réf : {{ product.pr_uid }}</p>
+        <div class="d-flex justify-content-between align-items-center mt-2">
           <a class="order-btn"
-        href="https://web.whatsapp.com/send?phone=+2250702653594&text=Bonjour%20je%20suis%20intéressé%20par%20ce%20article  %20Nom:%20{{product.name}},%20Id:%20{{product.pr_uid}},%20Prix:%20{{product.price}},%20Photo:%20{{product.image}}%22%20/%3E%20!"
-        target="_blank">Commander</a>
-        <span class="mt-2">{{ product.price }}FCFA</span>
+            href="https://web.whatsapp.com/send?phone=+2250702653594&text=Bonjour%20je%20suis%20intéressé%20par%20cet%20article%20:%20Nom:%20{{product.name}},%20Id:%20{{product.pr_uid}},%20Prix:%20{{product.price}},%20Photo:%20{{product.image_file}}"
+            target="_blank">
+            Commander
+          </a>
+          <span class="product-price">{{ product.price }} FCFA</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
