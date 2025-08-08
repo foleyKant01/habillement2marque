@@ -1,74 +1,79 @@
-.accueil{
-  height: 57px;
-  background-color: rgb(238, 238, 238) !important;
-  // border: 1px solid red;
-  // background-image: url("/assets/img_products/home5.jpg" );
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-/* styles.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f9fa;
+/* CSS */
+.suivez-nous-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 50px auto;
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 100% de la hauteur de la fenêtre */
 }
 
-.content {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.social-links {
+.suivez-nous-section {
+  flex: 1;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
+  padding: 60px 20px;
+  background: linear-gradient(to right, #ece9e6, #ffffff);
 }
 
-.social-links a {
-  margin: 0 10px;
-}
-
-form {
-  // text-align: center;
-}
-
-input {
-  padding: 10px;
-  width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-footer {
-  background-color: #343a40;
-  color: #ffffff;
-  padding: 20px 0;
+.content-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
   text-align: center;
+  max-width: 600px;
+  width: 100%;
 }
-label{
-  text-align: left;
+
+.content-box h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #222;
 }
-select.form-control:not([size]):not([multiple]) {
-  height: calc(2.75rem + 2px);
+
+.content-box p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon img {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.icon:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+}
+
+.site-footer {
+  background-color: #20232a;
+  color: #ffffff;
+  padding: 30px 15px;
+  text-align: center;
+  margin-top: auto; /* pousse le footer en bas si peu de contenu */
+}
+
+.site-footer a {
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
 }

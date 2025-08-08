@@ -1,5 +1,3 @@
-import csv
-import json
 import os
 from flask import jsonify, request
 from werkzeug.utils import secure_filename
@@ -24,11 +22,9 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'PATCH' or request.method == 'POST':
         print('is post')
-        # Vérifier si la partie de la requête contient le fichier
         if 'image_file' not in request.files:
             return None  # Champ de fichier manquant
         file = request.files['image_file']
-        # Si l'utilisateur ne sélectionne pas de fichier, le navigateur envoie un fichier vide sans nom de fichier.
         print(file.filename)
         if file.filename == '':
             return None  # Nom de fichier vide
@@ -36,15 +32,10 @@ def upload_file():
             filename = secure_filename(file.filename)  # Nettoyer le nom de fichier
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             return filename
-    # return None
-    
-
 
 
 def CreateProducts():
-    
     response = {}
-
     try:
         name = request.form.get('name')
         type = request.form.get('type')
@@ -79,7 +70,6 @@ def CreateProducts():
         new_products.taille3 = taille3
         new_products.taille4 = taille4
         new_products.pr_uid = pr_uid
-        
         db.session.add(new_products)
         db.session.commit()
 
@@ -91,21 +81,13 @@ def CreateProducts():
 
     return response
 
+
 def generate_product_id(name):
-    # Extraire les trois premières lettres du nom du produit
     prefix = name[:3].upper()
-    # Générer un identifiant unique
     unique_id = str(uuid.uuid4().hex)[:6].upper()  # Utilisation des 6 premiers caractères de l'UUID généré
-    # Concaténer les trois premières lettres du nom du produit avec l'identifiant unique
     product_id = prefix + unique_id
     return product_id
 
-# # Exemple d'utilisation
-# product_name = "T-shirt"
-# product_id = generate_product_id(product_name)
-# print("Identifiant unique du produit:", product_id)
-
-# ID: comment par 3 premières lettres du nom du produit
 
 def test():
     product_name = "Landry Roland"
@@ -240,7 +222,6 @@ def ReadSingleProducts():
 
 def AllSimilarProducts():
     response = {}
-    pr_uid = str
     
     try:
         product_type = request.json.get('type')

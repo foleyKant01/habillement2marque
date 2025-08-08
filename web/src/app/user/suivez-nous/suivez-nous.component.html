@@ -1,63 +1,32 @@
-<div class="accueil">
-  <app-header></app-header><br><br>
-</div><br>
-<div class="container">
-  <div class="content">
-    <h2>Suivez-Nous</h2><br>
-    <p>Retrouvez-nous sur les réseaux sociaux :</p>
-    <div class="d-flex">
-      <div class="col-4"></div>
-      <div style=" height: 30px; justify-content: space-between; text-align: center;"  class="col-3 d-flex" >
-        <a style="height: 30px; margin-right: 5px;" href="lien_vers_Whatsapp" target="_blank"><img style="height: 100%;" src="https://qui-a-invente.com/wp-content/uploads/2021/01/inventeur-whatsapp.png" alt=""></a>
-        <a style="height: 30px; margin-right: 5px;" href="https://www.facebook.com/foleykant.store1" target="_blank"><img style="height: 100%;" src="https://www.facebook.com/images/fb_icon_325x325.png" alt=""></a>
-        <a style="height: 30px;" href="lien_vers_instagra" target="_blank"><img style="height: 100%;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/800px-Instagram_logo_2022.svg.png" alt=""></a>
-      </div>
-      <div class="col-5"></div>
-    </div><br>
-    <div class="col-lg-12">
-      <div class="fancy-title title-border">
-        <h2>Send us an Email</h2>
-      </div>
-        <form class="mb-0" id="template-contactform" name="template-contactform" action="include/form.php" method="post" novalidate="novalidate">
-          <div class="row">
-            <!-- <div class="d-flex col-12 p-0"> -->
-              <div class="col-md-4 form-group">
-                <label for="template-contactform-name">Name <small>*</small></label>
-                <input style="width: 100%;" type="text" id="template-contactform-name" name="template-contactform-name" value="" class="form-control required">
-              </div>
-              <div class="col-md-4 form-group">
-                <label for="template-contactform-email">Email <small>*</small></label>
-                <input style="width: 100%;" type="email" id="template-contactform-email" name="template-contactform-email" value="" class="required email form-control">
-              </div>
-              <div class="col-md-4 form-group">
-                <label for="template-contactform-phone">Phone</label>
-                <input style="width: 100%;" type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="form-control">
-              </div>
-              <div class="w-100"></div>
-              <div class="col-md-6 form-group">
-                <label for="template-contactform-subject">Subject <small>*</small></label>
-                <input style="width: 100%;" type="text" id="template-contactform-subject" name="subject" value="" class="form-control">
-              </div>
-            <div class="w-100"></div>
-            <div class="col-12 form-group">
-              <label for="template-contactform-message">Message <small>*</small></label>
-              <textarea class="required form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
-            </div>
-            <div class="col-12 form-group d-none">
-              <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control">
-            </div><br>
-            <div class="col-12 form-group">
-              <button name="submit" type="submit" id="submit-button" tabindex="5" value="Submit" class="button button-3d m-0">Submit Comment</button>
-            </div>
-          </div>
-          <input type="hidden" name="prefix" value="template-contactform-">
-        </form>
-    </div>
-  </div>
-</div>
+<div class="page-wrapper">
+  <app-header></app-header>
 
-<footer>
-  <div class="container">
-    <p>Contactez-nous : contacthabillement2manque.com</p>
-  </div>
-</footer>
+  <section class="suivez-nous-section">
+    <div class="content-box">
+      <h2>📲 Suivez-Nous</h2>
+      <p>Ne manquez rien de nos nouveautés, promotions et collections exclusives&nbsp;: cliquez pour nous suivre !</p>
+
+      <div class="social-icons">
+        <a href="https://www.tiktok.com/@ton_nom_utilisateur" target="_blank" class="icon tiktok" title="TikTok">
+          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" />
+        </a>
+        <a href="https://www.facebook.com/foleykant.store1" target="_blank" class="icon facebook" title="Facebook">
+          <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="Facebook">
+        </a>
+        <a href="https://instagram.com/tonprofil" target="_blank" class="icon instagram" title="Instagram">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/800px-Instagram_logo_2022.svg.png"
+            alt="Instagram">
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>📧 Contactez-nous : <a href="mailto:contact@habillement2manque.com">contact@habillement2manque.com</a></p>
+      <p>&copy; 2025 Habillement 2 Manque. Tous droits réservés.</p>
+    </div>
+  </footer>
+</div>
