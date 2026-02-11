@@ -22,7 +22,7 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.post("http://127.0.0.1:5000/api/admin/create", body, httpOptions)
+    return this.http.post("http://fullshop.ci/api/admin/create", body, httpOptions)
   }
 
 
@@ -32,13 +32,13 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.post('http://127.0.0.1:5000/api/admin/login', body, httpOptions);
+    return this.http.post('http://fullshop.ci/api/admin/login', body, httpOptions);
     // return this.api.post('mysql+pymysql://root:@localhost/tt_officiel', body, httpOptions)
   }
 
 
   // ReadAllUser(): Observable<any>{
-  //   return this.api.get<any>("http://127.0.0.1:5000/api/user/readall")
+  //   return this.api.get<any>("http://fullshop.ci/api/user/readall")
   // }
 
 
@@ -50,7 +50,7 @@ export class BackService {
   //     })
   //   };
 
-  //   return this.api.get("http://127.0.0.1:5000/api/user/readsingle/${u_uid}", httpOptions);
+  //   return this.api.get("http://fullshop.ci/api/user/readsingle/${u_uid}", httpOptions);
   // }
 
   // UpdateUser(body:any){
@@ -61,7 +61,7 @@ export class BackService {
   //     })
   //   };
 
-  //   return this.api.patch("http://127.0.0.1:5000/api/user/update", body, httpOptions)
+  //   return this.api.patch("http://fullshop.ci/api/user/update", body, httpOptions)
   // }
 
 
@@ -73,33 +73,33 @@ export class BackService {
   //     })
   //   };
 
-  //   return this.api.post("http://127.0.0.1:5000/api/user/delete", body, httpOptions)
+  //   return this.api.post("http://fullshop.ci/api/user/delete", body, httpOptions)
   // }
 
 
   // Api Products
 
    ReadAllProducts(): Observable<any>{
-    return this.http.get<any[]>("http://127.0.0.1:5000/api/products/readall")
+    return this.http.get<any[]>("http://fullshop.ci/api/products/readall")
   }
 
 
   ReadSingleProducts(body : any){
-    return this.http.post("http://127.0.0.1:5000/api/products/readsingle",body);
+    return this.http.post("http://fullshop.ci/api/products/readsingle",body);
   }
 
 
   AllSimilarProducts(body : any){
-    return this.http.post("http://127.0.0.1:5000/api/products/readsimilar",body);
+    return this.http.post("http://fullshop.ci/api/products/readsimilar",body);
   }
 
   AllSimilarColorProducts(body : any){
-    return this.http.post("http://127.0.0.1:5000/api/products/readsimilarcolor",body);
+    return this.http.post("http://fullshop.ci/api/products/readsimilarcolor",body);
   }
 
 
   AllSimilarTypeProducts(body : any){
-    return this.http.post("http://127.0.0.1:5000/api/products/readsimilartype",body);
+    return this.http.post("http://fullshop.ci/api/products/readsimilartype",body);
   }
 
 
@@ -109,7 +109,7 @@ export class BackService {
     //   //   'Content-Type': 'application/json',
     //   // })
     // }
-    return this.http.post("http://127.0.0.1:5000/api/products/create", formData)
+    return this.http.post("http://fullshop.ci/api/products/create", formData)
   }
 
 
@@ -120,7 +120,7 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.delete("http://127.0.0.1:5000/api/products/delete", body)
+    return this.http.delete("http://fullshop.ci/api/products/delete", body)
   }
 
 
@@ -130,6 +130,6 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.patch("http://127.0.0.1:5000/api/products/update", body, httpOptions)
+    return this.http.patch("http://fullshop.ci/api/products/update", body, httpOptions)
   }
 }
