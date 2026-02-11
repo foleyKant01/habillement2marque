@@ -1,5 +1,5 @@
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-from flask import Flask, render_template
+from flask_jwt_extended import JWTManager
+from flask import Flask, render_template, jsonify
 import os
 from flask_restful import Resource, Api
 from config.db import db
@@ -8,22 +8,10 @@ from model.tt import *
 from resources.admin import AdminApi
 from resources.products import ProductsApi
 from flask_migrate import Migrate
-from flask import Flask
 from flask_cors import CORS
-from flask import Flask, jsonify
 
-
-
-
-app = Flask(__name__)
-
-@app.route('/products')
-def products():
-    # juste pour test
-    return jsonify({"status": "ok"})
-
+app = Flask(__name__, template_folder='templates', static_folder='static')  # Assure toi que tes dossiers sont corrects
 CORS(app)
-# CORS(app, resources={r"/api/*": {"origins": "https://tt_officiel.com"}})
 
 app.config['JWT_SECRET_KEY'] = 'super-secret'
 jwt = JWTManager(app)
@@ -31,24 +19,38 @@ jwt = JWTManager(app)
 app.secret_key = os.urandom(24)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = LIEN_BASE_DE_DONNEES
-app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
-
 migrate = Migrate(app, db)
 api = Api(app)
 
-
+# ------------------------
+# Routes pour le front
+# ------------------------
+@app.route('/')
+def index():
+    print('FullShop Officiel')
+    return render_template('index.html')   # ton front s'affiche ici
 
 @app.route('/a')    
-def home():
-    print('FullShop Officiel')
+def page_a():
+    print('FullShop Officiel /a')
     return render_template('index.html')
 
+# ------------------------
+# Routes test / API
+# ------------------------
+@app.route('/products')
+def products():
+    return jsonify({"status": "ok"})
+
+# Routes Flask-RESTful
 api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_products', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
+# ------------------------
+# Lancer le serveur
+# ------------------------
 if __name__ == '__main__':
-    app.run(debug=False,  host="0.0.0.0")  
+    app.run(debug=False, host="0.0.0.0")
