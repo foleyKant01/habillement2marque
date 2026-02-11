@@ -12,7 +12,7 @@ const routes: Routes = [
   children: [
     { path:'', redirectTo:'home', pathMatch:'full' },
     { path:'home', component: HomeComponent },
-    { path:'read-single-product/:pr_uid/:type', component: ReadSingleProductComponent },
+    { path:'read-single-product/:pr_uid/:type/:name', component: ReadSingleProductComponent },
     { path:'suivez-nous', component: SuivezNousComponent },
     { path:'offres', component: OffresComponent },
     { path:'product_by_filter/:type', component: ProductByFilterComponent },

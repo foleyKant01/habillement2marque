@@ -3,34 +3,44 @@
   <div class="accueil">
     <app-header></app-header>
     <div class="hero-text container">
-      <h2>Du quotidien au glamour,<br>notre style incarne le chic, le confort et la confiance.</h2>
-      <p>Des marques, des tendances, une seule destination : <strong>Habillement de Marque</strong>.</p>
+      <h2>Des jeux, des rires et des rêves,<br>pour accompagner chaque moment de l’enfance.</h2>
+<p>
+  Jouets éducatifs, créatifs et amusants pour petits et grands,
+  découvrez <strong>L’univers Magique des Enfants</strong>.
+</p>
+
       <a href="#articles" class="cta-button">Voir nos articles</a>
     </div>
   </div>
 
   <!-- SECTION ARTICLES -->
   <div class="body pt-5" id="articles">
-    <div class="container">
-      <h1 class="section-title">Nos Articles</h1>
-      <div class="products" *ngIf="data && data?.length > 0">
-        <div class="product" *ngFor="let product of data">
-          <div class="product-image">
-            <a (click)="readsingleProducts(product.pr_uid, product.type)">
-              <img [src]="product?.image_file" alt="Image produit">
-            </a>
-          </div>
-          <h2>{{ product.name }}</h2>
-          <p>ID : {{ product.pr_uid }}</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <a class="order-btn"
-              href="https://wa.me/2250702653594?text=Bonjour%20je%20suis%20int%C3%A9ress%C3%A9%20par%20cet%20article%20:%20Nom%20{{product.name}},%20Id%20{{product.pr_uid}},%20Prix%20{{product.price}}FCFA"
-              target="_blank">Commander</a>
-            <span class="price">{{ product.price }} FCFA</span>
-          </div>
+<div class="container">
+  <h1 class="section-title">Nos Articles</h1>
+  <div class="row" *ngIf="data && data?.length > 0">
+    <div 
+      class="col-12 col-sm-6 col-lg-4 mb-4" 
+      *ngFor="let product of data"
+    >
+      <div class="product">
+        <div class="product-image">
+          <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
+            <img [src]="product?.image_file" alt="Image produit">
+          </a>
+        </div>
+        <h2>{{ product.name }}</h2>
+        <p>ID : {{ product.pr_uid }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <a class="order-btn"
+            href="https://wa.me/2250702653594?text=Bonjour%20je%20suis%20int%C3%A9ress%C3%A9%20par%20cet%20article%20:%20Nom%20{{product.name}},%20Id%20{{product.pr_uid}},%20Prix%20{{product.price}}FCFA"
+            target="_blank">Commander</a>
+          <span class="price">{{ product.price }} FCFA</span>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   </div>
 
   <!-- FOOTER -->

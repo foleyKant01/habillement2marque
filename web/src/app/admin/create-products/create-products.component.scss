@@ -1,88 +1,124 @@
-#wrappe{
-  padding-top: 5%;
-  display: flex;
-  width: auto !important;
-  margin-bottom: 0px;
-  position: relative;
-  float: none;
-  margin-left: 0px!important;
-  justify-content: space-around;
-}
+.create-product-page {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
 
-form{
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
 
-  padding: 10px 20px 10px 20px;
-  min-width: 600px;
-  border-radius: 10px;
-  box-shadow: 4px 2px 12px #b1b1b1,
-    -8px -8px 10px #ffffff;
-}
+    .logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
 
-button{
-  background-color: black;
-  border: 0px;
-  padding: 5px 8px 5px 8px;
-  border-radius: 3px;
-  color: white;
-}
-button:hover{
-  background-color: #ffc107;
-  font-weight: 600;
-  cursor: pointer;
-}
+    h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00A4A6;
+    }
 
-.mt-2 > a{
-  color: #656565;
-}
+    .subtitle {
+      font-size: 16px;
+      color: #555;
+    }
+  }
 
-a{
-  color: black;
-  text-decoration: none;
-}
+  form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s all ease;
 
-.Copyrights{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-  color: #9b9b9b;
-}
+    .form-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
 
-.div-input{
-  display: flex;
-  justify-content: space-between;
-  padding-right: 0px;
-}
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      label {
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #555;
+      }
+      input, select, textarea {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+    }
 
-label{
-  min-width: 140px!important;
-  color: #656565;
-  padding-top: 6px;
-}
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
 
-input{
-  height: 35px;
-}
+      .btn-cancel {
+        background: #ccc;
+        color: #fff;
+        padding: 10px 25px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .btn-cancel:hover {
+        background: #999;
+      }
 
-.blur-background {
-  filter: blur(5px); /* Appliquer un flou au contenu de la page */
-}
+      .btn-submit {
+        background: #00A4A6;
+        color: #fff;
+        padding: 10px 25px;
+        border-radius: 6px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-submit:hover {
+        background: #00787c;
+      }
+    }
 
-.overlay {
-  position: fixed;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999; /* Positionner le patienteur au-dessus du contenu de la page */
-}
+    .blur-background {
+      filter: blur(5px);
+    }
+  }
 
-.alert.alert-success {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000; /* Assure que le message est au premier plan */
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  .overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  .alert-success {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1000;
+    animation: fadeInOut 3s forwards;
+  }
+
+  @keyframes fadeInOut {
+    0% {opacity: 0;}
+    10% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
+  }
 }

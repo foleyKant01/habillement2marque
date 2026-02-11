@@ -10,10 +10,18 @@ from resources.products import ProductsApi
 from flask_migrate import Migrate
 from flask import Flask
 from flask_cors import CORS
+from flask import Flask, jsonify
+
 
 
 
 app = Flask(__name__)
+
+@app.route('/products')
+def products():
+    # juste pour test
+    return jsonify({"status": "ok"})
+
 CORS(app)
 # CORS(app, resources={r"/api/*": {"origins": "https://tt_officiel.com"}})
 
@@ -36,7 +44,7 @@ api = Api(app)
 
 @app.route('/a')    
 def home():
-    print('Trouvez Tous Officiel')
+    print('FullShop Officiel')
     return render_template('index.html')
 
 api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])

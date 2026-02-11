@@ -1,16 +1,12 @@
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token
 from datetime import timedelta
 from flask import request, jsonify
 import uuid
-
 import requests
 from config.db import db
 from model.tt import Admin
-import bcrypt, jwt
-from werkzeug.security import check_password_hash
 
 
-# liste_admin = []
    
 def CreateAdmin():
     reponse = {}
@@ -23,32 +19,23 @@ def CreateAdmin():
         ad_email = (request.json.get('email'))
         ad_password = (request.json.get('password'))
         ad_uid = str(uuid.uuid4())
-
-        hashed_password = bcrypt.hashpw(ad_password.encode('utf-8'), bcrypt.gensalt())
-        
+        # hashed_password = bcrypt.hashpw(ad_password.encode('utf-8'), bcrypt.gensalt())
         new_admin = Admin()
         new_admin.ad_fullname = ad_fullname
         new_admin.ad_username = ad_username
         new_admin.ad_mobile = ad_mobile
         new_admin.ad_address = ad_address
         new_admin.ad_email = ad_email
-        new_admin.ad_password = hashed_password
+        new_admin.ad_password = ad_password
         new_admin.ad_uid = ad_uid
         
         db.session.add(new_admin)
         db.session.commit()
-
-        # nouvel_hotel =(reponse)
-        # liste_users.append(nouvel_hotel)
-
         reponse['status'] = 'Succes'
 
     except Exception as e:
         reponse['error_description'] = str(e)
         reponse['status'] = 'error'
-    # except:
-    #     reponse['error'] = 'Incorrect data, recheck it'
-
     return reponse
 
 
@@ -174,34 +161,41 @@ def CreateAdmin():
 #     return reponse
 
 
-
 def LoginAdmin():
     reponse = {}
-    reponses = {}
 
     try:
-        username = request.json.get('username')
-        password = request.json.get('password')
+        data = request.get_json()
 
-        login_admin = Admin.query.filter_by(ad_username=username).first()
+        ad_email = data.get('ad_email')
+        ad_password = data.get('ad_password')
 
-        if login_admin and bcrypt.checkpw(password.encode('utf-8'), login_admin.ad_password.encode('utf-8')):
+        # Recherche de l'admin
+        login_admin = Admin.query.filter_by(ad_email=ad_email).first()
+
+        if login_admin and login_admin.ad_password == ad_password:
             expires = timedelta(hours=1)
-            access_token = create_access_token(identity=username)
+            access_token = create_access_token(identity=ad_email, expires_delta=expires)
 
             reponse['status'] = 'success'
             reponse['message'] = 'Login successful'
             reponse['access_token'] = access_token
+            reponse['admin'] = {
+                'ad_uid': login_admin.ad_uid,
+                'ad_email': login_admin.ad_email,
+                'ad_username': login_admin.ad_username
+            }
 
         else:
             reponse['status'] = 'error'
-            reponse['message'] = 'Invalid username or password'
+            reponse['message'] = 'Invalid email or password'
 
     except Exception as e:
-        reponse['error_description'] = str(e)
         reponse['status'] = 'error'
+        reponse['error_description'] = str(e)
 
-    return reponse
+    return jsonify(reponse)
+
 
 
 def send_lien():
@@ -317,70 +311,6 @@ def pubs_fb():
 # Identifiant = "1573355863575113"
 
 
-import facebook
-
-def pubs_fb2():
-
-    # Remplacez par votre App ID et votre clé secrète
-    app_id = '1573355863575113'
-    app_secret = 'e7cbbe9100850714115fed5412ed97a9'
-    access_token = 'ZRwiLvTOapdKISzk-Ou626z5g6g'
-
-    # Étape 1 : Obtenir un jeton d'accès temporaire
-    # auth_url = f"https://graph.facebook.com/oauth/access_token?client_id={app_id}&client_secret={app_secret}&grant_type=client_credentials"
-    # auth_response = requests.get(auth_url)
-    # auth_data = auth_response.json()
-    # print("OKOK: ", auth_data)
-
-    # if 'access_token' in auth_data:
-    #     access_token = auth_data['access_token']
-    #     print("Jeton d'accès temporaire obtenu :", access_token)
-    # else:
-    #     print("Erreur lors de la récupération du jeton d'accès :", auth_data)
-
-    # Étape 2 : Utiliser le jeton d'accès pour publier sur votre mur Facebook
-    # Initialiser l'objet Facebook avec le jeton d'accès
-    graph = facebook.GraphAPI(access_token=access_token)
-
-    # Contenu de la publication
-    message = "Votre message est publé"
-
-    # Publier sur Facebook
-    try:
-        post = graph.put_object(parent_object='me', connection_name='feed', message=message)
-        print("Publication réussie :", post)
-    except facebook.GraphAPIError as e:
-        print("Erreur lors de la publication :", e)
-
-    # import requests
-
-    # app_id = '1573355863575113'
-    # app_secret = 'e7cbbe9100850714115fed5412ed97a9'
-    # code = 'CODE_OBTENU_APRES_AUTORISATION'
-    # redirect_uri = 'VOTRE_REDIRECT_URI'
-
-    # token_exchange_url = f"https://graph.facebook.com/v17.0/oauth/access_token?client_id={app_id}&redirect_uri={redirect_uri}&client_secret={app_secret}&code={code}"
-    # response = requests.get(token_exchange_url)
-    # access_token_data = response.json()
-
-    # if 'access_token' in access_token_data:
-    #     access_token = access_token_data['access_token']
-    #     print("Jeton d'accès utilisateur obtenu :", access_token)
-    # else:
-    #     print("Erreur lors de l'échange de code :", access_token_data)
-
-    # https://www.facebook.com/v17.0/dialog/oauth?client_id=1573355863575113&redirect_uri=http://127.0.0.1:5000/api/admin/code&scope=publish_to_groups,pages_manage_posts
-
-    return True
-
-
-def code():
-
-    code = request.json.get('code')
-
-    return code 
-
-import requests
 
 def code():
     try:

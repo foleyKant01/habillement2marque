@@ -93,6 +93,10 @@ export class BackService {
     return this.http.post("http://127.0.0.1:5000/api/products/readsimilar",body);
   }
 
+  AllSimilarColorProducts(body : any){
+    return this.http.post("http://127.0.0.1:5000/api/products/readsimilarcolor",body);
+  }
+
 
   AllSimilarTypeProducts(body : any){
     return this.http.post("http://127.0.0.1:5000/api/products/readsimilartype",body);

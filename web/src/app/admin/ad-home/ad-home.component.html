@@ -1,19 +1,47 @@
-<div class="body">
-  <div class="container">
-    <div class="button-container">
-        <button routerLink="/admin/create-products" >Create products</button>
-        <button routerLink="/admin/view-all-products" >View all products</button>
+<div class="admin-dashboard" *ngIf="admin">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1>Administration</h1>
+      <p>Bienvenue sur le panneau de gestion</p>
     </div>
-  </div>
+
+    <div class="header-right">
+      <span class="admin-badge">Admin</span>
+    </div>
+  </header>
+
+  <!-- Cards actions -->
+  <section class="dashboard-actions">
+
+    <div class="action-card" routerLink="/admin/create-products">
+      <div class="icon">➕</div>
+      <h3>Créer un produit</h3>
+      <p>Ajoutez de nouveaux produits à votre boutique</p>
+    </div>
+
+    <div class="action-card" routerLink="/admin/view-all-products">
+      <div class="icon">📦</div>
+      <h3>Voir les produits</h3>
+      <p>Consultez et gérez tous les produits</p>
+    </div>
+
+    <div class="action-card disabled">
+      <div class="icon">📊</div>
+      <h3>Statistiques</h3>
+      <p>Bientôt disponible</p>
+    </div>
+
+  </section>
+
+  <!-- Info section -->
+  <section class="dashboard-info">
+    <h2>📢 Information</h2>
+    <p>
+      Vous êtes connecté à l’espace administrateur.<br>
+      Utilisez les cartes ci-dessus pour gérer efficacement votre plateforme.
+    </p>
+  </section>
 
 </div>
-<body>
-  <div class="container">
-      <h1 class="title">Concours d'Habillement</h1>
-      <p class="content">
-          Participez et montrez votre style ! <br>
-          <span class="date">Date : 15 Juillet 2024</span> <br>
-          Lieu : Centre Culturel de la Mode, Paris
-      </p>
-  </div>
-</body>

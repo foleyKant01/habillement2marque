@@ -9,10 +9,13 @@ import { BackService } from 'src/app/back.service';
 })
 export class ReadSingleProductComponent implements OnInit{
   products: any;
+  products_color: any;
   product: any; // Stocke les détails du produit
   data: any;
+  data_color: any;
   productUid: string | undefined;
   productType: string | undefined;
+  productName: string | undefined;
 
   constructor(private route: ActivatedRoute, private http: BackService, private router: Router) {}
 
@@ -20,14 +23,16 @@ export class ReadSingleProductComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.productUid = params['pr_uid']; // (+) converts string 'id' to a number
       this.productType = params['type']; // (+) converts string 'id' to a number
+      this.productName = params['name']; // (+) converts string 'id' to a number
     });
 
     this.readSingleProducts();
     this.allSimilarProducts();
+    this.allSimilarColorProducts();
   }
-  readsingleProducts(pr_uid: number, type: string): void {
+  readsingleProducts(pr_uid: number, type: string, name: string): void {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['/user/read-single-product', pr_uid, type]));
+      this.router.navigate(['/user/read-single-product', pr_uid, type, name]));
   }
 
   readSingleProducts(): void {
@@ -50,6 +55,7 @@ export class ReadSingleProductComponent implements OnInit{
     allSimilarProducts(): void {
       let body = {
         type: this.productType,
+        name: this.productName,
         pr_uid: this.productUid
       }
       this.http.AllSimilarProducts(body).subscribe({
@@ -58,6 +64,25 @@ export class ReadSingleProductComponent implements OnInit{
           if(response?.products)  {
             this.data = response?.products
             console.log(this.data)
+          }
+        },
+        error: (error) => {
+          console.error('Failed to load products:', error);
+        }
+      });
+      }
+
+      allSimilarColorProducts(): void {
+      let body = {
+        name: this.productName,
+        pr_uid: this.productUid
+      }
+      this.http.AllSimilarColorProducts(body).subscribe({
+        next: (response: any) => {
+          this.products_color = response || []; // Stocker les produits dans le tableau
+          if(response?.products_color)  {
+            this.data_color = response?.products_color
+            console.log(this.data_color)
           }
         },
         error: (error) => {

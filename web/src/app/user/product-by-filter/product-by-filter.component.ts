@@ -30,10 +30,13 @@ export class ProductByFilterComponent implements OnInit{
 
   }
 
-  readsingleProducts(pr_uid: number, type: string): void {
-    this.router.navigate(['/user/read-single-product', pr_uid, type]);
-  }
+  // readsingleProducts(pr_uid: number, type: string): void {
+  //   this.router.navigate(['/user/read-single-product', pr_uid, type]);
+  // }
 
+  readsingleProducts(pr_uid: number, type: string, name: string): void {
+    this.router.navigate(['/user/read-single-product', pr_uid, type, name]);
+  }
 
   allSimilarTypeProducts(): void {
     let body = {

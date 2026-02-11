@@ -11,10 +11,13 @@ class ProductsApi(Resource):
             return CreateProducts()
         
         if route == "readsingle":
-            return ReadSingleProducts()
+            return ReadSingleProducts() 
         
         if route == "readsimilar":
             return AllSimilarProducts()
+        
+        if route == "readsimilarcolor":
+            return AllSimilarColorProducts()
         
         if route == "readsimilartype":
             return AllSimilarTypeProducts()

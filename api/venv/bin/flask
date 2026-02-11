@@ -1,4 +1,6 @@
-#!/home/foleykant/Work/Foley/tt_officiel_Api/venv/bin/python3
+#!/bin/sh
+'''exec' "/home/foley-kant/Foley Kant/habillement2marque/api/venv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,37 +1,75 @@
 import os
 from flask import jsonify, request
-from werkzeug.utils import secure_filename
 import uuid
 from config.db import db
 from config.constant import *
+from sqlalchemy import case, func
+
+import re
+from werkzeug.utils import secure_filename
 
 from model.tt import Products
 
-UPLOAD_FOLDER = 'static/assets/uploads/'
-IMGHOSTNAME = 'http://127.0.0.1:5000/static/assets/uploads/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def upload_file():
-    if request.method == 'PATCH' or request.method == 'POST':
-        print('is post')
-        if 'image_file' not in request.files:
-            return None  # Champ de fichier manquant
-        file = request.files['image_file']
-        print(file.filename)
-        if file.filename == '':
-            return None  # Nom de fichier vide
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)  # Nettoyer le nom de fichier
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            return filename
+# if not os.path.exists(UPLOAD_FOLDER):
+#     os.makedirs(UPLOAD_FOLDER)
+
+# def allowed_file(filename):
+#     return '.' in filename and \
+#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+# def upload_file():
+#     if request.method == 'PATCH' or request.method == 'POST':
+#         print('is post')
+#         if 'image_file' not in request.files:
+#             return None  # Champ de fichier manquant
+#         file = request.files['image_file']
+#         print(file.filename)
+#         if file.filename == '':
+#             return None  # Nom de fichier vide
+#         if file and allowed_file(file.filename):
+#             filename = secure_filename(file.filename)  # Nettoyer le nom de fichier
+#             file.save(os.path.join(UPLOAD_FOLDER, filename))
+#             return filename
+        
+        
+
+
+def upload_to_s3(files):
+    urls = []
+
+    for file in files:
+        print('file', file)    
+        
+        # 🔹 nom original
+        original_name = file.filename
+        print('original_name', original_name)    
+
+        # 🔹 sécuriser le nom (supprime caractères dangereux)
+        clean_name = secure_filename(original_name)
+        print('clean_name', clean_name)    
+
+        # 🔹 remplacer TOUS les espaces par +
+        clean_name = re.sub(r"\s+", "+", clean_name)
+        print('clean_name', clean_name)    
+
+        filename = f"{uuid.uuid4().hex}_{clean_name}"
+
+        S3_CLIENT.upload_fileobj(
+            file,
+            BUCKET_NAME,
+            filename,
+            ExtraArgs={"ACL": "public-read"}
+        )
+
+        url = URL + filename
+        urls.append(url)
+
+    return urls
+
+
 
 
 def CreateProducts():
@@ -41,8 +79,10 @@ def CreateProducts():
         type = request.form.get('type')
         description = request.form.get('description')
         price = request.form.get('price')
-        image_file = upload_file()  # Appelez directement la fonction sans argument
+        image_file = request.files.getlist('image_file')
         print('here', image_file)    
+        image_urls = upload_to_s3(image_file)  # ⚡ renommer pour plus de clarté
+        print('here', image_urls)    
         inventory_level = request.form.get('inventory_level')
         price_received = request.form.get('price_received')
         color = request.form.get('color')
@@ -59,7 +99,7 @@ def CreateProducts():
         new_products.type = type
         new_products.description = description
         new_products.price = price
-        new_products.image_file = image_file
+        new_products.image_file = image_urls
         new_products.inventory_level = inventory_level
         new_products.price_received = price_received
         new_products.color = color
@@ -157,31 +197,43 @@ def DeleteProducts():
 
 def ReadAllProducts():
     response = {}
-    
+
     try:
-        all_products = Products.query.all()
+        subquery = (
+            db.session.query(
+                Products.name,
+                func.max(Products.id).label("max_id")
+            )
+            .group_by(Products.name)
+            .subquery()
+        )
+
+        all_products = (
+            Products.query
+            .join(subquery, Products.id == subquery.c.max_id)
+            .all()
+        )
 
         products_info = []
 
-        for products  in all_products:
-            products_infos = {
-                'name': products.name,              
-                'price': products.price,  
-                'image_file': str(IMGHOSTNAME)+str(products.image_file),              
-                'pr_uid': products.pr_uid,          
-                'type': products.type,          
-            }
-            products_info.append(products_infos)
+        for product in all_products:
+            products_info.append({
+                'name': product.name,
+                'price': product.price,
+                'image_file': product.image_file,
+                'pr_uid': product.pr_uid,
+                'type': product.type,
+            })
 
         response['status'] = 'success'
-        response ['products'] = products_info
-        # response ['products'] = all_products
+        response['products'] = products_info
 
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
 
     return response
+
 
 
 def ReadSingleProducts():
@@ -197,7 +249,7 @@ def ReadSingleProducts():
             'type': single_products.type,  
             'description': single_products.description,              
             'price': single_products.price,              
-            'image_file': str(IMGHOSTNAME) + str(single_products.image_file),              
+            'image_file': single_products.image_file,              
             'inventory_level': single_products.inventory_level,              
             'price_received': single_products.price_received,              
             'color': single_products.color,              
@@ -220,25 +272,69 @@ def ReadSingleProducts():
 
 
 
+def AllSimilarColorProducts():
+    response = {}
+    try:
+        uid = request.json.get('pr_uid')
+        product_name = request.json.get('name')
+
+        all_products = (
+            Products.query
+            .filter(
+                Products.pr_uid != uid,
+                Products.name == product_name
+            )
+            .all()
+        )
+
+        products_info = []
+        for product in all_products:
+            products_info.append({
+                'name': product.name,
+                'price': product.price,
+                'image_file': product.image_file,
+                'pr_uid': product.pr_uid,
+                'type': product.type,
+            })
+
+        response['status'] = 'success'
+        response['products_color'] = products_info
+
+    except Exception as e:
+        response['status'] = 'error'
+        response['error_description'] = str(e)
+
+    return response
+
+
+
 def AllSimilarProducts():
     response = {}
-    
     try:
         product_type = request.json.get('type')
         uid = request.json.get('pr_uid')
-        all_products = Products.query.filter(Products.type == product_type, Products.pr_uid != uid).all()
+        product_name = request.json.get('name')
+
+        all_products = (
+            Products.query
+            .filter(
+                Products.pr_uid != uid,
+                Products.type == product_type,
+                Products.name != product_name
+            )
+            .group_by(Products.name)  # empêche les doublons de nom
+            .all()
+        )
 
         products_info = []
-
-        for products  in all_products:
-            products_infos = {
-                'name': products.name,              
-                'price': products.price,  
-                'image_file': str(IMGHOSTNAME)+str(products.image_file),              
-                'pr_uid': products.pr_uid,          
-                'type': products.type,          
-            }
-            products_info.append(products_infos)
+        for product in all_products:
+            products_info.append({
+                'name': product.name,
+                'price': product.price,
+                'image_file': product.image_file,
+                'pr_uid': product.pr_uid,
+                'type': product.type,
+            })
 
         response['status'] = 'success'
         response['products'] = products_info
@@ -251,11 +347,13 @@ def AllSimilarProducts():
 
 
 
+
+
 def serialize_product(product):
     return {
         'name': product.name,              
         'price': product.price,  
-        'image_file': str(IMGHOSTNAME)+str(product.image_file),              
+        'image_file': product.image_file,              
         'pr_uid': product.pr_uid,          
         'type': product.type,          
     }
