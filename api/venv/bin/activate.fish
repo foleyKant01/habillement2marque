@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV '/home/foley-kant/Foley Kant/habillement2marque/api/venv'
+set -gx VIRTUAL_ENV /home/ubuntu/habillement2marque/api/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
