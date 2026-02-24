@@ -170,14 +170,9 @@ def LoginAdmin():
         admin = Admin.query.filter_by(ad_email=ad_email).first()
 
         if admin and admin.ad_password == ad_password:
-
-            expires = timedelta(hours=1)
-            token = create_access_token(identity=ad_email, expires_delta=expires)
-
             return {
                 "status": "success",
                 "message": "Login successful",
-                "access_token": token,
                 "admin": {
                     "ad_uid": admin.ad_uid,
                     "ad_email": admin.ad_email,
