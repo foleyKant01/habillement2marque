@@ -162,39 +162,37 @@ def CreateAdmin():
 
 
 def LoginAdmin():
-    reponse = {}
-
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
+
+        if not data:
+            return {"status": "error", "message": "No JSON received"}, 400
 
         ad_email = data.get('ad_email')
         ad_password = data.get('ad_password')
 
-        # Recherche de l'admin
-        login_admin = Admin.query.filter_by(ad_email=ad_email).first()
+        admin = Admin.query.filter_by(ad_email=ad_email).first()
 
-        if login_admin and login_admin.ad_password == ad_password:
+        if admin and admin.ad_password == ad_password:
+
             expires = timedelta(hours=1)
-            access_token = create_access_token(identity=ad_email, expires_delta=expires)
+            token = create_access_token(identity=ad_email, expires_delta=expires)
 
-            reponse['status'] = 'success'
-            reponse['message'] = 'Login successful'
-            reponse['access_token'] = access_token
-            reponse['admin'] = {
-                'ad_uid': login_admin.ad_uid,
-                'ad_email': login_admin.ad_email,
-                'ad_username': login_admin.ad_username
-            }
+            return {
+                "status": "success",
+                "message": "Login successful",
+                "access_token": token,
+                "admin": {
+                    "ad_uid": admin.ad_uid,
+                    "ad_email": admin.ad_email,
+                    "ad_username": admin.ad_username
+                }
+            }, 200
 
-        else:
-            reponse['status'] = 'error'
-            reponse['message'] = 'Invalid email or password'
+        return {"status": "error", "message": "Invalid email or password"}, 401
 
     except Exception as e:
-        reponse['status'] = 'error'
-        reponse['error_description'] = str(e)
-
-    return jsonify(reponse)
+        return {"status": "error", "error_description": str(e)}, 500
 
 
 

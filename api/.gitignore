@@ -11,10 +11,10 @@ __pycache__/
 /tmp
 /out-tsc
 
-venv
 /venv
 .venv/
 .venv
+
 /env
 .env/
 .env

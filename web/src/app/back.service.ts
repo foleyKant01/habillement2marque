@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { Observable, catchError, pipe, throwError } from 'rxjs';
+// import { environment } from './environments/environment.prod';
+import { environment } from './environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +12,8 @@ export class BackService {
 
 
   private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
+  api_url = environment.apiUrl
+
 
 
   constructor(private http: HttpClient, private api: HttpClient) {}
@@ -22,23 +27,22 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.post("http://fullshop.ci/api/admin/create", body, httpOptions)
+    return this.http.post(this.api_url+"/api/admin/create", body, httpOptions)
   }
 
 
-  LoginAdmin(body:any): Observable<any> {
+  LoginAdmin(body:any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     }
-    return this.http.post('http://fullshop.ci/api/admin/login', body, httpOptions);
-    // return this.api.post('mysql+pymysql://root:@localhost/tt_officiel', body, httpOptions)
+    return this.http.post(this.api_url+"/api/admin/login", body, httpOptions);
   }
 
 
   // ReadAllUser(): Observable<any>{
-  //   return this.api.get<any>("http://fullshop.ci/api/api/user/readall")
+  //   return this.api.get<any>(this.api_url+"/api/user/readall")
   // }
 
 
@@ -50,7 +54,7 @@ export class BackService {
   //     })
   //   };
 
-  //   return this.api.get("http://fullshop.ci/api/user/readsingle/${u_uid}", httpOptions);
+  //   return this.api.get(this.api_url+"/api/user/readsingle/${u_uid}", httpOptions);
   // }
 
   // UpdateUser(body:any){
@@ -61,7 +65,7 @@ export class BackService {
   //     })
   //   };
 
-  //   return this.api.patch("http://fullshop.ci/api/user/update", body, httpOptions)
+  //   return this.api.patch(this.api_url+"/api/user/update", body, httpOptions)
   // }
 
 
@@ -73,33 +77,33 @@ export class BackService {
   //     })
   //   };
 
-  //   return this.api.post("http://fullshop.ci/api/user/delete", body, httpOptions)
+  //   return this.api.post(this.api_url+"/api/user/delete", body, httpOptions)
   // }
 
 
   // Api Products
 
    ReadAllProducts(): Observable<any>{
-    return this.http.get<any[]>("http://fullshop.ci/api/api/products/readall")
+    return this.http.get<any[]>(this.api_url+"/api/products/readall")
   }
 
 
   ReadSingleProducts(body : any){
-    return this.http.post("http://fullshop.ci/api/products/readsingle",body);
+    return this.http.post(this.api_url+"/api/products/readsingle",body);
   }
 
 
   AllSimilarProducts(body : any){
-    return this.http.post("http://fullshop.ci/api/products/readsimilar",body);
+    return this.http.post(this.api_url+"/api/products/readsimilar",body);
   }
 
   AllSimilarColorProducts(body : any){
-    return this.http.post("http://fullshop.ci/api/products/readsimilarcolor",body);
+    return this.http.post(this.api_url+"/api/products/readsimilarcolor",body);
   }
 
 
   AllSimilarTypeProducts(body : any){
-    return this.http.post("http://fullshop.ci/api/products/readsimilartype",body);
+    return this.http.post(this.api_url+"/api/products/readsimilartype",body);
   }
 
 
@@ -109,7 +113,7 @@ export class BackService {
     //   //   'Content-Type': 'application/json',
     //   // })
     // }
-    return this.http.post("http://fullshop.ci/api/products/create", formData)
+    return this.http.post(this.api_url+"/api/products/create", formData)
   }
 
 
@@ -120,7 +124,7 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.delete("http://fullshop.ci/api/products/delete", body)
+    return this.http.delete(this.api_url+"/api/products/delete", body)
   }
 
 
@@ -130,6 +134,6 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.patch("http://fullshop.ci/api/products/update", body, httpOptions)
+    return this.http.patch(this.api_url+"/api/products/update", body, httpOptions)
   }
 }
