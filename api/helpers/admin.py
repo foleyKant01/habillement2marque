@@ -163,13 +163,9 @@ def CreateAdmin():
 
 def LoginAdmin():
     try:
-        data = request.get_json(silent=True)
 
-        if not data:
-            return {"status": "error", "message": "No JSON received"}, 400
-
-        ad_email = data.get('ad_email')
-        ad_password = data.get('ad_password')
+        ad_email = request.json.get('ad_email')
+        ad_password = request.json.get('ad_password')
 
         admin = Admin.query.filter_by(ad_email=ad_email).first()
 
