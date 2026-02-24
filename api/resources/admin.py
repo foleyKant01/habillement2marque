@@ -19,6 +19,8 @@ class AdminApi(Resource):
         
         if route == "send_lien":
             return send_lien()
+    def get(self, route):
+        return {"status": "error", "message": "GET not allowed"}, 405
     
     # def get(self, route):
     #     if route == "readall":
