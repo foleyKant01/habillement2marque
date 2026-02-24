@@ -46,8 +46,8 @@ def products():
     return jsonify({"status": "ok"})
 
 # Routes Flask-RESTful
-api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', methods=['GET','POST', 'DELETE', 'PATCH'])
-api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_products', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', methods=['POST','GET', 'DELETE', 'PATCH'])
+api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_products', methods=['POST', 'GET', 'DELETE', 'PATCH'])
 
 # ------------------------
 # Lancer le serveur
