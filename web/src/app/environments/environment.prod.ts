@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://fullshop.ci'
+    apiUrl: 'https://fullshop.ci'
   };
   
