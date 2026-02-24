@@ -38,7 +38,7 @@ export class BackService {
 
 
   // ReadAllUser(): Observable<any>{
-  //   return this.api.get<any>("http://fullshop.ci/api/user/readall")
+  //   return this.api.get<any>("http://fullshop.ci/api/api/user/readall")
   // }
 
 
@@ -80,7 +80,7 @@ export class BackService {
   // Api Products
 
    ReadAllProducts(): Observable<any>{
-    return this.http.get<any[]>("http://fullshop.ci/api/products/readall")
+    return this.http.get<any[]>("http://fullshop.ci/api/api/products/readall")
   }
 
 
