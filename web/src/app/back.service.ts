@@ -16,7 +16,7 @@ export class BackService {
 
 
 
-  constructor(private http: HttpClient, private api: HttpClient) {}
+  constructor(private https: HttpClient, private api: HttpClient) {}
 
 
   // Api Admin
@@ -27,7 +27,7 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.post(this.api_url+"/api/admin/create", body, httpOptions)
+    return this.https.post(this.api_url+"/api/admin/create", body, httpOptions)
   }
 
 
@@ -37,7 +37,7 @@ export class BackService {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.post(this.api_url+"/api/admin/login", body, httpOptions);
+    return this.https.post(this.api_url+"/api/admin/login", body, httpOptions);
   }
 
 
@@ -84,26 +84,26 @@ export class BackService {
   // Api Products
 
    ReadAllProducts(): Observable<any>{
-    return this.http.get<any[]>(this.api_url+"/api/products/readall")
+    return this.https.get<any[]>(this.api_url+"/api/products/readall")
   }
 
 
   ReadSingleProducts(body : any){
-    return this.http.post(this.api_url+"/api/products/readsingle",body);
+    return this.https.post(this.api_url+"/api/products/readsingle",body);
   }
 
 
   AllSimilarProducts(body : any){
-    return this.http.post(this.api_url+"/api/products/readsimilar",body);
+    return this.https.post(this.api_url+"/api/products/readsimilar",body);
   }
 
   AllSimilarColorProducts(body : any){
-    return this.http.post(this.api_url+"/api/products/readsimilarcolor",body);
+    return this.https.post(this.api_url+"/api/products/readsimilarcolor",body);
   }
 
 
   AllSimilarTypeProducts(body : any){
-    return this.http.post(this.api_url+"/api/products/readsimilartype",body);
+    return this.https.post(this.api_url+"/api/products/readsimilartype",body);
   }
 
 
@@ -113,7 +113,7 @@ export class BackService {
     //   //   'Content-Type': 'application/json',
     //   // })
     // }
-    return this.http.post(this.api_url+"/api/products/create", formData)
+    return this.https.post(this.api_url+"/api/products/create", formData)
   }
 
 
@@ -124,7 +124,7 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.delete(this.api_url+"/api/products/delete", body)
+    return this.https.delete(this.api_url+"/api/products/delete", body)
   }
 
 
@@ -134,6 +134,6 @@ export class BackService {
       'Content-Type': 'application/json',
       })
     };
-    return this.http.patch(this.api_url+"/api/products/update", body, httpOptions)
+    return this.https.patch(this.api_url+"/api/products/update", body, httpOptions)
   }
 }
