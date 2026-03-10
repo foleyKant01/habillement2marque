@@ -31,31 +31,28 @@ export class CreateProductsComponent implements OnInit {
     this.createproducts = this.fb.group({
       name: [null, Validators.required],
       type: [null, Validators.required],
+      model: [null],
+      style: [null],
+      details: [null],
+      material: [null],
+      talon_cm: [null],
       description: [null, Validators.required],
       price: [null, Validators.required],
       image_file: [null, Validators.required],
       inventory_level: [null, Validators.required],
       price_received: [null, Validators.required],
-      color: [null],
-      tailleVe: [null]
+      color: [null, Validators.required],
     });
 
     // Suivi des changements du type pour gérer les champs dynamiques
     this.createproducts.get('type')?.valueChanges.subscribe(value => {
-      this.selectedType = value;
-      // Réinitialiser les champs dynamiques si le type change
-      if (value === 'Vêtement Homme' || value === 'Vêtement Femme' || value === 'Sous Vêtement Homme' || value === 'Sous Vêtement Femme') {
-        this.createproducts.get('color')?.setValidators([Validators.required]);
-        this.createproducts.get('tailleVe')?.setValidators([Validators.required]);
-      } else if (value === 'Jouet Enfant' || value === 'Chaînes' || value === 'Montres' || value === 'Bagues' || value.includes('Chaussures') || value.includes('Sandales')) {
-        this.createproducts.get('color')?.setValidators([Validators.required]);
-        this.createproducts.get('tailleVe')?.clearValidators();
+      // this.selectedType = value;
+      if (value === 'Chaussures Homme' || value === 'Chaussures Femme') {
+        this.createproducts.get('talon_cm')?.setValidators([Validators.required]);
       } else {
-        this.createproducts.get('color')?.clearValidators();
-        this.createproducts.get('tailleVe')?.clearValidators();
+        this.createproducts.get('talon_cm')?.clearValidators();
       }
-      this.createproducts.get('color')?.updateValueAndValidity();
-      this.createproducts.get('tailleVe')?.updateValueAndValidity();
+      this.createproducts.get('talon_cm')?.updateValueAndValidity();
     });
   }
 
@@ -82,14 +79,16 @@ export class CreateProductsComponent implements OnInit {
     formData.append('price', this.createproducts.get('price')?.value);
     formData.append('inventory_level', this.createproducts.get('inventory_level')?.value);
     formData.append('price_received', this.createproducts.get('price_received')?.value);
+    formData.append('color', this.createproducts.get('color')?.value);
+    formData.append('model', this.createproducts.get('model')?.value);
+    formData.append('style', this.createproducts.get('style')?.value);
+    formData.append('details', this.createproducts.get('details')?.value);
+    formData.append('material', this.createproducts.get('material')?.value);
     formData.append('image_file', this.file as File);
 
     // Champs dynamiques
-    if (this.createproducts.get('color')?.value) {
-      formData.append('color', this.createproducts.get('color')?.value);
-    }
-    if (this.createproducts.get('tailleVe')?.value) {
-      formData.append('tailleVe', this.createproducts.get('tailleVe')?.value);
+    if (this.createproducts.get('talon_cm')?.value) {
+      formData.append('talon_cm', this.createproducts.get('talon_cm')?.value);
     }
 
     // Appel API

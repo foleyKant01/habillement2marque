@@ -86,12 +86,10 @@ def CreateProducts():
         inventory_level = request.form.get('inventory_level')
         price_received = request.form.get('price_received')
         color = request.form.get('color')
-        tailleVe = request.form.get('tailleVe')
-        tailleJe = request.form.get('tailleJe')
-        taille1 = request.form.get('taille1')
-        taille2 = request.form.get('taille2')
-        taille3 = request.form.get('taille3')
-        taille4 = request.form.get('taille4')
+        model = request.form.get('model')
+        style = request.form.get('style')
+        details = request.form.get('details')
+        material = request.form.get('material')
         pr_uid = generate_product_id(name)
 
         new_products = Products()
@@ -103,12 +101,10 @@ def CreateProducts():
         new_products.inventory_level = inventory_level
         new_products.price_received = price_received
         new_products.color = color
-        new_products.tailleVe = tailleVe
-        new_products.tailleJe = tailleJe
-        new_products.taille1 = taille1
-        new_products.taille2 = taille2
-        new_products.taille3 = taille3
-        new_products.taille4 = taille4
+        new_products.model = model
+        new_products.style = style
+        new_products.details = details
+        new_products.material = material
         new_products.pr_uid = pr_uid
         db.session.add(new_products)
         db.session.commit()
@@ -148,16 +144,14 @@ def UpdateProducts():
             update_products.type = request.form.get('type', update_products.type)
             update_products.description = request.form.get('description', update_products.description)
             update_products.price = request.form.get('price', update_products.price)
-            update_products.image_file = request.form.get('image_file', upload_file())
+            update_products.image_file = request.form.get('image_file', upload_to_s3())
             update_products.inventory_level = request.form.get('inventory_level', update_products.inventory_level)
             update_products.price_received = request.form.get('price_received', update_products.price_received)
             update_products.color = request.form.get('color', update_products.color)
-            update_products.tailleVe = request.form.get('tailleVe', update_products.tailleVe)
-            update_products.tailleJe = request.form.get('tailleJe', update_products.tailleJe)
-            update_products.taille1 = request.form.get('taille1', update_products.taille1)
-            update_products.taille2 = request.form.get('taille2', update_products.taille2)
-            update_products.taille3 = request.form.get('taille3', update_products.taille3)
-            update_products.taille4 = request.form.get('taille4', update_products.taille4) 
+            update_products.model = request.form.get('model', update_products.model)
+            update_products.style = request.form.get('style', update_products.style)
+            update_products.details = request.form.get('details', update_products.details)
+            update_products.material = request.form.get('material', update_products.material)
      
         db.session.add(update_products)
         db.session.commit() 
@@ -253,12 +247,10 @@ def ReadSingleProducts():
             'inventory_level': single_products.inventory_level,              
             'price_received': single_products.price_received,              
             'color': single_products.color,              
-            'tailleVe': single_products.tailleVe,              
-            'tailleJe': single_products.tailleJe,              
-            'taille1': single_products.taille1,              
-            'taille2': single_products.taille2,              
-            'taille3': single_products.taille3,              
-            'taille4': single_products.taille4,          
+            'model': single_products.model,              
+            'style': single_products.style,              
+            'details': single_products.details,              
+            'material': single_products.material,                       
         }
 
         response['status'] = 'success'

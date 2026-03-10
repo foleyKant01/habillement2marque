@@ -1,60 +1,147 @@
 <div class="create-product-page">
-
   <!-- Header/logo -->
   <div class="header">
-    <img src="assets/logo.png" alt="Trouvez Tous" class="logo">
+    <img src="assets/logo.png" alt="Trouvez Tous" class="logo" />
     <h2>Créer un produit</h2>
-    <p class="subtitle">Ajoutez un produit à votre catalogue rapidement et facilement</p>
+    <p class="subtitle">
+      Ajoutez un produit à votre catalogue rapidement et facilement
+    </p>
   </div>
 
   <!-- Formulaire -->
-  <form [formGroup]="createproducts" (ngSubmit)="Createproducts()" [ngClass]="{'blur-background': loading || success}">
-    
+  <form
+    [formGroup]="createproducts"
+    (ngSubmit)="Createproducts()"
+    [ngClass]="{ 'blur-background': loading || success }"
+  >
     <!-- Type & Name -->
     <div class="form-row">
       <div class="form-group">
         <label>Type:</label>
         <select formControlName="type" class="form-control">
           <option value="Jouet Enfant">Jouets Enfant</option>
-          <option value="Vêtement Homme">Vêtements Homme</option>
-          <option value="Vêtement Femme">Vêtements Femme</option>
-          <option value="Sous Vêtement Homme">Sous-vêtements Homme</option>
-          <option value="Sous Vêtement Femme">Sous-vêtements Femme</option>
-          <option value="Chaînes">Chaînes</option>
-          <option value="Montres">Montres</option>
-          <option value="Bagues">Bagues</option>
+          <!-- <option value="Vêtement Homme">Vêtements Homme</option>
+          <option value="Vêtement Femme">Vêtements Femme</option> -->
+          <!-- <option value="Sous Vêtement Homme">Sous-vêtements Homme</option> -->
+          <!-- <option value="Sous Vêtement Femme">Sous-vêtements Femme</option> -->
+          <!-- <option value="Chaînes">Chaînes</option> -->
+          <!-- <option value="Montres">Montres</option> -->
+          <!-- <option value="Bagues">Bagues</option> -->
           <option value="Chaussures Homme">Chaussures Homme</option>
           <option value="Chaussures Femme">Chaussures Femme</option>
-          <option value="Sandales Homme">Sandales Homme</option>
-          <option value="Sandales Femme">Sandales Femme</option>
+          <!-- <option value="Sandales Homme">Sandales Homme</option> -->
+          <!-- <option value="Sandales Femme">Sandales Femme</option> -->
         </select>
       </div>
       <div class="form-group">
         <label>Nom:</label>
-        <input type="text" formControlName="name" class="form-control" placeholder="Nom du produit">
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Nom du produit"
+        />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Modèle:</label>
+        <input
+          type="text"
+          formControlName="model"
+          class="form-control"
+          placeholder="Modèle du produit"
+        />
+      </div>
+      <div class="form-group">
+        <label>Style:</label>
+        <input
+          type="text"
+          formControlName="style"
+          class="form-control"
+          placeholder="Style du produit"
+        />
       </div>
     </div>
 
     <!-- Description -->
     <div class="form-group">
       <label>Description:</label>
-      <textarea formControlName="description" class="form-control" rows="3" placeholder="Description du produit"></textarea>
+      <textarea
+        formControlName="description"
+        class="form-control"
+        rows="3"
+        placeholder="Description du produit"
+      ></textarea>
     </div>
 
     <!-- Prix & Inventaire -->
     <div class="form-row">
       <div class="form-group">
         <label>Prix:</label>
-        <input type="number" formControlName="price" class="form-control" placeholder="Prix de vente">
+        <input
+          type="number"
+          formControlName="price"
+          class="form-control"
+          placeholder="Prix de vente"
+        />
       </div>
       <div class="form-group">
         <label>Stock:</label>
-        <input type="number" formControlName="inventory_level" class="form-control" placeholder="Quantité disponible">
+        <input
+          type="number"
+          formControlName="inventory_level"
+          class="form-control"
+          placeholder="Quantité disponible"
+        />
       </div>
       <div class="form-group">
         <label>Prix d'achat:</label>
-        <input type="number" formControlName="price_received" class="form-control" placeholder="Prix reçu">
+        <input
+          type="number"
+          formControlName="price_received"
+          class="form-control"
+          placeholder="Prix d'achat"
+        />
       </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Details:</label>
+        <textarea
+          formControlName="details"
+          class="form-control"
+          rows="3"
+          placeholder="Details du produit"
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Matière:</label>
+        <input
+          type="text"
+          formControlName="material"
+          class="form-control"
+          placeholder="Matière de fabrication"
+        />
+      </div>
+       <div class="form-group">
+        <label>Couleur:</label>
+        <select formControlName="color" class="form-control">
+          <option *ngFor="let c of colors" [value]="c">{{c}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'">
+      <label>Talon cm:</label>
+      <input
+        type="text"
+        formControlName="talon_cm"
+        class="form-control"
+        placeholder="Taille en cm du talon"
+      />
     </div>
 
     <!-- Couleur / Taille (exemple dynamique) -->
@@ -76,7 +163,12 @@
     <!-- Image -->
     <div class="form-group">
       <label>Image:</label>
-      <input type="file" (change)="onFileChange($event)" formControlName="image_file" class="form-control">
+      <input
+        type="file"
+        (change)="onFileChange($event)"
+        formControlName="image_file"
+        class="form-control"
+      />
     </div>
 
     <!-- Actions -->
@@ -84,15 +176,11 @@
       <a routerLink="/admin/ad-home" class="btn-cancel">Annuler</a>
       <button type="submit" class="btn-submit">Créer</button>
     </div>
-    
   </form>
 
   <!-- Loader -->
   <app-spinner *ngIf="loading" class="overlay"></app-spinner>
 
   <!-- Success Message -->
-  <div *ngIf="success" class="alert-success">
-    Produit créé avec succès !
-  </div>
-
+  <div *ngIf="success" class="alert-success">Produit créé avec succès !</div>
 </div>

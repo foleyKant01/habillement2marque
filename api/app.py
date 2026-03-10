@@ -25,30 +25,14 @@ db.init_app(app)
 migrate = Migrate(app, db)
 api = Api(app)
 
-# ------------------------
-# Routes pour le front
-# ------------------------
-# @app.route('/')
-# def index():
-#     print('FullShop Officiel')
-#     return render_template('index.html')   # ton front s'affiche ici
-
 @app.route('/a')    
 def page_a():
     print('FullShop Officiel')
     return render_template('index.html')
 
-
-# @app.route('/products')
-# def products():
-#     return jsonify({"status": "ok"})
-
 # Routes Flask-RESTful
 api.add_resource(AdminApi, '/api/admin/<string:route>', endpoint='all_user', methods=['GET','POST', 'DELETE', 'PATCH'])
 api.add_resource(ProductsApi, '/api/products/<string:route>', endpoint='all_products', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
-# ------------------------
-# Lancer le serveur
-# ------------------------
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
