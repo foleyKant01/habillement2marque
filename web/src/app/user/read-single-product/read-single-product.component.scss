@@ -106,3 +106,31 @@ body {
   font-weight: bold;
   color: #ffa726;
 }
+
+
+.main-image {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-thumbnails {
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid #eee;
+  transition: 0.3s;
+}
+
+.thumbnail:hover {
+  border-color: #000;
+  transform: scale(1.05);
+}

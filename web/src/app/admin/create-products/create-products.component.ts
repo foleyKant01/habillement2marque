@@ -13,7 +13,7 @@ export class CreateProductsComponent implements OnInit {
   createproducts!: FormGroup;
   loading = false;
   success = false;
-  file: File | null = null;
+  files: File[] = [];
   selectedType: string | null = null;
 
   // Couleurs et tailles dynamiques
@@ -33,7 +33,7 @@ export class CreateProductsComponent implements OnInit {
       type: [null, Validators.required],
       model: [null],
       style: [null],
-      details: [null],
+      pointure: [null],
       material: [null],
       talon_cm: [null],
       description: [null, Validators.required],
@@ -49,26 +49,33 @@ export class CreateProductsComponent implements OnInit {
       // this.selectedType = value;
       if (value === 'Chaussures Homme' || value === 'Chaussures Femme') {
         this.createproducts.get('talon_cm')?.setValidators([Validators.required]);
+        this.createproducts.get('pointure')?.setValidators([Validators.required]);
       } else {
         this.createproducts.get('talon_cm')?.clearValidators();
+        this.createproducts.get('pointure')?.clearValidators();
       }
       this.createproducts.get('talon_cm')?.updateValueAndValidity();
+      this.createproducts.get('pointure')?.updateValueAndValidity();
     });
   }
 
   // Gestion du fichier
   onFileChange(event: any): void {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      this.file = selectedFile;
-      this.createproducts.get('image_file')?.setValue(selectedFile);
+  const selectedFiles = event.target.files;
+
+  if (selectedFiles.length > 0) {
+    this.files = [];
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      this.files.push(selectedFiles[i]);
     }
   }
+}
 
   // Création du produit
   Createproducts(): void {
-    if (this.createproducts.invalid || !this.file) {
-      return; // Formulaire incomplet
+    if (this.createproducts.invalid || !this.files) {
+      return;
     }
 
     this.loading = true;
@@ -82,10 +89,11 @@ export class CreateProductsComponent implements OnInit {
     formData.append('color', this.createproducts.get('color')?.value);
     formData.append('model', this.createproducts.get('model')?.value);
     formData.append('style', this.createproducts.get('style')?.value);
-    formData.append('details', this.createproducts.get('details')?.value);
+    formData.append('pointure', this.createproducts.get('pointure')?.value);
     formData.append('material', this.createproducts.get('material')?.value);
-    formData.append('image_file', this.file as File);
-
+    this.files.forEach(file => {
+      formData.append('image_file', file);
+    });
     // Champs dynamiques
     if (this.createproducts.get('talon_cm')?.value) {
       formData.append('talon_cm', this.createproducts.get('talon_cm')?.value);
@@ -98,7 +106,7 @@ export class CreateProductsComponent implements OnInit {
         this.success = true;
         // Reset du formulaire
         this.createproducts.reset();
-        this.file = null;
+        this.files = [];
         setTimeout(() => this.success = false, 3000); // Message succès 3s
       },
       error: (err) => {
@@ -114,7 +122,7 @@ export class CreateProductsComponent implements OnInit {
     return !!this.selectedType && this.selectedType !== 'Jouer Enfant';
   }
 
-  get showTailleVe(): boolean {
-    return this.selectedType === 'Vêtement Homme' || this.selectedType === 'Vêtement Femme' || this.selectedType === 'Sous Vêtement Homme' || this.selectedType === 'Sous Vêtement Femme';
+  get showPointure(): boolean {
+    return this.selectedType === 'Chaussures Homme' || this.selectedType === 'Chaussures Femme';
   }
 }

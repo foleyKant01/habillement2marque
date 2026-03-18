@@ -1,3 +1,4 @@
+import json
 import os
 from flask import jsonify, request
 import uuid
@@ -9,8 +10,6 @@ import re
 from werkzeug.utils import secure_filename
 
 from model.tt import Products
-
-
 
 # if not os.path.exists(UPLOAD_FOLDER):
 #     os.makedirs(UPLOAD_FOLDER)
@@ -33,7 +32,6 @@ from model.tt import Products
 #             filename = secure_filename(file.filename)  # Nettoyer le nom de fichier
 #             file.save(os.path.join(UPLOAD_FOLDER, filename))
 #             return filename
-        
         
 
 
@@ -71,7 +69,6 @@ def upload_to_s3(files):
 
 
 
-
 def CreateProducts():
     response = {}
     try:
@@ -80,7 +77,16 @@ def CreateProducts():
         description = request.form.get('description')
         price = request.form.get('price')
         image_file = request.files.getlist('image_file')
-        print('here', image_file)    
+        print('here', image_file)  
+        image_paths = []
+        # for file in image_file:
+        #     if file:
+        #     filename = secure_filename(file.filename)
+        #     filepath = os.path.join("uploads", filename)
+        #     file.save(filepath)
+
+        #     image_paths.append(filename)
+  
         image_urls = upload_to_s3(image_file)  # ⚡ renommer pour plus de clarté
         print('here', image_urls)    
         inventory_level = request.form.get('inventory_level')
@@ -88,7 +94,7 @@ def CreateProducts():
         color = request.form.get('color')
         model = request.form.get('model')
         style = request.form.get('style')
-        details = request.form.get('details')
+        pointure = request.form.get('pointure')
         material = request.form.get('material')
         pr_uid = generate_product_id(name)
 
@@ -97,13 +103,13 @@ def CreateProducts():
         new_products.type = type
         new_products.description = description
         new_products.price = price
-        new_products.image_file = image_urls
+        new_products.image_file = json.dumps(image_urls)        
         new_products.inventory_level = inventory_level
         new_products.price_received = price_received
         new_products.color = color
         new_products.model = model
         new_products.style = style
-        new_products.details = details
+        new_products.pointure = pointure
         new_products.material = material
         new_products.pr_uid = pr_uid
         db.session.add(new_products)
@@ -150,7 +156,7 @@ def UpdateProducts():
             update_products.color = request.form.get('color', update_products.color)
             update_products.model = request.form.get('model', update_products.model)
             update_products.style = request.form.get('style', update_products.style)
-            update_products.details = request.form.get('details', update_products.details)
+            update_products.pointure = request.form.get('pointure', update_products.pointure)
             update_products.material = request.form.get('material', update_products.material)
      
         db.session.add(update_products)
@@ -191,7 +197,6 @@ def DeleteProducts():
 
 def ReadAllProducts():
     response = {}
-
     try:
         subquery = (
             db.session.query(
@@ -201,20 +206,19 @@ def ReadAllProducts():
             .group_by(Products.name)
             .subquery()
         )
-
         all_products = (
             Products.query
             .join(subquery, Products.id == subquery.c.max_id)
             .all()
         )
-
         products_info = []
 
         for product in all_products:
+            images = json.loads(product.image_file)
             products_info.append({
                 'name': product.name,
                 'price': product.price,
-                'image_file': product.image_file,
+                'image_file': images,
                 'pr_uid': product.pr_uid,
                 'type': product.type,
             })
@@ -236,6 +240,8 @@ def ReadSingleProducts():
     try:
         uid = request.json.get('pr_uid')
         single_products = Products.query.filter_by(pr_uid=uid).first()
+        
+        images = json.loads(single_products.image_file)
 
         products_infos = {
             'pr_uid': single_products.pr_uid,
@@ -243,13 +249,13 @@ def ReadSingleProducts():
             'type': single_products.type,  
             'description': single_products.description,              
             'price': single_products.price,              
-            'image_file': single_products.image_file,              
+            'image_file': images,              
             'inventory_level': single_products.inventory_level,              
             'price_received': single_products.price_received,              
             'color': single_products.color,              
             'model': single_products.model,              
             'style': single_products.style,              
-            'details': single_products.details,              
+            'pointure': single_products.pointure,              
             'material': single_products.material,                       
         }
 
@@ -261,7 +267,6 @@ def ReadSingleProducts():
         response['error_description'] = str(e)
 
     return response 
-
 
 
 def AllSimilarColorProducts():
@@ -278,13 +283,13 @@ def AllSimilarColorProducts():
             )
             .all()
         )
-
         products_info = []
         for product in all_products:
+            images = json.loads(product.image_file)
             products_info.append({
                 'name': product.name,
                 'price': product.price,
-                'image_file': product.image_file,
+                'image_file': images,
                 'pr_uid': product.pr_uid,
                 'type': product.type,
             })
@@ -320,10 +325,11 @@ def AllSimilarProducts():
 
         products_info = []
         for product in all_products:
+            images = json.loads(product.image_file)
             products_info.append({
                 'name': product.name,
                 'price': product.price,
-                'image_file': product.image_file,
+                'image_file': images,
                 'pr_uid': product.pr_uid,
                 'type': product.type,
             })
@@ -338,9 +344,6 @@ def AllSimilarProducts():
     return response
 
 
-
-
-
 def serialize_product(product):
     return {
         'name': product.name,              
@@ -349,6 +352,7 @@ def serialize_product(product):
         'pr_uid': product.pr_uid,          
         'type': product.type,          
     }
+    
 
 def AllSimilarTypeProducts():
     response = {}

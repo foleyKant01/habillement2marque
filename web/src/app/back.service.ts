@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { Observable, catchError, pipe, throwError } from 'rxjs';
-import { environment } from './environments/environment.prod';
-// import { environment } from './environments/environment';
-
+// import { environment } from './environments/environment.prod';
+import { environment } from './environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackService {
 
-
   private apiUrl = 'mysql+pymysql://root:@localhost/tt_officiel';
   api_url = environment.apiUrl
 
-
-
   constructor(private https: HttpClient, private api: HttpClient) {}
-
 
   // Api Admin
 
@@ -30,7 +25,6 @@ export class BackService {
     return this.https.post(this.api_url+"/api/admin/create", body, httpOptions)
   }
 
-
   LoginAdmin(body:any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -40,11 +34,9 @@ export class BackService {
     return this.https.post(this.api_url+"/api/admin/login", body, httpOptions);
   }
 
-
   // ReadAllUser(): Observable<any>{
   //   return this.api.get<any>(this.api_url+"/api/user/readall")
   // }
-
 
   // ReadSingleUser(u_uid:any){
 
@@ -106,7 +98,6 @@ export class BackService {
     return this.https.post(this.api_url+"/api/products/readsimilartype",body);
   }
 
-
   CreateProducts(formData: FormData){
     // const httpOptions = {
     //   // headers: new HttpHeaders({
@@ -116,8 +107,6 @@ export class BackService {
     return this.https.post(this.api_url+"/api/products/create", formData)
   }
 
-
-
   DeleteProducts(body:any){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -126,7 +115,6 @@ export class BackService {
     };
     return this.https.delete(this.api_url+"/api/products/delete", body)
   }
-
 
   UpdateProducts(body:any){
     const httpOptions = {

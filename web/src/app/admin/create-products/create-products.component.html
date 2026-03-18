@@ -108,17 +108,6 @@
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>Details:</label>
-        <textarea
-          formControlName="details"
-          class="form-control"
-          rows="3"
-          placeholder="Details du produit"
-        ></textarea>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
         <label>Matière:</label>
         <input
           type="text"
@@ -134,31 +123,21 @@
         </select>
       </div>
     </div>
-    <div class="form-group" *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'">
-      <label>Talon cm:</label>
-      <input
+    <div class="form-row" *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'">
+      <div class="form-group" >
+        <label>Talon cm:</label>
+        <input type="text" formControlName="talon_cm" class="form-control" placeholder="Taille en cm du talon"/>
+      </div>
+      <div class="form-group">
+        <label>Pointure:</label>
+        <input
         type="text"
-        formControlName="talon_cm"
+        formControlName="pointure"
         class="form-control"
-        placeholder="Taille en cm du talon"
+        placeholder="Pointure de la chaussure"
       />
-    </div>
-
-    <!-- Couleur / Taille (exemple dynamique) -->
-    <div *ngIf="selectedType" class="form-row">
-      <div class="form-group" *ngIf="showColor">
-        <label>Couleur:</label>
-        <select formControlName="color" class="form-control">
-          <option *ngFor="let c of colors" [value]="c">{{c}}</option>
-        </select>
       </div>
-      <div class="form-group" *ngIf="showTailleVe">
-        <label>Taille vêtements:</label>
-        <select formControlName="tailleVe" class="form-control">
-          <option *ngFor="let t of taillesVe">{{t}}</option>
-        </select>
       </div>
-    </div>
 
     <!-- Image -->
     <div class="form-group">
@@ -168,6 +147,7 @@
         (change)="onFileChange($event)"
         formControlName="image_file"
         class="form-control"
+        multiple
       />
     </div>
 

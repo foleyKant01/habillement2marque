@@ -16,6 +16,7 @@ export class ReadSingleProductComponent implements OnInit{
   productUid: string | undefined;
   productType: string | undefined;
   productName: string | undefined;
+  selectedImage: string = '';
 
   constructor(private route: ActivatedRoute, private http: BackService, private router: Router) {}
 
@@ -35,21 +36,47 @@ export class ReadSingleProductComponent implements OnInit{
       this.router.navigate(['/user/read-single-product', pr_uid, type, name]));
   }
 
+  // readSingleProducts(): void {
+  //   let body = {
+  //     pr_uid: this.productUid
+  //   }
+  //   this.http.ReadSingleProducts(body).subscribe({
+  //     next: (response: any) => {
+  //       this.product = response?.user; // Stocker les produits dans le tableau
+
+  //     },
+  //     error: (error) => {
+  //       console.error('Failed to load products:', error);
+  //     }
+  //   });
+
+  //   }
+
   readSingleProducts(): void {
     let body = {
       pr_uid: this.productUid
     }
+
     this.http.ReadSingleProducts(body).subscribe({
       next: (response: any) => {
-        this.product = response?.user; // Stocker les produits dans le tableau
+
+        this.product = response?.user;
+
+        // 🔹 définir l'image principale
+        if (this.product?.image_file?.length) {
+          this.selectedImage = this.product.image_file[0];
+        }
 
       },
       error: (error) => {
         console.error('Failed to load products:', error);
       }
     });
+  }
 
-    }
+  changeImage(img: string): void {
+    this.selectedImage = img;
+  }
 
 
     allSimilarProducts(): void {

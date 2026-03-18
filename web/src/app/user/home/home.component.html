@@ -19,7 +19,7 @@
       <div class="product">
         <div class="product-image">
           <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
-            <img [src]="product?.image_file" alt="Image produit">
+            <img [src]="product?.image_file[0]" alt="Image produit">
           </a>
         </div>
         <h2>{{ product.name }}</h2>
