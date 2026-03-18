@@ -18,6 +18,10 @@ export class ReadSingleProductComponent implements OnInit{
   productName: string | undefined;
   selectedImage: string = '';
 
+  showModal = false;
+  selectedSize: string = '';
+  currentProduct: any = null;
+
   constructor(private route: ActivatedRoute, private http: BackService, private router: Router) {}
 
   ngOnInit(): void {
@@ -36,6 +40,18 @@ export class ReadSingleProductComponent implements OnInit{
       this.router.navigate(['/user/read-single-product', pr_uid, type, name]));
   }
 
+  openOrderModal(product: any) {
+  this.currentProduct = product;
+    if (
+      product.type === 'Chaussures Homme' ||
+      product.type === 'Chaussures Femme'
+    ) {
+      this.showModal = true;
+    } else {
+      this.sendToWhatsApp(product);
+    }
+}
+
   // readSingleProducts(): void {
   //   let body = {
   //     pr_uid: this.productUid
@@ -51,6 +67,24 @@ export class ReadSingleProductComponent implements OnInit{
   //   });
 
   //   }
+
+  sendToWhatsApp(product: any) {
+    let message = `Bonjour je suis intéressé par ce produit\n
+    Nom: ${product.name}\n
+    Ref: ${product.pr_uid}\n
+    Couleur: ${product.color}\n
+    Prix: ${product.price} FCFA \n`;
+
+      if (this.selectedSize) {
+        message += `\nPointure: ${this.selectedSize}`;
+      }
+
+      const url = `https://wa.me/2250777861623?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+
+      this.showModal = false;
+      this.selectedSize = '';
+  }
 
   readSingleProducts(): void {
     let body = {

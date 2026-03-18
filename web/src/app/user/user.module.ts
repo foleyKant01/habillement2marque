@@ -10,6 +10,7 @@ import { SuivezNousComponent } from './suivez-nous/suivez-nous.component';
 import { ReadSingleProductComponent } from './read-single-product/read-single-product.component';
 import { ProductByFilterComponent } from './product-by-filter/product-by-filter.component';
 import { OffresComponent } from './offres/offres.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { OffresComponent } from './offres/offres.component';
   imports: [
     CommonModule,
     UserRoutingModule,
+    FormsModule
 
   ]
 })
