@@ -72,7 +72,7 @@ def upload_to_s3(files):
 def CreateProducts():
     response = {}
     try:
-        name = request.form.get('name')
+        name = request.form.get('name').strip()
         type = request.form.get('type')
         description = request.form.get('description')
         price = request.form.get('price')
@@ -292,6 +292,7 @@ def AllSimilarColorProducts():
                 'image_file': images,
                 'pr_uid': product.pr_uid,
                 'type': product.type,
+                'color': product.color,
             })
 
         response['status'] = 'success'
@@ -312,24 +313,35 @@ def AllSimilarProducts():
         uid = request.json.get('pr_uid')
         product_name = request.json.get('name')
 
-        all_products = (
-            Products.query
+        # 🔹 Subquery : dernier produit par nom
+        subquery = (
+            db.session.query(
+                Products.name,
+                func.max(Products.id).label("max_id")
+            )
             .filter(
                 Products.pr_uid != uid,
                 Products.type == product_type,
                 Products.name != product_name
             )
-            .group_by(Products.name)  # empêche les doublons de nom
+            .group_by(Products.name)
+            .subquery()
+        )
+
+        # 🔹 Join avec Products
+        all_products = (
+            Products.query
+            .join(subquery, Products.id == subquery.c.max_id)
             .all()
         )
 
         products_info = []
+
         for product in all_products:
-            images = json.loads(product.image_file)
             products_info.append({
                 'name': product.name,
                 'price': product.price,
-                'image_file': images,
+                'image_file': product.image_file,  # ✅ pas de json.loads si JSON
                 'pr_uid': product.pr_uid,
                 'type': product.type,
             })
