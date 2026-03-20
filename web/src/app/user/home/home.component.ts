@@ -11,6 +11,10 @@ export class HomeComponent implements OnInit{
   products: any[] = []; // Tableau pour stocker les produits
   data: any;
 
+  showModal = false;
+  selectedSize: string = '';
+  currentProduct: any = null;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: BackService) { }
 
   ngOnInit(): void {
@@ -20,6 +24,18 @@ export class HomeComponent implements OnInit{
   readsingleProducts(pr_uid: number, type: string, name: string): void {
     this.router.navigate(['/user/read-single-product', pr_uid, type, name]);
   }
+
+  openOrderModal(product: any) {
+  this.currentProduct = product;
+    if (
+      product.type === 'Chaussures Homme' ||
+      product.type === 'Chaussures Femme'
+    ) {
+      this.showModal = true;
+    } else {
+      this.sendToWhatsApp(product);
+    }
+}
 
   viewallProducts(): void {
     this.http.ReadAllProducts().subscribe({
@@ -35,6 +51,24 @@ export class HomeComponent implements OnInit{
         console.error('Failed to load products:', error);
       }
     });
+  }
+
+  sendToWhatsApp(product: any) {
+    let message = `Bonjour je suis intéressé par ce produit\n
+    Nom: ${product.name}\n
+    Ref: ${product.pr_uid}\n
+    Couleur: ${product.color}\n
+    Prix: ${product.price} FCFA \n`;
+
+      if (this.selectedSize) {
+        message += `\nPointure: ${this.selectedSize}`;
+      }
+
+      const url = `https://wa.me/2250777861623?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+
+      this.showModal = false;
+      this.selectedSize = '';
   }
 
 }

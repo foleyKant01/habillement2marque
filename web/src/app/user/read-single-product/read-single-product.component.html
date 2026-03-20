@@ -113,24 +113,16 @@
       <h4>{{ product.name }}</h4>
 
       <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
-        <img [src]="product.image_file" alt="{{ product.name }}" />
+        <img [src]="product.image_file[0]" alt="{{ product.name }}" />
       </a>
 
       <p class="price">{{ product.price }} FCFA</p>
 
       <a
         class="order-btn mt-3"
-        href="https://wa.me/2250777861623?text=
-        Bonjour%20je%20suis%20intéressé%20par%20ce%20produit%0A
-        Nom:%20{{product.name}}%0A
-        Ref:%20{{product.pr_uid}}%0A
-        Couleur:%20{{product.color}}%0A
-        Prix:%20{{product.price}}%20FCFA%0A
-        Image:%20{{product.image_file}}"
-
-        target="_blank"
+        (click)="openOrderModal(product)"
       >
-        Commander
+        Commander sur WhatsApp
       </a>
     </div>
   </div>
@@ -147,17 +139,16 @@
       <h4>{{ product.name }}</h4>
 
       <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
-        <img [src]="product.image_file" alt="{{ product.name }}" />
+        <img [src]="product.image_file[0]" alt="{{ product.name }}" />
       </a>
 
       <p class="price">{{ product.price }} FCFA</p>
 
       <a
-        class="order-btn small"
-        href="https://web.whatsapp.com/send?phone=+2250702653594&text=Bonjour%20je%20suis%20intéressé%20par%20ce%20produit%20Nom:%20{{product.name}},%20Ref:%20{{product.pr_uid}},%20Couleur:%20{{product.color}},%20Prix:%20{{product.price}}%20fcfa"
-        target="_blank"
+        class="order-btn mt-3"
+        (click)="openOrderModal(product)"
       >
-        Commander
+        Commander sur WhatsApp
       </a>
     </div>
   </div>
