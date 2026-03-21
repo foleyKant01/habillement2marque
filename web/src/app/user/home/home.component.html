@@ -12,10 +12,7 @@
 <div class="container">
   <h1 class="section-title">Nos Articles</h1>
   <div class="row" *ngIf="data && data?.length > 0">
-    <div 
-      class="col-12 col-sm-6 col-lg-4 mb-4" 
-      *ngFor="let product of data"
-    >
+    <div class="col-12 col-sm-6 col-lg-4 mb-4" *ngFor="let product of data">
       <div class="product">
         <div class="product-image">
           <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
@@ -31,9 +28,46 @@
           <span class="price pt-3">{{ product.price }} FCFA</span>
         </div>
       </div>
+      <div class="custom-modal" *ngIf="showModal">
+  <div class="modal-content">
+
+    <h4>Veillez préciser</h4>
+    <div style="text-align: left;" class="form-group">
+      <label>Couleur:</label>
+      <input type="text" class="form-control" placeholder="{{product.color}}" [(ngModel)]="selectedColor" min="15" max="50"/>
     </div>
+    <div style="text-align: left;">
+      <label>Pointure:</label>
+      <input
+      type="number"
+      class="form-control"
+      placeholder="{{product.pointure}}"
+      [(ngModel)]="selectedSize"
+      min="15"
+      max="50"
+    />
+    </div>
+  <div class="modal-actions mt-3">
+    <button class="btn btn-secondary" (click)="showModal = false">
+      Annuler
+    </button>
+
+    <button
+      class="btn btn-primary"
+      [disabled]="!selectedSize || !selectedColor"
+      (click)="sendToWhatsApp(currentProduct)"
+    >
+      Confirmer
+    </button>
+  </div>
+
   </div>
 </div>
+    </div>
+    
+  </div>
+</div>
+
 
   </div>
 

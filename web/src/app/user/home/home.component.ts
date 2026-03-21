@@ -13,7 +13,11 @@ export class HomeComponent implements OnInit{
 
   showModal = false;
   selectedSize: string = '';
-  currentProduct: any = null;
+  selectedColor: string = '';
+  currentProduct: any = null; 
+
+  colors: string[] = ['Noir', 'Blanc', 'Gris', 'Marron', 'Beige', 'Bleu marine', 'Rouge', 'Vert', 'Jaune', 'Bleu', 'Rose', 'Violet', 'Orange', 'Multi'];
+
 
   constructor(private router: Router, private route: ActivatedRoute, private http: BackService) { }
 
@@ -57,11 +61,12 @@ export class HomeComponent implements OnInit{
     let message = `Bonjour je suis intéressé par ce produit\n
     Nom: ${product.name}\n
     Ref: ${product.pr_uid}\n
-    Couleur: ${product.color}\n
     Prix: ${product.price} FCFA \n`;
 
-      if (this.selectedSize) {
-        message += `\nPointure: ${this.selectedSize}`;
+      if (this.selectedSize ) {
+        if (this.selectedColor) {
+          message += `\nPointure: ${this.selectedSize}, \nCouleur: ${this.selectedColor}`;
+        }
       }
 
       const url = `https://wa.me/2250777861623?text=${encodeURIComponent(message)}`;
@@ -69,6 +74,7 @@ export class HomeComponent implements OnInit{
 
       this.showModal = false;
       this.selectedSize = '';
+      this.selectedColor = '';
   }
 
 }

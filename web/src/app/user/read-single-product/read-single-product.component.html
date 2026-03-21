@@ -51,20 +51,25 @@
       </a>
     </div>
   </div>
-  <div class="custom-modal" *ngIf="showModal">
+<div class="custom-modal" *ngIf="showModal">
   <div class="modal-content">
 
-    <h4>Choisir votre pointure</h4>
-
-    <input
-    type="number"
-    class="form-control"
-    placeholder="{{product.pointure}}"
-    [(ngModel)]="selectedSize"
-    min="20"
-    max="50"
-  />
-
+    <h4>Veillez préciser</h4>
+    <div style="text-align: left;" class="form-group">
+      <label>Couleur:</label>
+      <input type="text" class="form-control" placeholder="{{product.color}}" [(ngModel)]="selectedColor" min="15" max="50"/>
+    </div>
+    <div style="text-align: left;">
+      <label>Pointure:</label>
+      <input
+      type="number"
+      class="form-control"
+      placeholder="{{product.pointure}}"
+      [(ngModel)]="selectedSize"
+      min="15"
+      max="50"
+    />
+    </div>
   <div class="modal-actions mt-3">
     <button class="btn btn-secondary" (click)="showModal = false">
       Annuler
@@ -72,7 +77,7 @@
 
     <button
       class="btn btn-primary"
-      [disabled]="!selectedSize"
+      [disabled]="!selectedSize || !selectedColor"
       (click)="sendToWhatsApp(currentProduct)"
     >
       Confirmer

@@ -140,3 +140,119 @@
 .site-footer a:hover {
   text-decoration: underline;
 }
+
+
+
+/* Overlay (fond sombre) */
+.custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+
+  /* animation fade */
+  animation: fadeIn 0.3s ease;
+}
+
+/* Boîte du modal */
+.modal-content {
+  background: #fff;
+  padding: 25px 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 350px;
+
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+  /* animation slide */
+  transform: translateY(-20px);
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Titre */
+.modal-content h4 {
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Input */
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.3s;
+}
+
+/* Focus input */
+.modal-content input:focus {
+  border-color: #000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Boutons */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Bouton annuler */
+.modal-actions .btn-secondary {
+  flex: 1;
+  border-radius: 8px;
+}
+
+/* Bouton confirmer */
+.modal-actions .btn-primary {
+  flex: 1;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+/* Hover bouton */
+.modal-actions .btn-primary:hover {
+  transform: scale(1.05);
+}
+
+/* Bouton désactivé */
+.modal-actions .btn-primary:disabled {
+  background: #ccc;
+  border: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile optimisation */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px 15px;
+  }
+}

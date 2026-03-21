@@ -221,6 +221,9 @@ def ReadAllProducts():
                 'image_file': images,
                 'pr_uid': product.pr_uid,
                 'type': product.type,
+                'color': product.color,
+                'pointure': product.pointure
+                
             })
 
         response['status'] = 'success'
@@ -334,9 +337,7 @@ def AllSimilarProducts():
             .join(subquery, Products.id == subquery.c.max_id)
             .all()
         )
-
         products_info = []
-
         for product in all_products:
             products_info.append({
                 'name': product.name,
@@ -345,10 +346,8 @@ def AllSimilarProducts():
                 'pr_uid': product.pr_uid,
                 'type': product.type,
             })
-
         response['status'] = 'success'
         response['products'] = products_info
-
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
@@ -369,15 +368,20 @@ def serialize_product(product):
 def AllSimilarTypeProducts():
     response = {}
     product_list = []
-    
     try:
         product_type = request.json.get('type')
         all_products = Products.query.filter_by(type=product_type).all()
-        
         for product in all_products:
-            product_data = serialize_product(product)
-            product_list.append(product_data)
-        
+            images = json.loads(product.image_file)
+            product_list.append({
+                'name': product.name,
+                'price': product.price,
+                'image_file': images,
+                'pr_uid': product.pr_uid,
+                'type': product.type,
+                'color': product.color,
+                'pointure': product.pointure
+            })
         response['products'] = product_list
         response['status'] = 'success'
         

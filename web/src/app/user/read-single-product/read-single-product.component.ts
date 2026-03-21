@@ -20,6 +20,7 @@ export class ReadSingleProductComponent implements OnInit{
 
   showModal = false;
   selectedSize: string = '';
+  selectedColor: string = '';
   currentProduct: any = null;
 
   constructor(private route: ActivatedRoute, private http: BackService, private router: Router) {}
@@ -72,11 +73,12 @@ export class ReadSingleProductComponent implements OnInit{
     let message = `Bonjour je suis intéressé par ce produit\n
     Nom: ${product.name}\n
     Ref: ${product.pr_uid}\n
-    Couleur: ${product.color}\n
     Prix: ${product.price} FCFA \n`;
 
-      if (this.selectedSize) {
-        message += `\nPointure: ${this.selectedSize}`;
+      if (this.selectedSize ) {
+        if (this.selectedColor) {
+          message += `\nPointure: ${this.selectedSize}, \nCouleur: ${this.selectedColor}`;
+        }
       }
 
       const url = `https://wa.me/2250777861623?text=${encodeURIComponent(message)}`;
@@ -84,6 +86,7 @@ export class ReadSingleProductComponent implements OnInit{
 
       this.showModal = false;
       this.selectedSize = '';
+      this.selectedColor = '';
   }
 
   readSingleProducts(): void {
