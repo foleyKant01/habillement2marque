@@ -22,11 +22,12 @@ export class EditProductsComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
+      inventory_level: ['', Validators.required],
+      color: ['', Validators.required],
+      pointure: ['', Validators.required],
+      style: ['', Validators.required],
+      material: ['', Validators.required],
       image: ['', Validators.required],
-      taille1: ['', Validators.required],
-      taille2: ['', Validators.required],
-      taille3: ['', Validators.required],
-      taille4: ['', Validators.required]
     });
   }
 
@@ -65,11 +66,12 @@ export class EditProductsComponent implements OnInit {
         name: this.updateProductsForm.value.name,
         description: this.updateProductsForm.value.description,
         price: this.updateProductsForm.value.price,
-        image: this.updateProductsForm.value.image,
-        taille1: this.updateProductsForm.value.taille1,
-        taille2: this.updateProductsForm.value.taille2,
-        taille3: this.updateProductsForm.value.taille3,
-        taille4: this.updateProductsForm.value.taille4,
+        inventory_level: this.updateProductsForm.value.inventory_level,
+        color: this.updateProductsForm.value.color,
+        pointure: this.updateProductsForm.value.pointure,
+        style: this.updateProductsForm.value.style,
+        material: this.updateProductsForm.value.material,
+        image: this.updateProductsForm.value.image
       };
 
       // Appeler la fonction de mise à jour de la catégorie dans le service API

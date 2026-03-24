@@ -1,130 +1,105 @@
-<div style="height: 905px;">
-  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
-    <img src="" alt="Logo Trouvez Tous">
-  </div><br>
-  <div class="container" style="height: auto;">
-    <div id="wrapper">
-      <a routerLink="/admin/view-all-products/"><i class="fa-solid fa-left-long"></i></a>
-      <h2 style="margin-top: 20px;">Read product for update</h2>
-      <div></div>
-      <br>
-      <div class="p-2" style=" border: 1px solid; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-        <div class="table-wrapper mt-5">
-          <div class="col-12 table-responsive">
-            <table class="table table-striped" *ngIf="product">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Name </th>
-                  <th scope="col">Type </th>
-                  <th scope="col">Description </th>
-                  <th scope="col">Price </th>
-                  <th scope="col">Image </th>
-                  <th scope="col">Inventory level </th>
-                  <th scope="col">Price received </th>
-                  <th scope="col">Color </th>
-                  <th scope="col">Taille vetements </th>
-                  <th scope="col">Taille jeans </th>
-                  <th scope="col">Taille 1 </th>
-                  <th scope="col">Taille 2 </th>
-                  <th scope="col">Taille 3 </th>
-                  <th scope="col">Taille 4 </th>
-                  <th scope="col">Reférence </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{ product.name }}</td>
-                <td>{{ product.type }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.image_file }}</td>
-                <td>{{ product.inventory_level }}</td>
-                <td>{{ product.price_received }}</td>
-                <td>{{ product.color }}</td>
-                <td>{{ product.tailleVe }}</td>
-                <td>{{ product.tailleJe }}</td>
-                <td>{{ product.taille1 }}</td>
-                <td>{{ product.taille2 }}</td>
-                <td>{{ product.taille3 }}</td>
-                <td>{{ product.taille4 }}</td>
-                <td>{{ product.pr_uid }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+<div class="product-update-page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <a routerLink="/admin/view-all-products/" class="back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    <div>
+      <h2>Modifier le produit</h2>
+      <p>Gérez et mettez à jour les informations</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- LEFT : INFOS PRODUIT -->
+    <div class="product-card" *ngIf="product">
+      <img [src]="product.image_file[0]" alt="product">
+
+      <h3>{{ product.name }}</h3>
+      <span class="type">{{ product.type }}</span>
+
+      <p class="desc">{{ product.description }}</p>
+
+      <div class="info">
+        <div><strong>Prix:</strong> {{ product.price }} FCFA</div>
+        <div><strong>Stock:</strong> {{ product.inventory_level }}</div>
+        <div><strong>Couleur:</strong> {{ product.color }}</div>
+        <div><strong>Réf:</strong> {{ product.pr_uid }}</div>
+      </div>
+    </div><br>
+
+    <!-- RIGHT : FORM -->
+    <form 
+      (submit)="updateProducts()" 
+      [formGroup]="updateProductsForm"
+      class="form-card"
+      [ngClass]="{'blur': loading}"
+    >
+
+      <h3>Modifier</h3>
+
+      <div class="form-group">
+        <label>Nom</label>
+        <input formControlName="name" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea formControlName="description"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prix</label>
+          <input formControlName="price" type="text">
+        </div>
+
+        <div class="form-group">
+          <label>Stock</label>
+          <input formControlName="inventory_level" type="text">
         </div>
       </div>
-    </div>
+
+      <div class="form-group">
+        <label>Couleur</label>
+        <input formControlName="color" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Pointure</label>
+        <input formControlName="pointure" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Style</label>
+        <input formControlName="style" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Matière</label>
+        <input formControlName="material" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Image</label>
+        <input formControlName="image" type="file">
+      </div>
+      <button type="submit" class="btn">
+        Mettre à jour
+      </button>
+
+    </form>
+
   </div>
-  <div id="wrappe">
-    <form (submit)="updateProducts()" [formGroup]="updateProductsForm" [ngClass]="{'blur-background': loading || success}">
-      <h2>Update product</h2>
-      <hr><br>
-      <div class="div-input">
-        <label for="name" class="form-label">Name:</label>
-        <input formControlName="name" type="text" id="name" name="name" class="form-control" aria-describedby="name">
-      </div><br>
-      <div class="div-input">
-        <label for="description" class="form-label">Description:</label>
-        <textarea formControlName="description" class="form-control" name="description" id="description" cols="25" rows="3"></textarea>
-      </div><br>
-      <div class="div-input">
-        <label for="price" class="form-label">Price:</label>
-        <input formControlName="price" type="text" class="form-control" name="price"  id="price" aria-describedby="price">
-      </div><br>
-      <div class="div-input">
-        <label for="image" class="form-label">Image:</label>
-        <input formControlName="image" type="file" class="form-control" name="image" id="image"  aria-describedby="image">
-      </div><br>
-      <div class="div-input">
-        <label for="taille1" class="form-label">Taille 1:</label>
-        <select name="taille1" name="taille1" id="taille1" class="form-control" formControlName="taille1" aria-describedby="taille1">
-          <option value="null"></option>
-          <option value="weight40">40</option>
-          <option value="weight41">41</option>
-          <option value="weight42">42</option>
-          <option value="weight43">43</option>
-        </select>
-      </div><br>
-      <div class="div-input">
-        <label for="taille2" class="form-label">Taille 2:</label>
-        <select name="taille2" class="form-control" name="taille2" formControlName="taille2" id="taille2" aria-describedby="taille2">
-          <option value="null"></option>
-          <option value="weight40">40</option>
-          <option value="weight41">41</option>
-          <option value="weight42">42</option>
-          <option value="weight43">43</option>
-        </select>
-      </div><br>
-      <div class="div-input">
-        <label for="taille3" class="form-label">Taille 3:</label>
-        <select name="taille3" name="taille3" id="taille3" class="form-control" formControlName="taille3" aria-describedby="taille3">
-          <option value="null"></option>
-          <option value="weight40">40</option>
-          <option value="weight41">41</option>
-          <option value="weight42">42</option>
-          <option value="weight43">43</option>
-        </select>
-      </div><br>
-      <div class="div-input">
-        <label for="taille4" class="form-label">Taille 4:</label>
-        <select name="taille4" name="taille4" id="taille4" class="form-control" formControlName="taille4" aria-describedby="taille4">
-          <option value="null"></option>
-          <option value="weight40">40</option>
-          <option value="weight41">41</option>
-          <option value="weight42">42</option>
-          <option value="weight43">43</option>
-        </select>
-      </div><br>
-      <div class="mt-2 p-2" style="display: flex; justify-content: end;">
-        <div *ngIf="!loading"></div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </div>
-  </form>
-  <app-spinner style="margin-top: -400px;" class="overlay" *ngIf="loading"></app-spinner>
-  <div *ngIf="success" style="position: fixed; top: 50%; height: 50px; " class="alert alert-success" role="alert">
-    Catégorie créée avec succès !
+
+  <!-- LOADING -->
+  <app-spinner *ngIf="loading" class="overlay"></app-spinner>
+
+  <!-- SUCCESS -->
+  <div *ngIf="success" class="success-msg">
+    Produit mis à jour avec succès ✅
   </div>
-  </div>
-</div><br>
-<div class="text-center Copyrights text-muted"><small>Copyrights &copy; All Rights Reserved by foleyKant.</small></div>
+
+</div>
