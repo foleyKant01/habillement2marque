@@ -57,14 +57,14 @@
     <h4>Veillez préciser</h4>
     <div style="text-align: left;" class="form-group">
       <label>Couleur:</label>
-      <input type="text" class="form-control" placeholder="{{product.color}}" [(ngModel)]="selectedColor" min="15" max="50"/>
+      <input type="text" class="form-control" placeholder="{{currentProduct?.color}}" [(ngModel)]="selectedColor" min="15" max="50"/>
     </div>
     <div style="text-align: left;">
       <label>Pointure:</label>
       <input
       type="number"
       class="form-control"
-      placeholder="{{product.pointure}}"
+      placeholder="{{currentProduct?.pointure}}"
       [(ngModel)]="selectedSize"
       min="15"
       max="50"

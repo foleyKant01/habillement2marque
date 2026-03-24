@@ -1,61 +1,73 @@
-<div class="container" style="height: 905px;">
-  <br>
-  <div style="display: flex; justify-content: space-around;" class="text-center text-muted mt-5">
-    <img src="" alt="Logo Trouvez Tous">
-  </div><br>
-  <div id="wrapper">
-    <a routerLink="/admin/view-all-products/"><i class="fa-solid fa-left-long"></i></a>
-    <h2 style="margin-top: 20px;">Read Products</h2>
-    <br>
-    <div class="p-2" style=" border: 1px solid; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-      <div class="table-wrapper mt-5">
-        <div class="col-12 table-responsive">
-          <table class="table table-striped" *ngIf="product">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Name </th>
-                <th scope="col">Type </th>
-                <th scope="col">Description </th>
-                <th scope="col">Price </th>
-                <th scope="col">Image </th>
-                <th scope="col">Inventory level </th>
-                <th scope="col">Price received </th>
-                <th scope="col">Color </th>
-                <th scope="col">Taille vetements </th>
-                <th scope="col">Taille jeans </th>
-                <th scope="col">Taille 1 </th>
-                <th scope="col">Taille 2 </th>
-                <th scope="col">Taille 3 </th>
-                <th scope="col">Taille 4 </th>
-                <th scope="col">Reférence </th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.type }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.image_file }}</td>
-                <td>{{ product.inventory_level }}</td>
-                <td>{{ product.price_received }}</td>
-                <td>{{ product.color }}</td>
-                <td>{{ product.tailleVe }}</td>
-                <td>{{ product.tailleJe }}</td>
-                <td>{{ product.taille1 }}</td>
-                <td>{{ product.taille2 }}</td>
-                <td>{{ product.taille3 }}</td>
-                <td>{{ product.taille4 }}</td>
-                <td>{{ product.pr_uid }}</td>
-                <td><button type="button" class="btn" style="width: 50%; margin-left: -5px;" (click)="editProduct(product.pr_uid)"><i style="color: #e9af00;"  class="fa-solid fa-pencil"></i></button></td>
-                <td><button type="button" class="btn" style="width: 50%;" routerLink=""><i class="fa-solid fa-trash-can text-danger"></i></button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+<div class="container product-admin" *ngIf="product">
+
+  <!-- HEADER -->
+  <div class="header d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <a routerLink="/admin/view-all-products" class="back-btn">
+        ← Retour
+      </a>
+      <h2 class="mt-2">Détails du produit</h2>
+    </div>
+
+    <div class="d-flex">
+      <button class="btn btn-warning me-2" (click)="editProduct(product.pr_uid)">
+        Modifier
+      </button>
+      <button class="btn btn-danger" (click)="deleteProduct(product.pr_uid)">
+        Supprimer
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="row product-card">
+
+    <!-- IMAGE -->
+    <div class="col-md-5 text-center">
+      <img 
+        *ngIf="product.image_file?.length"
+        [src]="product.image_file[0]" 
+        class="main-img"
+      />
+
+      <div class="d-flex justify-content-center mt-3">
+        <img 
+          *ngFor="let img of product.image_file"
+          [src]="img"
+          class="thumb"
+        />
       </div>
     </div>
+
+    <!-- INFOS -->
+    <div class="col-md-7 product-info">
+
+      <h3>{{ product.name }}</h3>
+      <p class="text-muted">{{ product.type }}</p>
+
+      <h4 class="price">{{ product.price }} FCFA</h4>
+
+      <p><strong>Description :</strong> {{ product.description }}</p>
+
+      <div class="info-grid">
+
+        <p><strong>Référence :</strong> {{ product.pr_uid }}</p>
+        <p><strong>Stock :</strong> {{ product.inventory_level }}</p>
+        <p><strong>Prix reçu :</strong> {{ product.price_received }}</p>
+
+        <p><strong>Couleur :</strong> {{ product.color }}</p>
+        <p><strong>Pointure :</strong> {{ product.pointure || '—' }}</p>
+
+        <p><strong>Modèle :</strong> {{ product.model || '—' }}</p>
+        <p><strong>Style :</strong> {{ product.style || '—' }}</p>
+        <p><strong>Matière :</strong> {{ product.material || '—' }}</p>
+
+        <p><strong>Créé le :</strong> {{ product.creation_date | date:'short' }}</p>
+        <p><strong>Mis à jour :</strong> {{ product.update_date | date:'short' }}</p>
+
+      </div>
+
+    </div>
+
   </div>
 </div>

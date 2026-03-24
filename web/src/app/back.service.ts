@@ -108,20 +108,10 @@ export class BackService {
   }
 
   DeleteProducts(body:any){
-    const httpOptions = {
-      headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      })
-    };
-    return this.https.delete(this.api_url+"/api/products/delete", body)
+    return this.https.post(this.api_url+"/api/products/delete", body)
   }
 
   UpdateProducts(body:any){
-    const httpOptions = {
-      headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      })
-    };
-    return this.https.patch(this.api_url+"/api/products/update", body, httpOptions)
+    return this.https.post(this.api_url+"/api/products/update", body)
   }
 }

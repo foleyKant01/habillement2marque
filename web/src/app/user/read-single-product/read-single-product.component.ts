@@ -43,6 +43,9 @@ export class ReadSingleProductComponent implements OnInit{
 
   openOrderModal(product: any) {
   this.currentProduct = product;
+  // reset champs
+  this.selectedSize = '';
+  this.selectedColor = '';
     if (
       product.type === 'Chaussures Homme' ||
       product.type === 'Chaussures Femme'
@@ -53,21 +56,6 @@ export class ReadSingleProductComponent implements OnInit{
     }
 }
 
-  // readSingleProducts(): void {
-  //   let body = {
-  //     pr_uid: this.productUid
-  //   }
-  //   this.http.ReadSingleProducts(body).subscribe({
-  //     next: (response: any) => {
-  //       this.product = response?.user; // Stocker les produits dans le tableau
-
-  //     },
-  //     error: (error) => {
-  //       console.error('Failed to load products:', error);
-  //     }
-  //   });
-
-  //   }
 
   sendToWhatsApp(product: any) {
     let message = `Bonjour je suis intéressé par ce produit\n

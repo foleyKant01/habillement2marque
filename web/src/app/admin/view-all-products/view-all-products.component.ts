@@ -11,6 +11,9 @@ export class ViewAllProductsComponent implements OnInit {
   products: any[] = []; // Tableau pour stocker les produits
   data: any;
 
+  searchText: string = ''; // 🔍 recherche
+  isLoading: boolean = false; // ⏳ loader
+
   constructor(private router: Router, private route: ActivatedRoute, private http: BackService) { }
 
   ngOnInit(): void {
@@ -38,18 +41,17 @@ export class ViewAllProductsComponent implements OnInit {
   }
 
 
-  deleteProduct(pr_uid: number): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
-      this.http.DeleteProducts(pr_uid).subscribe({
-        next: (response: any) => {
-          console.log('Product deleted successfully:', response);
-          // Actualiser la liste des produits après la suppression
-          this.viewallProducts();
-        },
-        error: (error) => {
-          console.error('Failed to delete product:', error);
-        }
-      });
+  deleteProduct(pr_uid: string) {
+      if (confirm('Voulez-vous vraiment supprimer ce produit ?')) {
+        this.http.DeleteProducts({ pr_uid }).subscribe({
+          next: () => {
+            alert('Produit supprimé avec succès');
+            this.router.navigate(['/admin/view-all-products']);
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
+      }
     }
-  }
 }

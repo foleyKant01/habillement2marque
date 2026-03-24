@@ -40,6 +40,20 @@ export class ViewSingleProductsComponent implements OnInit{
       // }
     }
 
+    deleteProduct(pr_uid: string) {
+      if (confirm('Voulez-vous vraiment supprimer ce produit ?')) {
+        this.http.DeleteProducts({ pr_uid }).subscribe({
+          next: () => {
+            alert('Produit supprimé avec succès');
+            this.router.navigate(['/admin/view-all-products']);
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
+      }
+    }
+
     editProduct(productUid: string): void {
       this.router.navigate(['/admin/edit-products', productUid]);
     }

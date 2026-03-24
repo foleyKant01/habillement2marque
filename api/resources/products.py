@@ -22,6 +22,12 @@ class ProductsApi(Resource):
         if route == "readsimilartype":
             return AllSimilarTypeProducts()
         
+        if route == "delete":
+                return DeleteProducts()
+            
+        if route == "update":
+            return UpdateProducts()
+        
         if route == "transformater":
             return transformater()
         
@@ -32,14 +38,3 @@ class ProductsApi(Resource):
         
         if route == "test":
             return test()
-        
-        
-    
-    def delete(self, route):
-         if route == "delete":
-            return DeleteProducts()
-         
-    def patch(self, route):
-        if route == "update":
-            return UpdateProducts()
-        

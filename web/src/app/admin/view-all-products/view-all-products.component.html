@@ -1,49 +1,64 @@
 <div class="admin-products-page">
 
-  <!-- Header -->
+  <!-- HEADER -->
   <div class="header">
-    <a routerLink="/admin/ad-home" class="back-btn">
-      <i class="fa-solid fa-arrow-left"></i> Retour
-    </a>
-    <h2>Tous les produits</h2>
-    <p class="subtitle">Gérez vos produits facilement</p>
+    <div class="left">
+      <a routerLink="/admin/ad-home" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <div>
+        <h2>Produits</h2>
+        <p>Gérez vos produits facilement</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Table des produits -->
-  <div class="table-container" *ngIf="data && data.length > 0; else noProducts">
-    <table class="products-table">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Prix</th>
-          <th>Référence</th>
-          <th>Voir</th>
-          <th>Supprimer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of data">
-          <td>{{ product.name }}</td>
-          <td>{{ product.price | currency:'FCFA' }}</td>
-          <td>{{ product.pr_uid }}</td>
-          <td>
-            <button class="btn-view" (click)="viewsingleProducts(product.pr_uid)">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </td>
-          <td>
-            <button class="btn-delete" (click)="deleteProduct(product.pr_uid)">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- GRID -->
+  <div class="products-grid" *ngIf="data?.length > 0; else noProducts">
+
+    <div class="product-card" *ngFor="let product of data">
+
+      <!-- IMAGE -->
+      <div class="image-box">
+        <img [src]="product.image_file[0]" alt="">
+        <span 
+          class="stock-badge"
+          [class.low]="product.inventory_level < 5"
+        >
+          {{ product.inventory_level }}
+        </span>
+      </div>
+
+      <!-- INFOS -->
+      <div class="product-info">
+        <h4>{{ product.name }}</h4>
+        <p class="type">{{ product.type }}</p>
+
+        <p class="price">{{ product.price }} FCFA</p>
+
+        <p class="ref">Ref: {{ product.pr_uid }}</p>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button class="btn-view" (click)="viewsingleProducts(product.pr_uid)">
+          <i class="fa-solid fa-eye"></i>
+        </button>
+
+        <button class="btn-delete" (click)="deleteProduct(product.pr_uid)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+
+    </div>
+
   </div>
 
+  <!-- EMPTY -->
   <ng-template #noProducts>
-    <div class="no-products">
-      <p>Aucun produit trouvé.</p>
+    <div class="empty-state">
+      <i class="fa-solid fa-box-open"></i>
+      <p>Aucun produit disponible</p>
     </div>
   </ng-template>
 

@@ -216,13 +216,21 @@ def ReadAllProducts():
         for product in all_products:
             images = json.loads(product.image_file)
             products_info.append({
-                'name': product.name,
-                'price': product.price,
-                'image_file': images,
                 'pr_uid': product.pr_uid,
-                'type': product.type,
-                'color': product.color,
-                'pointure': product.pointure
+                'name': product.name,  
+                'type': product.type,  
+                'description': product.description,              
+                'price': product.price,              
+                'image_file': images,              
+                'inventory_level': product.inventory_level,              
+                'price_received': product.price_received,              
+                'color': product.color,              
+                'model': product.model,              
+                'style': product.style,              
+                'pointure': product.pointure,              
+                'material': product.material,                       
+                'creation_date': str(product.creation_date),                       
+                'update_date': str(product.update_date),  
                 
             })
 
@@ -260,6 +268,8 @@ def ReadSingleProducts():
             'style': single_products.style,              
             'pointure': single_products.pointure,              
             'material': single_products.material,                       
+            'creation_date': str(single_products.creation_date),                       
+            'update_date': str(single_products.update_date),                       
         }
 
         response['status'] = 'success'
@@ -341,10 +351,19 @@ def AllSimilarProducts():
         for product in all_products:
             products_info.append({
                 'name': product.name,
-                'price': product.price,
-                'image_file': product.image_file,  # ✅ pas de json.loads si JSON
-                'pr_uid': product.pr_uid,
                 'type': product.type,
+                'description': product.description,  # ✅ pas de json.loads si JSON
+                'price': product.price,
+                'image_file': product.image_file,
+                'inventory_level': product.inventory_level,
+                'price_received': product.price_received,
+                'pointure': product.pointure,
+                'color': product.color,
+                'model': product.model,
+                'style': product.style,
+                'material': product.material,
+                'pr_uid': product.pr_uid,
+                'creation_date': str(product.creation_date),
             })
         response['status'] = 'success'
         response['products'] = products_info
@@ -357,11 +376,20 @@ def AllSimilarProducts():
 
 def serialize_product(product):
     return {
-        'name': product.name,              
-        'price': product.price,  
-        'image_file': product.image_file,              
-        'pr_uid': product.pr_uid,          
-        'type': product.type,          
+        'name': product.name,
+        'type': product.type,
+        'description': product.description,  # ✅ pas de json.loads si JSON
+        'price': product.price,
+        'image_file': product.image_file,
+        'inventory_level': product.inventory_level,
+        'price_received': product.price_received,
+        'pointure': product.pointure,
+        'color': product.color,
+        'model': product.model,
+        'style': product.style,
+        'material': product.material,
+        'pr_uid': product.pr_uid,
+        'creation_date': str(product.creation_date),          
     }
     
 
