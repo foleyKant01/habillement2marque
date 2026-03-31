@@ -9,28 +9,15 @@
   </div>
 
   <!-- Formulaire -->
-  <form
-    [formGroup]="createproducts"
-    (ngSubmit)="Createproducts()"
-    [ngClass]="{ 'blur-background': loading || success }"
-  >
+  <form [formGroup]="createproducts" (ngSubmit)="Createproducts()" [ngClass]="{ 'blur-background': loading || success }">
     <!-- Type & Name -->
     <div class="form-row">
       <div class="form-group">
         <label>Type:</label>
         <select formControlName="type" class="form-control">
           <option value="Jouet Enfant">Jouets Enfant</option>
-          <!-- <option value="Vêtement Homme">Vêtements Homme</option>
-          <option value="Vêtement Femme">Vêtements Femme</option> -->
-          <!-- <option value="Sous Vêtement Homme">Sous-vêtements Homme</option> -->
-          <!-- <option value="Sous Vêtement Femme">Sous-vêtements Femme</option> -->
-          <!-- <option value="Chaînes">Chaînes</option> -->
-          <!-- <option value="Montres">Montres</option> -->
-          <!-- <option value="Bagues">Bagues</option> -->
           <option value="Chaussures Homme">Chaussures Homme</option>
           <option value="Chaussures Femme">Chaussures Femme</option>
-          <!-- <option value="Sandales Homme">Sandales Homme</option> -->
-          <!-- <option value="Sandales Femme">Sandales Femme</option> -->
         </select>
       </div>
       <div class="form-group">
@@ -88,15 +75,6 @@
         />
       </div>
       <div class="form-group">
-        <label>Stock:</label>
-        <input
-          type="number"
-          formControlName="inventory_level"
-          class="form-control"
-          placeholder="Quantité disponible"
-        />
-      </div>
-      <div class="form-group">
         <label>Prix d'achat:</label>
         <input
           type="number"
@@ -115,27 +93,82 @@
           class="form-control"
           placeholder="Matière de fabrication"
         />
+            
+
+          <!-- VARIANTS (COULEUR + POINTURES) -->
+      <div class="variants-section">
+        <h3>Variantes du produit</h3>
+
+        <div formArrayName="variants">
+          <div
+            *ngFor="let variant of variants.controls; let i = index"
+            [formGroupName]="i"
+            class="variant-card"
+          >
+            <!-- Couleur -->
+            <div class="form-row">
+              <div class="form-group">
+                <label>Couleur:</label>
+                <select formControlName="color" class="form-control">
+                  <option *ngFor="let c of colors" [value]="c">{{ c }}</option>
+                </select>
+              </div>
+
+              <button type="button" class="btn-delete" (click)="removeVariant(i)">
+                Supprimer
+              </button>
+            </div>
+
+            <!-- POINTURES -->
+            <div formArrayName="pointures" class="pointure-section">
+              <div
+                *ngFor="let p of getPointures(i).controls; let j = index"
+                [formGroupName]="j"
+                class="pointure-row"
+              >
+                <input *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'"
+                  type="text"
+                  formControlName="size"
+                  placeholder="Pointure (ex: 40)"
+                  class="form-control"
+                />
+
+                <input
+                  type="number"
+                  formControlName="stock"
+                  placeholder="Stock"
+                  class="form-control"
+                />
+
+                <button *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'"
+                  type="button"
+                  class="btn-delete"
+                  (click)="removePointure(i, j)"
+                >
+                  ❌
+                </button>
+              </div>
+
+              <button *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'"
+                type="button"
+                class="btn-add"
+                (click)="addPointure(i)"
+              >
+                + Ajouter pointure
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" (click)="addVariant()">
+          + Ajouter couleur
+        </button>
       </div>
-       <div class="form-group">
-        <label>Couleur:</label>
-        <select formControlName="color" class="form-control">
-          <option *ngFor="let c of colors" [value]="c">{{c}}</option>
-        </select>
-      </div>
-    </div>
+
     <div class="form-row" *ngIf="createproducts.get('type')?.value === 'Chaussures Homme' || createproducts.get('type')?.value === 'Chaussures Femme'">
       <div class="form-group" >
         <label>Talon cm:</label>
         <input type="text" formControlName="talon_cm" class="form-control" placeholder="Taille en cm du talon"/>
-      </div>
-      <div class="form-group">
-        <label>Pointure:</label>
-        <input
-        type="text"
-        formControlName="pointure"
-        class="form-control"
-        placeholder="Disponible du 40 au 45"
-      />
       </div>
       </div>
 
@@ -156,6 +189,8 @@
       <a routerLink="/admin/ad-home" class="btn-cancel">Annuler</a>
       <button type="submit" class="btn-submit">Créer</button>
     </div>
+    </div>
+    </div>
   </form>
 
   <!-- Loader -->
@@ -164,3 +199,8 @@
   <!-- Success Message -->
   <div *ngIf="success" class="alert-success">Produit créé avec succès !</div>
 </div>
+
+
+
+
+

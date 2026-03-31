@@ -85,7 +85,7 @@ export class ReadSingleProductComponent implements OnInit{
     this.http.ReadSingleProducts(body).subscribe({
       next: (response: any) => {
 
-        this.product = response?.user;
+        this.product = response?.product;
 
         // 🔹 définir l'image principale
         if (this.product?.image_file?.length) {

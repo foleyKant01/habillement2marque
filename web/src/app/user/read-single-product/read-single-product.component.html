@@ -33,15 +33,26 @@
     <div class="col-lg-7 col-md-6 col-sm-12 product-info">
       <h2>{{ product.name }}</h2>
 
-      <p><strong>Prix :</strong> {{ product.price }} FCFA</p>
       <p><strong>Référence :</strong> {{ product.pr_uid }}</p>
+      <p><strong>Type :</strong> {{ product.type }}</p>
       <p><strong>Description :</strong> {{ product.description }}</p>
+      <p><strong>Prix :</strong> {{ product.price }} FCFA</p>
       <p><strong>Modele :</strong> {{ product.model }}</p>
       <p><strong>style :</strong> {{ product.style }}</p>
-      <p><strong>Pointure :</strong>{{ product.pointure }}</p>
-      <p><strong>Stock :</strong> {{ product.inventory_level }}</p>
-      <p><strong>Type :</strong> {{ product.type }}</p>
-      <p><strong>Couleur :</strong> {{ product.color }}</p>
+
+      <div  *ngFor="let variant of product.variants">
+        <p><strong>Couleur :</strong> {{ variant.color }}</p>
+        <table style="border: 1px rgb(97, 97, 97) solid; margin-left: 68px; margin-top: -10px; margin-bottom: 10px;">
+          <th style="color: rgb(83, 83, 83); border: 1px solid; padding:5px 10px;">Pointure</th>
+          <th style="color: rgb(83, 83, 83); border: 1px solid; padding:5px 10px;">Stock</th>
+
+          <tr *ngFor="let pointure of variant.pointures">
+            <td style="color: rgb(83, 83, 83); border: 1px solid; text-align: center;">{{ pointure.size }}</td>
+            <td style="color: rgb(83, 83, 83); border: 1px solid; text-align: center;">{{ pointure.stock }}</td>
+          </tr>
+        </table>
+      </div>
+
       <p><strong>Matière :</strong> {{ product.material }}</p>
       <a
         class="order-btn mt-3"
