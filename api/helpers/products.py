@@ -117,25 +117,67 @@ def upload_to_s3(files):
 
 
 def CreateProducts():
-    response = {}
-
     try:
-        name = request.form.get('name').strip()
-        type = request.form.get('type')
+        name = (request.form.get('name') or "").strip()
+        type_ = request.form.get('type')
         description = request.form.get('description')
         price = request.form.get('price')
         price_received = request.form.get('price_received')
         model = request.form.get('model')
         talon_cm = request.form.get('talon_cm')
         style = request.form.get('style')
-        material = request.form.get('material') 
-
-        pr_uid = generate_product_id(name)
+        material = request.form.get('material')
         image_files = request.files.getlist('image_file')
-        image_urls = upload_to_s3(image_files)  # retourne liste
+        errors = []
+
+        if not name:
+            errors.append("name")
+
+        if not type_:
+            errors.append("type")
+
+        if not description:
+            errors.append("description")
+
+        if not price:
+            errors.append("price")
+
+        if not price_received:
+            errors.append("price_received")
+
+        if not image_files or len(image_files) == 0:
+            errors.append("image_files")
+
+        if errors:
+            return jsonify({
+                "status": "error",
+                "message": f"Champs manquants: {', '.join(errors)}"
+            }), 400
+        try:
+            price = float(price)
+            price_received = float(price_received)
+        except ValueError:
+            return jsonify({
+                "status": "error",
+                "message": "Prix invalide"
+            }), 400
+        try:
+            image_urls = upload_to_s3(image_files)
+        except Exception as e:
+            return jsonify({
+                "status": "error",
+                "message": "Erreur upload images",
+                "details": str(e)
+            }), 500
+
+        # =========================
+        # 🆔 CREATE PRODUCT
+        # =========================
+        pr_uid = generate_product_id(name)
+
         new_product = Products(
             name=name,
-            type=type,
+            type=type_,
             description=description,
             price=price,
             price_received=price_received,
@@ -146,17 +188,45 @@ def CreateProducts():
             style=style,
             pr_uid=pr_uid
         )
+
         db.session.add(new_product)
-        db.session.commit()  # ⚠️ important pour avoir product_id
+        db.session.commit()
+
+        # =========================
+        # 🔥 VARIANTS
+        # =========================
         variants_data = request.form.get('variants')
+
         if variants_data:
-            variants = json.loads(variants_data)
+            try:
+                variants = json.loads(variants_data)
+            except json.JSONDecodeError:
+                return jsonify({
+                    "status": "error",
+                    "message": "Format variants invalide"
+                }), 400
             for variant in variants:
                 color = variant.get('color')
+                if not color:
+                    return jsonify({
+                        "status": "error",
+                        "message": "Chaque variante doit avoir une couleur"
+                    }), 400
                 pointures = variant.get('pointures', [])
+                if not pointures:
+                    return jsonify({
+                        "status": "error",
+                        "message": f"La variante {color} doit avoir au moins une pointure"
+                    }), 400
                 for size in pointures:
                     pointure = size.get('size')
-                    stock = size.get('stock')
+                    stock = size.get('stock', 0)
+
+                    if pointure is None:
+                        return jsonify({
+                            "status": "error",
+                            "message": f"Pointure manquante pour la couleur {color}"
+                        }), 400
                     new_variant = ProductVariants(
                         product_id=new_product.pr_uid,
                         color=color,
@@ -164,19 +234,27 @@ def CreateProducts():
                         inventory_level=stock,
                     )
                     db.session.add(new_variant)
-        db.session.commit()
 
-        response['status'] = 'success'
-        response['message'] = 'Produit créé avec variantes'
+        # =========================
+        # ✅ SUCCESS
+        # =========================
+        return jsonify({
+            "status": "success",
+            "message": "Produit créé avec succès",
+            "product_id": pr_uid
+        }), 201
 
     except Exception as e:
         db.session.rollback()
-        response['status'] = 'error'
-        response['error_description'] = str(e)
 
-    return response
-
-
+        return jsonify({
+            "status": "error",
+            "message": "Erreur serveur",
+            "details": str(e)
+        }), 500
+        
+        
+        
 def generate_product_id(name):
     prefix = name[:3].upper()
     unique_id = str(uuid.uuid4().hex)[:6].upper()  # Utilisation des 6 premiers caractères de l'UUID généré

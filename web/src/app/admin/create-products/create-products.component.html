@@ -196,8 +196,15 @@
   <!-- Loader -->
   <app-spinner *ngIf="loading" class="overlay"></app-spinner>
 
-  <!-- Success Message -->
-  <div *ngIf="success" class="alert-success">Produit créé avec succès !</div>
+  <!-- alert success -->
+<div *ngIf="successMessage" class="alert-success-top">
+  {{ successMessage }}
+</div>
+
+<!-- alert erreur -->
+<div *ngIf="errorMessage" class="alert-error-top">
+  {{ errorMessage }}
+</div>
 </div>
 
 

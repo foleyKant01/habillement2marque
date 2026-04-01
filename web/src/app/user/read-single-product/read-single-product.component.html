@@ -1,172 +1,128 @@
+<!-- ✅ VERSION PRO AMÉLIORÉE (DISPOSITION + DESIGN) -->
+
 <div class="accueil">
   <app-header></app-header>
 </div>
 
 <div class="container product-page" *ngIf="product">
 
-  <!-- 🔹 DÉTAIL PRODUIT -->
-  <div class="row product-detail">
+  <div class="row product-detail align-items-start">
 
-    <!-- IMAGE -->
-    <div class="col-lg-5 col-md-6 col-sm-12 product-image mb-4">
+    <!-- IMAGE SECTION -->
+    <div class="col-lg-5 col-md-6 col-sm-12 product-image">
 
-  <!-- Image principale -->
-  <img
-    class="img-fluid imgread main-image"
-    [src]="selectedImage"
-    [alt]="product.image_file"
-  />
-
-  <!-- Miniatures -->
-  <div class="image-thumbnails mt-3 d-flex">
-    <img
-      *ngFor="let img of product.image_file"
-      [src]="img"
-      class="thumbnail"
-      (click)="changeImage(img)"
-    />
-  </div>
-
-</div><br>
-
-    <!-- INFOS -->
-    <div class="col-lg-7 col-md-6 col-sm-12 product-info">
-      <h2>{{ product.name }}</h2>
-
-      <p><strong>Référence :</strong> {{ product.pr_uid }}</p>
-      <p><strong>Type :</strong> {{ product.type }}</p>
-      <p><strong>Description :</strong> {{ product.description }}</p>
-      <p><strong>Prix :</strong> {{ product.price }} FCFA</p>
-      <p><strong>Modele :</strong> {{ product.model }}</p>
-      <p><strong>style :</strong> {{ product.style }}</p>
-
-      <div  *ngFor="let variant of product.variants">
-        <p><strong>Couleur :</strong> {{ variant.color }}</p>
-        <table style="border: 1px rgb(97, 97, 97) solid; margin-left: 68px; margin-top: -10px; margin-bottom: 10px;">
-          <th style="color: rgb(83, 83, 83); border: 1px solid; padding:5px 10px;">Pointure</th>
-          <th style="color: rgb(83, 83, 83); border: 1px solid; padding:5px 10px;">Stock</th>
-
-          <tr *ngFor="let pointure of variant.pointures">
-            <td style="color: rgb(83, 83, 83); border: 1px solid; text-align: center;">{{ pointure.size }}</td>
-            <td style="color: rgb(83, 83, 83); border: 1px solid; text-align: center;">{{ pointure.stock }}</td>
-          </tr>
-        </table>
+      <div class="image-wrapper">
+        <img
+          class="img-fluid main-image"
+          [src]="selectedImage"
+          [alt]="product.image_file"
+        />
       </div>
 
-      <p><strong>Matière :</strong> {{ product.material }}</p>
-      <a
-        class="order-btn mt-3"
-        (click)="openOrderModal(product)"
-      >
+      <div class="image-thumbnails">
+        <img
+          *ngFor="let img of product.image_file"
+          [src]="img"
+          class="thumbnail"
+          (click)="changeImage(img)"
+        />
+      </div>
+
+    </div>
+
+    <!-- INFO SECTION -->
+    <div class="col-lg-7 col-md-6 col-sm-12 product-info">
+
+      <h2 class="product-title">{{ product.name }}</h2><br>
+
+      <div class="product-meta">
+        <p><strong>Référence :</strong> {{ product.pr_uid }}</p>
+        <p><strong>Type :</strong> {{ product.type }}</p>
+        <p><strong>Modèle :</strong> {{ product.model }}</p>
+      </div>
+
+      <p class="product-description">{{ product.description }}</p>
+
+      <h3 class="product-price">{{ product.price }} FCFA</h3>
+
+      <div class="product-extra">
+        <p *ngIf="product.type === 'Chaussures Femme'">
+          <strong>Talon :</strong> {{ product.talon_cm }} cm
+        </p>
+        <p><strong>Style :</strong> {{ product.style }}</p>
+        <p><strong>Matière :</strong> {{ product.material }}</p>
+      </div>
+
+      <div class="variants">
+        <div *ngFor="let variant of product.variants" class="variant-box">
+          <p class="variant-color"><strong>{{ variant.color }}</strong></p>
+
+          <table class="variant-table">
+            <tr>
+              <th>Pointure</th>
+              <th>Stock</th>
+            </tr>
+
+            <tr *ngFor="let pointure of variant.pointures">
+              <td>{{ pointure.size }}</td>
+              <td>{{ pointure.stock }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <button class="order-btn" (click)="openOrderModal(product)">
         Commander sur WhatsApp
-      </a>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- SERVICES -->
+  <div class="row services">
+    <div class="col-md-4 service-box">
+      <h4>Livraison</h4>
+      <p>Abidjan dès 1 500 FCFA</p>
+      <p>Partout en Côte d'Ivoire</p>
+    </div>
+
+    <div class="col-md-4 service-box">
+      <h4>Paiement</h4>
+      <p>Espèces ou Mobile Money</p>
+    </div>
+
+    <div class="col-md-4 service-box">
+      <h4>Retour</h4>
+      <p>Retour gratuit sous 3 jours</p>
     </div>
   </div>
+
+</div>
+
+<!-- MODAL -->
 <div class="custom-modal" *ngIf="showModal">
   <div class="modal-content">
 
-    <h4>Veillez préciser</h4>
-    <div style="text-align: left;" class="form-group">
-      <label>Couleur:</label>
-      <input type="text" class="form-control" placeholder="{{currentProduct?.color}}" [(ngModel)]="selectedColor" min="15" max="50"/>
-    </div>
-    <div style="text-align: left;">
-      <label>Pointure:</label>
-      <input
-      type="number"
-      class="form-control"
-      placeholder="{{currentProduct?.pointure}}"
-      [(ngModel)]="selectedSize"
-      min="15"
-      max="50"
-    />
-    </div>
-  <div class="modal-actions mt-3">
-    <button class="btn btn-secondary" (click)="showModal = false">
-      Annuler
-    </button>
+    <h4>Précisez votre choix</h4>
 
-    <button
-      class="btn btn-primary"
-      [disabled]="!selectedSize || !selectedColor"
-      (click)="sendToWhatsApp(currentProduct)"
-    >
-      Confirmer
-    </button>
-  </div>
+    <div class="form-group">
+      <label>Couleur</label>
+      <input type="text" [(ngModel)]="selectedColor" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Pointure</label>
+      <input type="number" [(ngModel)]="selectedSize" class="form-control" />
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" (click)="showModal = false">Annuler</button>
+      <button class="btn btn-primary" [disabled]="!selectedSize || !selectedColor" (click)="sendToWhatsApp(currentProduct)">
+        Confirmer
+      </button>
+    </div>
 
   </div>
 </div>
 
-  <!-- 🔹 LIVRAISON & SERVICES -->
-  <div class="row services mt-3">
-    <div class="col-md-4 service-box p-3 mb-2">
-      <h4>Livraison</h4>
-      <p class="m-0">Abidjan dès 1 500 FCFA</p>
-      <p class="m-0">Partout en Côte d'Ivoire</p>
-    </div>
-
-    <div class="col-md-4 service-box p-1 mb-2">
-      <h4>Paiement</h4>
-      <p class="m-0">Espèces ou Mobile Money à la livraison</p>
-    </div>
-
-    <div class="col-md-4 service-box p-1 mb-2">
-      <h4>Retour</h4>
-      <p class="m-0">Retours gratuits sous 3 jours</p>
-    </div>
-  </div>
-
-</div>
-
-<!-- 🔹 PRODUITS COLOR SIMILAIRES -->
-<div class="similar-products" *ngIf="data_color?.length">
-
-  <h3 class="text-center mb-4">Autres couleur</h3>
-
-  <div class="products-grid">
-    <div class="product-card" *ngFor="let product of data_color">
-      <h4>{{ product.name }}</h4>
-
-      <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
-        <img [src]="product.image_file[0]" alt="{{ product.name }}" />
-      </a>
-
-      <p class="price">{{ product.price }} FCFA</p>
-
-      <a
-        class="order-btn mt-3"
-        (click)="openOrderModal(product)"
-      >
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
-
-</div>
-
-<!-- 🔹 PRODUITS SIMILAIRES -->
-<div class="similar-products" *ngIf="data?.length">
-
-  <h3 class="text-center mb-4">Produits similaires</h3>
-
-  <div class="products-grid">
-    <div class="product-card" *ngFor="let product of data">
-      <h4>{{ product.name }}</h4>
-
-      <a (click)="readsingleProducts(product.pr_uid, product.type, product.name)">
-        <img [src]="product.image_file[0]" alt="{{ product.name }}" />
-      </a>
-
-      <p class="price">{{ product.price }} FCFA</p>
-
-      <a
-        class="order-btn mt-3"
-        (click)="openOrderModal(product)"
-      >
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
-
-</div>

@@ -14,6 +14,8 @@ export class CreateProductsComponent implements OnInit {
   loading = false;
   success = false;
   files: File[] = [];
+  successMessage: string = '';
+  errorMessage: string = '';
 
   colors: string[] = [
     'Noir', 'Blanc', 'Gris', 'Marron', 'Beige',
@@ -82,7 +84,7 @@ export class CreateProductsComponent implements OnInit {
   newPointure(): FormGroup {
     return this.fb.group({
       size: [null, Validators.required],
-      stock: [0, Validators.required]
+      stock: [1, Validators.required]
     });
   }
 
@@ -115,7 +117,7 @@ export class CreateProductsComponent implements OnInit {
   // =========================
 
   Createproducts(): void {
-    if (this.createproducts.invalid) return;
+    // if (this.createproducts.invalid) return;
 
     this.loading = true;
 
@@ -143,23 +145,49 @@ export class CreateProductsComponent implements OnInit {
 
     console.log('DATA SENT:', formValue);
 
-    this.http.CreateProducts(formData).subscribe({
-      next: (response: any) => {
-        this.loading = false;
-        this.success = true;
+    // variables à ajouter dans le component
 
-        this.createproducts.reset();
-        this.variants.clear();
-        this.addVariant(); // reset propre
-        this.files = [];
+// dans ton subscribe
+this.http.CreateProducts(formData).subscribe({
+  next: (response: any) => {
+    this.loading = false;
 
-        setTimeout(() => this.success = false, 3000);
-      },
-      error: (err) => {
-        console.error(err);
-        this.loading = false;
-        alert('Erreur lors de la création du produit');
-      }
-    });
+    if (response.status === 'success') {
+      this.successMessage = response.message || 'Produit créé avec succès !';
+      this.errorMessage = '';
+
+      // reset du form
+      // this.createproducts.reset();
+      // this.variants.clear();
+      // this.addVariant();
+      this.files = [];
+
+      // cacher le message après 3s
+      setTimeout(() => this.successMessage = '', 3000);
+    } else {
+      // cas où API renvoie status != success
+      this.errorMessage = response.message || 'Erreur lors de la création du produit';
+      this.successMessage = '';
+
+      setTimeout(() => this.errorMessage = '', 3000);
+    }
+  },
+
+  error: (err) => {
+    this.loading = false;
+
+    this.errorMessage =
+      err?.error?.message ||
+      err?.error?.error ||
+      'Erreur lors de la création du produit';
+
+    this.successMessage = '';
+
+    // cacher message après 3s
+    setTimeout(() => this.errorMessage = '', 3000);
+
+    console.error(err);
+  }
+});
   }
 }
