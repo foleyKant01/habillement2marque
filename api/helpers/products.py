@@ -230,6 +230,8 @@ def CreateProducts():
                         inventory_level=stock,
                     )
                     db.session.add(new_variant)
+                    db.session.commit()
+                    
 
         # =========================
         # ✅ SUCCESS
@@ -378,34 +380,26 @@ def ReadAllProducts():
 
 def ReadSingleProducts():
     response = {}
-
     try:
         uid = request.json.get('pr_uid')
-
         product = Products.query.filter_by(pr_uid=uid).first()
-
         if not product:
             return {
                 "status": "error",
                 "error_description": "Produit non trouvé"
             }
-
         variants_dict = {}
-
         for variant in product.variants:
             color = variant.color
-
             if color not in variants_dict:
                 variants_dict[color] = {
                     "color": color,
                     "pointures": []
                 }
-
             variants_dict[color]["pointures"].append({
                 "size": variant.pointure,
                 "stock": variant.inventory_level
             })
-
         products_infos = {
             'pr_uid': product.pr_uid,
             'name': product.name,
@@ -418,22 +412,17 @@ def ReadSingleProducts():
             'style': product.style,
             'talon_cm': product.talon_cm,
             'material': product.material,
-
-            # ✅ variantes propres
             'variants': list(variants_dict.values()),
-
             'creation_date': str(product.creation_date),
             'update_date': str(product.update_date),
         }
-
         response['status'] = 'success'
         response['product'] = products_infos  # ✅ renommé (pas "user")
-
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
-
     return response
+
 
 def AllSimilarColorProducts():
     response = {}
