@@ -36,6 +36,7 @@ export class ReadSingleProductComponent implements OnInit{
     this.allSimilarProducts();
     this.allSimilarColorProducts();
   }
+  
   readsingleProducts(pr_uid: number, type: string, name: string): void {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
       this.router.navigate(['/user/read-single-product', pr_uid, type, name]));

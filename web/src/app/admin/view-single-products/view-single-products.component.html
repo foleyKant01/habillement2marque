@@ -1,16 +1,16 @@
 <div class="container product-admin" *ngIf="product">
 
+  <a routerLink="/admin/view-all-products" class="back-btn">
+    ← Retour
+  </a><br><br>
   <!-- HEADER -->
-  <div class="header d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <a routerLink="/admin/view-all-products" class="back-btn">
-        ← Retour
-      </a>
-      <h2 class="mt-2">Détails du produit</h2>
+  <div class="header">
+    <div class="left">
+      <h2>Détails du produit</h2>
     </div>
 
-    <div class="d-flex">
-      <button class="btn btn-warning me-2" (click)="editProduct(product.pr_uid)">
+    <div class="actions d-flex">
+      <button class="btn btn-warning" (click)="editProduct(product.pr_uid)">
         Modifier
       </button>
       <button class="btn btn-danger" (click)="deleteProduct(product.pr_uid)">
@@ -19,55 +19,93 @@
     </div>
   </div>
 
-  <!-- CONTENT -->
-  <div class="row product-card">
+  <!-- CARD -->
+  <div class="product-card">
 
-    <!-- IMAGE -->
-    <div class="col-md-5 text-center">
-      <img 
-        *ngIf="product.image_file?.length"
-        [src]="product.image_file[0]" 
-        class="main-img"
-      />
+    <div class="row">
 
-      <div class="d-flex justify-content-center mt-3">
+      <!-- IMAGES -->
+      <div class="col-md-5 image-section">
         <img 
-          *ngFor="let img of product.image_file"
-          [src]="img"
-          class="thumb"
+          *ngIf="product.image_file?.length"
+          [src]="product.image_file[0]" 
+          class="main-img"
         />
+
+        <div class="thumbs">
+          <img 
+            *ngFor="let img of product.image_file"
+            [src]="img"
+            class="thumb"
+          />
+        </div>
       </div>
+
+      <!-- INFOS -->
+      <div class="col-md-7 product-info">
+
+        <h3>{{ product.name }}</h3>
+        <p class="type">{{ product.type }}</p>
+
+        <h4 class="price">{{ product.price }} FCFA</h4>
+
+        <p class="description">
+          {{ product.description }}
+        </p>
+
+        <div class="info-grid">
+          <div><strong>Référence</strong><span>{{ product.pr_uid }}</span></div>
+          <div><strong>Prix reçu</strong><span>{{ product.price_received }}</span></div>
+          <div><strong>Modèle</strong><span>{{ product.model || '—' }}</span></div>
+          <div><strong>Style</strong><span>{{ product.style || '—' }}</span></div>
+          <div><strong>Matière</strong><span>{{ product.material || '—' }}</span></div>
+          <div><strong>Talon</strong><span>{{ product.talon_cm || '—' }} cm</span></div>
+          <div><strong>Créé le</strong><span>{{ product.creation_date | date:'short' }}</span></div>
+          <div><strong>Mis à jour</strong><span>{{ product.update_date | date:'short' }}</span></div>
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- INFOS -->
-    <div class="col-md-7 product-info">
+    <!-- VARIANTS -->
+    <div class="variants-section" *ngIf="product.variants?.length">
 
-      <h3>{{ product.name }}</h3>
-      <p class="text-muted">{{ product.type }}</p>
+      <h4>Variantes disponibles</h4>
 
-      <h4 class="price">{{ product.price }} FCFA</h4>
+      <div class="variants-grid">
+        <div *ngFor="let variant of product.variants" class="variant-card">
 
-      <p><strong>Description :</strong> {{ product.description }}</p>
+          <div class="variant-header">
+            <span class="color-dot"></span>
+            <strong>{{ variant.color }}</strong>
+          </div>
 
-      <div class="info-grid">
+          <table>
+            <thead>
+              <tr>
+                <th>Pointure</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of variant.pointures">
+                <td>{{ p.size }}</td>
+                <td>{{ p.stock }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <p><strong>Référence :</strong> {{ product.pr_uid }}</p>
-        <p><strong>Stock :</strong> {{ product.inventory_level }}</p>
-        <p><strong>Prix reçu :</strong> {{ product.price_received }}</p>
-
-        <p><strong>Couleur :</strong> {{ product.color }}</p>
-        <p><strong>Pointure :</strong> {{ product.pointure || '—' }}</p>
-
-        <p><strong>Modèle :</strong> {{ product.model || '—' }}</p>
-        <p><strong>Style :</strong> {{ product.style || '—' }}</p>
-        <p><strong>Matière :</strong> {{ product.material || '—' }}</p>
-
-        <p><strong>Créé le :</strong> {{ product.creation_date | date:'short' }}</p>
-        <p><strong>Mis à jour :</strong> {{ product.update_date | date:'short' }}</p>
-
+        </div>
       </div>
 
+    </div>
+
+    <!-- NO VARIANTS -->
+    <div *ngIf="!product.variants?.length" class="no-variants">
+      Aucune variante disponible pour ce produit
     </div>
 
   </div>
+
 </div>

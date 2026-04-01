@@ -18,6 +18,8 @@ export class ViewSingleProductsComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.productUid = params['pr_uid']; // (+) converts string 'id' to a number
+      console.log(this.productUid)
+
     });
 
     this.readSingleProducts();
@@ -29,7 +31,7 @@ export class ViewSingleProductsComponent implements OnInit{
     }
     this.http.ReadSingleProducts(body).subscribe({
       next: (response: any) => {
-        this.product = response?.user; // Stocker les produits dans le tableau
+        this.product = response?.product; // Stocker les produits dans le tableau
         console.log(this.product)
 
       },

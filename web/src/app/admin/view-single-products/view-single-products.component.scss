@@ -1,30 +1,51 @@
 .product-admin {
-  padding: 20px;
+  padding: 10px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .header h2 {
+  margin: 0;
   font-weight: 600;
 }
 
 .back-btn {
   text-decoration: none;
-  color: #555;
+  color: #777;
   font-size: 14px;
 }
 
+/* CARD */
 .product-card {
   background: #fff;
   border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+  padding: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
 }
 
 /* IMAGE */
+.image-section {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
 .main-img {
   width: 100%;
   max-height: 350px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
+}
+
+.thumbs {
+  margin-top: 10px;
 }
 
 .thumb {
@@ -34,18 +55,22 @@
   margin: 5px;
   border-radius: 8px;
   cursor: pointer;
-  border: 2px solid transparent;
   transition: 0.3s;
 }
 
 .thumb:hover {
-  border-color: #007bff;
-  transform: scale(1.05);
+  transform: scale(1.1);
+  border: 2px solid #007bff;
 }
 
 /* INFOS */
 .product-info h3 {
   font-weight: 600;
+}
+
+.type {
+  color: #888;
+  margin-bottom: 10px;
 }
 
 .price {
@@ -54,15 +79,96 @@
   margin-bottom: 15px;
 }
 
+.description {
+  margin-bottom: 20px;
+}
+
+/* GRID */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 
-.info-grid p {
+.info-grid div {
   background: #f8f9fa;
-  padding: 8px;
-  border-radius: 6px;
-  margin: 0;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-grid strong {
+  font-size: 12px;
+  color: #666;
+}
+
+.info-grid span {
+  font-weight: 500;
+}
+
+/* VARIANTS */
+.variants-section {
+  margin-top: 30px;
+}
+
+.variants-section h4 {
+  margin-bottom: 15px;
+}
+
+.variants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.variant-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.variant-card:hover {
+  transform: translateY(-5px);
+}
+
+/* VARIANT HEADER */
+.variant-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.color-dot {
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* TABLE */
+.variant-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.variant-card th {
+  text-align: left;
+  font-size: 13px;
+  color: #888;
+}
+
+.variant-card td {
+  padding: 5px 0;
+  font-weight: 500;
+}
+
+/* EMPTY */
+.no-variants {
+  margin-top: 20px;
+  text-align: center;
+  color: #999;
 }
