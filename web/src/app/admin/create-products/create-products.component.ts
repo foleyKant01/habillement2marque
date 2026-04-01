@@ -157,8 +157,8 @@ this.http.CreateProducts(formData).subscribe({
       this.errorMessage = '';
 
       // reset du form
-      // this.createproducts.reset();
-      // this.variants.clear();
+      this.createproducts.reset();
+      this.variants.clear();
       // this.addVariant();
       this.files = [];
 
