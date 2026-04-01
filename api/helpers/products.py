@@ -149,26 +149,26 @@ def CreateProducts():
             errors.append("image_files")
 
         if errors:
-            return jsonify({
+            return {
                 "status": "error",
                 "message": f"Champs manquants: {', '.join(errors)}"
-            }), 400
+            }, 400
         try:
             price = float(price)
             price_received = float(price_received)
         except ValueError:
-            return jsonify({
+            return {
                 "status": "error",
                 "message": "Prix invalide"
-            }), 400
+            }, 400
         try:
             image_urls = upload_to_s3(image_files)
         except Exception as e:
-            return jsonify({
+            return {
                 "status": "error",
                 "message": "Erreur upload images",
                 "details": str(e)
-            }), 500
+            }, 500
 
         # =========================
         # 🆔 CREATE PRODUCT
@@ -191,42 +191,38 @@ def CreateProducts():
 
         db.session.add(new_product)
         db.session.commit()
-
-        # =========================
-        # 🔥 VARIANTS
-        # =========================
         variants_data = request.form.get('variants')
 
         if variants_data:
             try:
                 variants = json.loads(variants_data)
             except json.JSONDecodeError:
-                return jsonify({
+                return {
                     "status": "error",
                     "message": "Format variants invalide"
-                }), 400
+                }, 400
             for variant in variants:
                 color = variant.get('color')
                 if not color:
-                    return jsonify({
+                    return {
                         "status": "error",
                         "message": "Chaque variante doit avoir une couleur"
-                    }), 400
+                    }, 400
                 pointures = variant.get('pointures', [])
                 if not pointures:
-                    return jsonify({
+                    return {
                         "status": "error",
                         "message": f"La variante {color} doit avoir au moins une pointure"
-                    }), 400
+                    }, 400
                 for size in pointures:
                     pointure = size.get('size')
                     stock = size.get('stock', 0)
 
                     if pointure is None:
-                        return jsonify({
+                        return {
                             "status": "error",
                             "message": f"Pointure manquante pour la couleur {color}"
-                        }), 400
+                        }, 400
                     new_variant = ProductVariants(
                         product_id=new_product.pr_uid,
                         color=color,
@@ -238,20 +234,20 @@ def CreateProducts():
         # =========================
         # ✅ SUCCESS
         # =========================
-        return jsonify({
+        return {
             "status": "success",
             "message": "Produit créé avec succès",
             "product_id": pr_uid
-        }), 201
+        }, 201
 
     except Exception as e:
         db.session.rollback()
 
-        return jsonify({
+        return {
             "status": "error",
             "message": "Erreur serveur",
             "details": str(e)
-        }), 500
+        }, 500
         
         
         
