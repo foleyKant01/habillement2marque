@@ -159,7 +159,7 @@ this.http.CreateProducts(formData).subscribe({
       // reset du form
       this.createproducts.reset();
       this.variants.clear();
-      // this.addVariant();
+      this.addVariant();
       this.files = [];
 
       // cacher le message après 3s

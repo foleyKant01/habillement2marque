@@ -128,31 +128,28 @@ def CreateProducts():
         style = request.form.get('style')
         material = request.form.get('material')
         image_files = request.files.getlist('image_file')
+        
         errors = []
-
         if not name:
             errors.append("name")
-
         if not type_:
             errors.append("type")
-
         if not description:
             errors.append("description")
-
         if not price:
             errors.append("price")
-
         if not price_received:
             errors.append("price_received")
-
-        if not image_files or len(image_files) == 0:
+        if not image_files:
             errors.append("image_files")
-
         if errors:
             return {
                 "status": "error",
                 "message": f"Champs manquants: {', '.join(errors)}"
             }, 400
+            
+        is_shoes = type_ in ["Chaussures Femme", "Chaussures Homme"]
+        
         try:
             price = float(price)
             price_received = float(price_received)
@@ -161,6 +158,15 @@ def CreateProducts():
                 "status": "error",
                 "message": "Prix invalide"
             }, 400
+            
+        if is_shoes and  talon_cm:
+            try:
+                talon_cm = float(talon_cm)
+            except ValueError:
+                return {
+                    "status": "error",
+                    "message": "talon_cm invalide"
+                }, 400
         try:
             image_urls = upload_to_s3(image_files)
         except Exception as e:
@@ -169,12 +175,7 @@ def CreateProducts():
                 "message": "Erreur upload images",
                 "details": str(e)
             }, 500
-
-        # =========================
-        # 🆔 CREATE PRODUCT
-        # =========================
         pr_uid = generate_product_id(name)
-
         new_product = Products(
             name=name,
             type=type_,
@@ -188,11 +189,9 @@ def CreateProducts():
             style=style,
             pr_uid=pr_uid
         )
-
         db.session.add(new_product)
-        db.session.commit()
         variants_data = request.form.get('variants')
-
+        is_shoes = type_ in ["Chaussures Femme", "Chaussures Homme"]
         if variants_data:
             try:
                 variants = json.loads(variants_data)
@@ -209,42 +208,68 @@ def CreateProducts():
                         "message": "Chaque variante doit avoir une couleur"
                     }, 400
                 pointures = variant.get('pointures', [])
-                if not pointures:
+                if is_shoes and not pointures:
                     return {
                         "status": "error",
                         "message": f"La variante {color} doit avoir au moins une pointure"
                     }, 400
-                for size in pointures:
-                    pointure = size.get('size')
-                    stock = size.get('stock', 0)
+                if not is_shoes:
+                    pointures = variant.get('pointures', [])
 
-                    if pointure is None:
+                    if not pointures or not isinstance(pointures, list):
                         return {
                             "status": "error",
-                            "message": f"Pointure manquante pour la couleur {color}"
+                            "message": f"Stock invalide pour la couleur {color}"
                         }, 400
-                    new_variant = ProductVariants(
-                        product_id=new_product.pr_uid,
-                        color=color,
-                        pointure=pointure,
-                        inventory_level=stock,
-                    )
-                    db.session.add(new_variant)
-                    db.session.commit()
-                    
 
-        # =========================
-        # ✅ SUCCESS
-        # =========================
+                    stock = pointures[0].get('stock')
+
+                    if stock is None:
+                        return {
+                            "status": "error",
+                            "message": f"Stock manquant pour la couleur {color}"
+                        }, 400
+
+                    try:
+                        stock = max(0, int(stock))
+                    except ValueError:
+                        return {
+                            "status": "error",
+                            "message": f"Stock invalide pour la couleur {color}"
+                        }, 400
+
+                    new_variant = ProductVariants(
+                        product_id=pr_uid,
+                        color=color,
+                        pointure=None,
+                        inventory_level=stock
+                    )
+
+                    db.session.add(new_variant)
+                else:
+                    for size in pointures:
+                        pointure = size.get('size')
+                        if pointure is None:
+                            return {
+                                "status": "error",
+                                "message": f"Pointure manquante pour la couleur {color}"
+                            }, 400
+                        stock = max(0, int(size.get('stock', 1)))
+                        new_variant = ProductVariants(
+                            product_id=pr_uid,
+                            color=color,
+                            pointure=pointure,
+                            inventory_level=stock,
+                        )
+                        db.session.add(new_variant)
+        db.session.commit()
         return {
             "status": "success",
             "message": "Produit créé avec succès",
             "product_id": pr_uid
         }, 201
-
     except Exception as e:
         db.session.rollback()
-
         return {
             "status": "error",
             "message": "Erreur serveur",

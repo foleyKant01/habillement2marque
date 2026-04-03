@@ -59,12 +59,14 @@
 
           <table class="variant-table">
             <tr>
-              <th>Pointure</th>
+              <th *ngIf="product.type === 'Chaussures Femme' || product.type === 'Chaussures Homme'">Pointure</th>
               <th>Stock</th>
             </tr>
 
             <tr *ngFor="let pointure of variant.pointures">
-              <td>{{ pointure.size }}</td>
+              <td *ngIf="product.type === 'Chaussures Femme' || product.type === 'Chaussures Homme'">
+                {{ pointure.size }}
+              </td>              
               <td>{{ pointure.stock }}</td>
             </tr>
           </table>
